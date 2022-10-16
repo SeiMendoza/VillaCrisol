@@ -62,6 +62,9 @@
                                     <a class="nav-link" href="{{route('compras.index')}}"><div class="sb-nav-link-icon">
                                         <i class="fa fa-shopping-bag"></i></div>
                                         Compras</a>
+                                    <a class="nav-link" href="layout-static.html"><div class="sb-nav-link-icon">
+                                            <i class="fa fa-list-alt"></i></div>
+                                            Productos</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
