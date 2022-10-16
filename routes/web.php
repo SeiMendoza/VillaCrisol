@@ -47,3 +47,5 @@ Route::post('/compras/create', [CompraController::class, 'store'])
 Route::get('/compras/{id}', [CompraController::class,'show'])
 ->name('compras.show')->where('id', '[0-9]+');
 
+// Productos
+Route::resource('tarea', TareaController::class);
