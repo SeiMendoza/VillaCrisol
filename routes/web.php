@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,46 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+/*
+   |-----------------|
+   | Rutas empleados |
+   |-----------------|
+*/
+
+Route::get('/', function () {
+   return view('inicio');
+});
+
+//Ruta para crear y mostrar el formulario y permitir el registro de empleados//
+Route::get('/empleados/crear' ,  [EmpleadoController::class,'create'])->name('empleado.crear');
+
+//Buscar empleados
+Route::get('/empleados/busqueda',  [EmpleadoController::class,'search'])
+->name('empleados.search');
+
+//Ruta para recibir los datos del formulario y guardarlos//
+Route::post('/empleados/crear' ,  [EmpleadoController::class,'store'])->name('empleado.guardar');
+
+//Ruta para mostrar listado general de empleados//
+Route::get('/empleados' ,  [EmpleadoController::class,'index'])->name('empleado.index');
+
+//ruta para editar el empleado
+Route::get('/empleados/{id}/editar', [EmpleadoController::class,'editar'])
+->name('empleado.editar')->where('id','[0-9]+');
+// ruta para actualizar empleado
+Route::put('/empleados/{id}/editar', [EmpleadoController::class,'update'])//envia los datos al servidor
+->name('empleado.update')->where('id','[0-9]+');
+//Ruta para mostrar los detalles del empleado//
+Route::get('/empleados/{id}' ,  [EmpleadoController::class,'show'])
+->name('empleado.mostrar')
+->where('id' ,'[0-9]+');
+
+//Ruta para borrar un empleado//
+Route::delete('/empleados/{id}/delete' ,  [EmpleadoController::class,'destroy'])
+->name('empleado.borrar')->where('id' , '[0-9]+');
+
 
 //ruta raiz
 Route::get('/', [HomeController::class, 'index'])->name('index');
