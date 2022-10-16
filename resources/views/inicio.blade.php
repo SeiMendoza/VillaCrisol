@@ -62,7 +62,7 @@
                                     <a class="nav-link" href="{{route('compras.index')}}"><div class="sb-nav-link-icon">
                                         <i class="fa fa-shopping-bag"></i></div>
                                         Compras</a>
-                                    <a class="nav-link" href="layout-static.html"><div class="sb-nav-link-icon">
+                                    <a class="nav-link" href="{{ route('tarea.create') }}"><div class="sb-nav-link-icon">
                                             <i class="fa fa-list-alt"></i></div>
                                             Productos</a>
                                 </nav>
