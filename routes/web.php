@@ -52,9 +52,7 @@ Route::get('/empleados/{id}' ,  [EmpleadoController::class,'show'])
 ->name('empleado.mostrar')
 ->where('id' ,'[0-9]+');
 
-//Ruta para borrar un empleado//
-Route::delete('/empleados/{id}/delete' ,  [EmpleadoController::class,'destroy'])
-->name('empleado.borrar')->where('id' , '[0-9]+');
+ 
 
 
 //ruta raiz

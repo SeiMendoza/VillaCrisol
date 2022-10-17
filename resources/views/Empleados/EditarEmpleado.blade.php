@@ -42,7 +42,7 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('CorreoElectrónico') is-invalid @enderror" id="CorreoElectrónico"
-      name="CorreoElectrónico" type="text"required autocomplete=" "
+      name="CorreoElectrónico" type="email"required autocomplete=" "
      value="{{$empleado->CorreoElectrónico}}" />
       <label for="CorreoElectrónico"> Correo Electrónico </label>
       @error('CorreoElectrónico')
@@ -71,7 +71,7 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('NúmeroDeReferencia') is-invalid @enderror" id="NúmeroDeReferencia"
-      name=" NúmeroDeReferencia" type="text"required autocomplete=" "
+      name=" NúmeroDeReferencia" type="num"required autocomplete=" "
      value="{{$empleado->NúmeroDeReferencia}}" />
       <label for="NúmeroDeReferencia"> Número De Referencia</label>
       @error('NúmeroDeReferencia')

@@ -19,8 +19,8 @@ class EmpleadoFactory extends Factory
             .$this->faker->numberbetween(1950, 2005)
             .$this->faker->unique()->numerify('-#####'),
             'CorreoElectrónico'=> $this->faker->unique()->safeEmail(),
-            'NúmeroTelefónico'=>$this->faker->randomNumber(8,8),
-            'NúmeroDeReferencia'=>$this->faker->randomNumber(8,8), 
+            'NúmeroTelefónico'=>$this->faker->randomElement(['3','8','9']).$this->faker->numerify('###-####'),
+            'NúmeroDeReferencia'=>$this->faker->randomElement(['3','8','9']).$this->faker->numerify('###-####'), 
             'NombreDeLaReferencia'=>$this->faker->name,
             'Domicilio'=>$this->faker->city,
             'FechaDeIngreso'=>$this->faker->dateTimeBetween('-40 years', '-16 years'),

@@ -40,36 +40,25 @@
             <table class="table" id="table">
                     <thead class="card-header" style="background: rgb(49, 63, 95); color:white;">
     <tr>
-      <th scope="col">id</th>
+    <th scope="col">id</th>
       <th scope="col">Nombre completo</th>
       <th scope="col">Número de identidad</th>
-      <th scope="col">Correo electrónico</th>
       <th scope="col">Número telefónico</th>
-      <th scope="col">Fecha de ingreso</th>
       <th scope="col">Estado</th>
       <th scope="col">Detalles</th>
-      <th scope="col">Eliminar</th>
     </tr>
   </thead>
   <tbody>
   @forelse($empleados as $empleado)
     <tr>
     <th scope="col">{{$empleado->id}}</th>
-      <td scope="col">{{$empleado->NombreCompleto</td>
+    <td scope="col">{{$empleado->NombreCompleto}}</td>
       <td scope="col">{{$empleado->NúmeroDeIdentidad}}</td>
-      <td scope="col">{{$empleado->CorreoElectrónico}}</td>
       <td scope="col">{{$empleado->NúmeroTelefónico}}</td>
-      <td scope="col">{{$empleado->FechaDeIngreso}}</td>
       <td scope="col">{{$empleado->Estado}}</td>
       <td style=" text-align: center"><a class="btn btn-info" href="{{route('empleado.mostrar' , ['id'=>$empleado->id])}}">Detalles</a></td>
       
-     <td>
-     <form method= "post" action="{{route('empleado.borrar' , ['id'=>$empleado->id])}}">
-      @csrf
-      @method('delete')
-      <input style=" text-align: center" type="submit" value="Eliminar" class="btn btn-danger" > 
-     </form>
-      </td> 
+     
     </tr>
     @empty
     <tr>
