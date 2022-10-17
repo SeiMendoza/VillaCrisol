@@ -50,14 +50,21 @@
                             </a>
                             <div class="sb-sidenav-menu-heading">Centro Turístico</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class='fas fa-drumstick-bite'></i></div>
                                 Restaurante
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Inventarios</a>
-                                    <a class="nav-link" href="{{route('compras.index')}}">Compras</a>
+                                    <a class="nav-link" href="layout-static.html"><div class="sb-nav-link-icon">
+                                        <i class="fa fa-list-alt"></i></div>
+                                        Inventario</a>
+                                    <a class="nav-link" href="{{route('compras.index')}}"><div class="sb-nav-link-icon">
+                                        <i class="fa fa-shopping-bag"></i></div>
+                                        Compras</a>
+                                    <a class="nav-link" href="{{ route('tarea.create') }}"><div class="sb-nav-link-icon">
+                                            <i class="fa fa-list-alt"></i></div>
+                                            Productos</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -67,44 +74,49 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="layout-static.html">Lista de reservaciones</a>
-                                    <a class="nav-link" href="#">Calendario</a>
+                                    <a class="nav-link" href="layout-static.html"><div class="sb-nav-link-icon"><i class='fa fa-list-ol'></i></div>
+                                        Reservaciones</a>
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>Calendario</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Área de Mantenimiento</div>
                             <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-list-alt"></i></div>
                                 Inventario
                             </a>
                             <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-shopping-bag"></i></div>
                                 Compras
                             </a>
                             <div class="sb-sidenav-menu-heading">Propiedad Privada</div>
                             <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tractor"></i></div>
                                 Siembras
                             </a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePage" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-crow"></i></div>
                                 Animales
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePage" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="layout-static.html">Inventario</a>
-                                    <a class="nav-link" href="#">Compras</a>
-                                    <a class="nav-link" href="#">Ventas</a>
-                                    <a class="nav-link" href="#">Producción</a>
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class="fa fa-list-alt"></i></div>
+                                        Inventario</a>
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class="fa fa-shopping-bag"></i></div>
+                                        Compras</a>
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class='fas fa-cash-register'></i></div>
+                                        Ventas</a>
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class='fa fa-shopping-basket'></i></div>
+                                        Producción</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Personas</div>
                             <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-id-card-alt"></i></div>
                                 Empleados
                             </a>
                             <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
                                 Usuarios
                             </a>
                         </div>
