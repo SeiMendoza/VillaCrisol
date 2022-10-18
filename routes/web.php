@@ -52,7 +52,7 @@ Route::get('/empleados/{id}' ,  [EmpleadoController::class,'show'])
 ->name('empleado.mostrar')
 ->where('id' ,'[0-9]+');
 
- 
+
 
 
 //ruta raiz

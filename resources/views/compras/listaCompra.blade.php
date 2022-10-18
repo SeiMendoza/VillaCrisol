@@ -20,9 +20,9 @@
             </div>
             <div style="float: left; width: 400px;">
                 <form action="{{ route('compras.search') }}" method="GET"
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 ">
                 <div class="input-group">
-                    <input class="form-control" type="text" name="busqueda" placeholder="Search for..." aria-label="Search for..."
+                    <input class="form-control" type="text" value="" name="busqueda" placeholder="Search for..." aria-label="Search for..."
                     aria-describedby="btnNavbarSearch" />
                     <button class="btn btn-primary" type="submit" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>

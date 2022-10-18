@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Compra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
@@ -11,7 +12,7 @@ class CompraController extends Controller
     public function index(Request $request)
     {
         $compras = Compra::paginate(10);
-        return view('compras.listaCompra')->with('compras', $compras);
+        return view('compras.listaCompra', compact('compras'));
     }
 
     //buscar compras
@@ -20,6 +21,7 @@ class CompraController extends Controller
         $compras = Compra::where('nombreCompra', 'like', '%'.$text.'%')->paginate(10);
         return view('compras/listaCompra')->with('compras', $compras);
     }
+
 
     //crear nueva compra
     public function create()
@@ -35,8 +37,6 @@ class CompraController extends Controller
             'cantidad' =>  'required|numeric|min:0',
             'precio'=>  'required|numeric|min:0',
             'total'=>  'required|numeric|min:0',
-            'observacion'=>  'string|min:5|max:100',
-            //'imagenFactura' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048'
         ],[
 
             'numeroFactura.numeric' => 'Solo se permiten números',
@@ -61,13 +61,6 @@ class CompraController extends Controller
             'total.required' => 'Campo obligatorio, ingresar el total',
             'total.numeric' => 'Solo se permiten números',
             'total.min' => 'La cantidad mínima a ingresar es "0"',
-
-            'observacion.string' => 'Añadir una observación para la compra',
-            'observacion.min' => 'Ingresar un mínimo de 5 letras',
-            'observacion.max' => 'Se ha excedido el limite máximo de 80 letras',
-
-           /* 'imagenFactura.image' => 'Seleccionar una imagen',
-            'imagenFactura.mimes' => 'Seleccionar una imagen en el formato correcto'*/
         ]);
 
         $crearCompra = new Compra();
@@ -79,9 +72,16 @@ class CompraController extends Controller
         $crearCompra->precio = $request->input('precio');
         $crearCompra->total = $request->input('total');
         $crearCompra->observacion = $request->input('observacion');
-        $crearCompra->imagenFactura = $request->input('imgenFactura');
-        $crearCompra->fechaRegistro = now()->format('Y-m-d');
-        $crearCompra->usuario = "Admin";
+        //$crearCompra->imagenFactura = $request->input('imagenFactura');
+        //$crearCompra->fechaRegistro = now()->format('Y-m-d');
+        //$crearCompra->usuario = "Admin";
+        if($request->hasFile('imagenFactura')){
+            $imagen = $request->file('imagenFactura');
+            $extention = $imagen->getClientOriginalExtension();
+            $filname = time().'.'.$extention;
+            $imagen->move('imagenes/', $filname);
+            $crearCompra->imagen_producto = $filname;
+        }
 
         $create = $crearCompra->save();
 

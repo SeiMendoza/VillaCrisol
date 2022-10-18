@@ -21,10 +21,10 @@ class CreateComprasTable extends Migration
             $table->integer('cantidad');
             $table->double('precio');
             $table->double('total');
-            $table->string('observacion');
+            $table->string('observacion')->nullable();
             $table->string('imagenFactura')->nullable();
-            $table->string('fechaRegistro');
-            $table->string('usuario');
+            $table->string('fechaRegistro')->nullable();
+            $table->string('usuario')->nullable();
             $table->timestamps();
         });
     }
