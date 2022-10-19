@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
@@ -89,3 +90,24 @@ Route::get('/compras/{id}', [CompraController::class,'show'])
 
 // Productos
 Route::resource('tarea', TareaController::class);
+
+/*
+   |----------------|
+   | Rutas clientes |
+   |----------------|
+*/
+
+//Lista de clientes
+Route::get('/clientes', [ClienteController::class,'index'])
+->name('clientes.index');
+
+//Buscar clientes
+Route::get('/clientes/busqueda', [ClienteController::class,'search'])
+->name('clientes.search');
+
+//Agregar nuevo cliente
+Route::get('/clientes/create', [ClienteController::class,'create'])
+->name('clientes.create');
+
+Route::post('/clientes/create', [ClienteController::class, 'store'])
+->name('clientes.store');

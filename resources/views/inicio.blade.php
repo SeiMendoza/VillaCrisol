@@ -111,7 +111,11 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Personas</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{route('clientes.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Clientes
+                            </a>
+                            <a class="nav-link" href="{{route('empleado.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-id-card-alt"></i></div>
                                 Empleados
                             </a>
@@ -149,16 +153,16 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">RESTAURANTE</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('restaurante')}}">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{route('restaurante')}}">MOSTRAR</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">MANTENIMIENTO</div>
+                                    <div class="card-body">CLIENTES</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{route('clientes.index')}}">MOSTRAR</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -167,7 +171,7 @@
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body">PROPIEDAD PRIVADA</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

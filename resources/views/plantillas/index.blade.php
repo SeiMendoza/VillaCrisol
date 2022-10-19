@@ -111,7 +111,11 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Personas</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{route('clientes.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Clientes
+                            </a>
+                            <a class="nav-link" href="{{route('empleado.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-id-card-alt"></i></div>
                                 Empleados
                             </a>
