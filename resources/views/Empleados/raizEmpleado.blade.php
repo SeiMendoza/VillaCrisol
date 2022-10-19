@@ -12,7 +12,7 @@
 @endif
 
 <div class="container-fluid px-4">
-    Empleados
+
     <div class="card shadow col-md-12">
         <div class="card-header" style="background: #25416b; color: white">
             <div>
@@ -22,11 +22,11 @@
                 <form action="{{ route('empleados.search') }}" method="GET"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input class="form-control" type="text" name="busqueda" placeholder="Search for..." aria-label="Search for..."
-                    aria-describedby="btnNavbarSearch" />
+                    <input class="form-control" type="text" name="busqueda" placeholder="Buscar Empleado..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" value="{{old('text')}}" />
                     <button class="btn btn-primary" type="submit" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+                    <a class="btn btn-primary" href="{{route('empleado.index')}}">Borrar Busqueda</a>
+                </div>          
             </div>
             <div style="text-align: right">
                 Agregar un nuevo empleado a la lista:
@@ -34,13 +34,13 @@
             </div>
         </div>
 
-        <!--------Lista de Compras---------------->
+        <!--------Lista de empleados---------------->
         <div class="card-body">
             <div class="table-responsive">
             <table class="table" id="table">
                     <thead class="card-header" style="background: rgb(49, 63, 95); color:white;">
     <tr>
-    <th scope="col">id</th>
+      <th scope="col">N</th>
       <th scope="col">Nombre completo</th>
       <th scope="col">Número de identidad</th>
       <th scope="col">Número telefónico</th>
@@ -52,13 +52,12 @@
   @forelse($empleados as $empleado)
     <tr>
     <th scope="col">{{$empleado->id}}</th>
-    <td scope="col">{{$empleado->NombreCompleto}}</td>
+      <td scope="col">{{$empleado->NombreCompleto}}</td>
       <td scope="col">{{$empleado->NúmeroDeIdentidad}}</td>
       <td scope="col">{{$empleado->NúmeroTelefónico}}</td>
       <td scope="col">{{$empleado->Estado}}</td>
       <td style=" text-align: center"><a class="btn btn-info" href="{{route('empleado.mostrar' , ['id'=>$empleado->id])}}">Detalles</a></td>
       
-     
     </tr>
     @empty
     <tr>
@@ -81,6 +80,6 @@
         </div>
     </div>
 </div>
-
+ 
 @endsection
 

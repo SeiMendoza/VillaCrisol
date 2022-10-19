@@ -14,8 +14,7 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('NombreCompleto') is-invalid @enderror" id="NombreCompleto"
-      name="NombreCompleto" type="text"required autocomplete="NombreCompleto"
-      placeholder="" value="{{old('NombreCompleto')}}" />
+      name="NombreCompleto" type="text" placeholder="" value="{{old('NombreCompleto')}}" />
       <label for="NombreCompleto">Nombre Completo</label>
       @error('NombreCompleto')
       <small class="invalid-feedback">
@@ -24,11 +23,11 @@
       @enderror
      </div>
      </div> 
-
+ 
      <div class="col-md-6">
                 <div class="form-floating">
                     <input class="form-control @error('NúmeroDeIdentidad') is-invalid @enderror" id="NúmeroDeIdentidad" name="NúmeroDeIdentidad" type="num"
-                    value="{{old('NúmeroDeIdentidad')}}" />
+                    value="{{old('NúmeroDeIdentidad')}}" maxlength="15"/>
                     <label for="NúmeroDeIdentidad">Número De Identidad</label>
                     @error('NúmeroDeIdentidad')
                         <small class="invalid-feedback" >
@@ -43,8 +42,8 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('CorreoElectrónico') is-invalid @enderror" id="CorreoElectrónico"
-      name="CorreoElectrónico" type="email"required autocomplete=" "
-     value="{{old('CorreoElectrónico')}}" />
+      name="CorreoElectrónico" type="text" 
+     value="{{old('CorreoElectrónico')}}" maxlength="30"/>
       <label for="CorreoElectrónico"> Correo Electrónico </label>
       @error('CorreoElectrónico')
       <small class="invalid-feedback">
@@ -56,8 +55,8 @@
 
      <div class="col-md-6">
                 <div class="form-floating">
-                    <input class="form-control @error('NúmeroTelefónico') is-invalid @enderror" id="NúmeroTelefónico" name="NúmeroTelefónico" type="num"
-                    value="{{old('NúmeroTelefónico')}}" />
+                    <input class="form-control @error('NúmeroTelefónico') is-invalid @enderror" id="NúmeroTelefónico" name="NúmeroTelefónico" type="text"
+                    value="{{old('NúmeroTelefónico')}}" maxlength="8"/>
                     <label for="NúmeroTelefónico"> Número Telefónico</label>
                     @error('NúmeroTelefónico')
                         <small class="invalid-feedback" >
@@ -72,9 +71,9 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('NúmeroDeReferencia') is-invalid @enderror" id="NúmeroDeReferencia"
-      name=" NúmeroDeReferencia" type="num"required autocomplete=" "
-     value="{{old('NúmeroDeReferencia')}}" />
-      <label for="NúmeroDeReferencia"> Número De Referencia</label>
+      name=" NúmeroDeReferencia" type="text" 
+     value="{{old('NúmeroDeReferencia')}}" maxlength="8"/>
+      <label for="NúmeroDeReferencia"> Número de Referencia</label>
       @error('NúmeroDeReferencia')
       <small class="invalid-feedback">
      <strong>{{ $message }}</strong>
@@ -88,7 +87,7 @@
                     <input class="form-control @error('NombreDeLaReferencia') is-invalid @enderror" id="NombreDeLaReferencia" name="NombreDeLaReferencia" type="text"
                      placeholder=""
                     value="{{old('NombreDeLaReferencia')}}" />
-                    <label for="NombreDeLaReferencia"> Nombre De La Referencia</label>
+                    <label for="NombreDeLaReferencia"> Nombre de contacto de la Empresa</label>
                     @error('NombreDeLaReferencia')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
@@ -102,7 +101,7 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('FechaDeIngreso') is-invalid @enderror" id="FechaDeIngreso"
-      name="FechaDeIngreso" type="date"required autocomplete="FechaDeIngreso"
+      name="FechaDeIngreso" type="date" 
        value="{{old('FechaDeIngreso')}}" />
       <label for="FechaDeIngreso">Fecha De Ingreso</label>
       @error('FechaDeIngreso')
@@ -132,10 +131,10 @@
  
             <div class="col-md-6">
                 <div class="form-floating">
-             <input class="form-control @error(' Domicilio') is-invalid @enderror" id="Domicilio" name="Domicilio" type="text"
-             value="{{old('Domicilio')}}" />
+             <input class="form-control @error('Domicilio') is-invalid @enderror" id="Domicilio" name="Domicilio" type="text"
+             value="{{old('Domicilio')}}" maxlength="50"/>
                     <label for="Domicilio ">Domicilio</label>
-                     @error('Domicilio ')
+                     @error('Domicilio')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
                         </small>
@@ -145,7 +144,7 @@
             </div>
       
       
-
+<br>
     <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating mb-3 mb-md-0">
@@ -182,24 +181,5 @@
     @endsection
 
 
-    
-@section('footer')
-<div class="small"><a href="#">Have an account? Go to login</a></div>
-<div class="my-2 float-start">
-    <span class="text-600 text-90" >Fecha:
-        <span id="date_r">
-            <script>
-                date = new Date();
-                year = date.getFullYear();
-                month = date.getMonth() + 1;
-                day = date.getDate();
-
-                document.getElementById("date_r").innerHTML = day + "/" + month + "/" + year;
-            </script>
-        </span>
-    </span>
-</div>
-<div class="my-2 float-end">
-    <span id="usuario" class="text-600 text-90">Registrado por: Admin</span>
-</div>
-@endsection
+ 
+ 
