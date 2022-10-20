@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Rule;
 use App\Models\Empleado;
+use Illuminate\Validation\Rule as ValidationRule;
 
 class EmpleadoController extends Controller
 {
@@ -15,30 +16,30 @@ class EmpleadoController extends Controller
 
      //Funcion para guardar el nuevo empleado agregado mediante el formulario//
     public function store(Request $request){
-      
-        /*Validación de campos*/ 
+
+        /*Validación de campos*/
         $request -> validate([
             'NombreCompleto'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
             'NúmeroDeIdentidad'=> 'required|unique:empleados,NúmeroDeIdentidad|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/',
-            'CorreoElectrónico'=>'required|unique:empleados,CorreoElectrónico|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25' , 
+            'CorreoElectrónico'=>'required|unique:empleados,CorreoElectrónico|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25' ,
             'NúmeroTelefónico'=>'required|min:8|max:8|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/',
             'NúmeroDeReferencia'=>'required|min:8|max:8|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/|min:8|max:8',
             'NombreDeLaReferencia'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u' ,
             'Domicilio'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u|min:4|max:50' ,
             'FechaDeIngreso'=> 'required|date',
-            'Estado'=> 'required|in:temporal,permanente' 
+            'Estado'=> 'required|in:temporal,permanente'
             ],[
-                
-                'NombreCompleto.required'=> 'El Nombre es Obligatorio', 
-                'NombreCompleto.regex'=> 'El Nombre debe Inciar con letra Mayuscula', 
+
+                'NombreCompleto.required'=> 'El Nombre es Obligatorio',
+                'NombreCompleto.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
                 'NúmeroDeIdentidad.required'=> 'El Número De Identidad es Obligatorio ',
                 'NúmeroDeIdentidad.regex'=> 'El Número De Identidad debe iniciar con (0 o 1) separado por (-) ejempl(####-####-#####)',
                 'NúmeroDeIdentidad.unique'=> 'El Número De Identidad ya existe',
-                'CorreoElectrónico.required'=>'El correo es un Obligatorio' , 
+                'CorreoElectrónico.required'=>'El correo es un Obligatorio' ,
                 'CorreoElectrónico.unique'=> 'El Número De Identidad ya existe',
                 'CorreoElectrónico.regex'=>'El correo es incorrecto ejempl:(usuario@gmail.com,usuario@yahoo.es)' ,
-                'CorreoElectrónico.min'=>'La longitud minima del correo electronico es:12' , 
-                'CorreoElectrónico.max'=>'La longitud maxima del correo electronico es:25' ,  
+                'CorreoElectrónico.min'=>'La longitud minima del correo electronico es:12' ,
+                'CorreoElectrónico.max'=>'La longitud maxima del correo electronico es:25' ,
                 'NúmeroTelefónico.required'=>'El Número Telefónico es un Campo Obligatorio',
 				'NúmeroTelefónico.unique'=> 'El Número De Telefóno ya existe',
                 'NúmeroTelefónico.regex'=>'El Número Telefónico debe iniciar con (2),(3),(8),(9)',
@@ -57,9 +58,9 @@ class EmpleadoController extends Controller
                 'Domicilio.max'=> 'El Domicilio debe tener maximo:50 letras' ,
                 'FechaDeIngreso.required'=> 'La Fecha De Ingreso es un Campo Obligatorio',
                 'FechaDeIngreso.date'=> 'La Fecha De Ingreso no es valida',
-                'Estado.required'=> 'El Estado es Obligatorio' 
+                'Estado.required'=> 'El Estado es Obligatorio'
             ]);
-    
+
             /*Variable para reconocer los nuevos registros a la tabla*/
             $nuevoEmpleado = new Empleado();
             $nuevoEmpleado->NombreCompleto=$request->input('NombreCompleto');
@@ -71,12 +72,12 @@ class EmpleadoController extends Controller
             $nuevoEmpleado->Domicilio=$request->input('Domicilio');
             $nuevoEmpleado->FechaDeIngreso=$request->input('FechaDeIngreso');
             $nuevoEmpleado->Estado=$request->input('Estado');
-    
+
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
             $creado = $nuevoEmpleado->save();
             if($creado){
                 return redirect()->route('empleado.index')->with('mensaje', "El empleado se registró correctamente");
-        } 
+        }
    }
 
    public function index(){
@@ -90,34 +91,36 @@ public function search(Request $request){
 	orwhere('NúmeroDeIdentidad', 'like', '%'.$text.'%')->paginate(10);
     return view('Empleados/raizEmpleado')->with('empleados', $empleados);
 
-    
+
 }
    //Funcion para actualizar empleado agregado mediante el formulario//
    public function update(Request $request, $id){
-    
-    /*Validación de campos*/ 
+
+    $empleados = Empleado::findOrFail($id);
+
+    /*Validación de campos*/
     $request -> validate([
         'NombreCompleto'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
-        'NúmeroDeIdentidad'=> 'required|unique:empleados,NúmeroDeIdentidad|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/' ,
-        'CorreoElectrónico'=>'required|unique:empleados,CorreoElectrónico|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25'  , 
-        'NúmeroTelefónico'=>'required|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/' ,
-        'NúmeroDeReferencia'=>'required|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/' ,
+        'NúmeroDeIdentidad'=> ['required','regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/',  ValidationRule::unique('empleados')->ignore($empleados->id)],
+        'CorreoElectrónico'=>['required','regex:/(.+)@(.+)\.(.+)$/', 'min:12|max:25', ValidationRule::unique('empleados')->ignore($empleados->id)],
+        'NúmeroTelefónico'=>['required', 'regex:/^[2,3,8,9][0-9]{7}$/', ValidationRule::unique('empleados')->ignore($empleados->id)],
+        'NúmeroDeReferencia'=>['required', 'regex:/^[2,3,8,9][0-9]{7}$/', ValidationRule::unique('empleados')->ignore($empleados->id)],
         'NombreDeLaReferencia'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u' ,
         'Domicilio'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u|min:4|max:50' ,
         'FechaDeIngreso'=> 'required|date',
-        'Estado'=> 'required|in:temporal,permanente,activo,inactivo' 
+        'Estado'=> 'required|in:temporal,permanente,activo,inactivo'
 ],[
-    
-    'NombreCompleto.required'=> 'El Nombre es Obligatorio', 
-    'NombreCompleto.regex'=> 'El Nombre debe Inciar con letra Mayuscula', 
+
+    'NombreCompleto.required'=> 'El Nombre es Obligatorio',
+    'NombreCompleto.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
     'NúmeroDeIdentidad.required'=> 'El Número De Identidad es Obligatorio ',
     'NúmeroDeIdentidad.regex'=> 'El Número De Identidad debe iniciar con (0 o 1) separado por (-) ejemplo(####-####-#####)',
     'NúmeroDeIdentidad.unique'=> 'El Número De Identidad ya existe',
-    'CorreoElectrónico.required'=>'El correo es Obligatorio' , 
+    'CorreoElectrónico.required'=>'El correo es Obligatorio' ,
     'CorreoElectrónico.regex'=>'El correo es incorrecto ejempl:(usuario@gmail.com,usuario@yahoo.es)' ,
-    'CorreoElectrónico.min'=>'La longitud minima del correo electronico es:12' , 
-    'CorreoElectrónico.max'=>'La longitud maxima del correo electronico es:25' , 
-    'CorreoElectrónico.unique'=> 'El Correo Electrónico ya existe', 
+    'CorreoElectrónico.min'=>'La longitud minima del correo electronico es:12' ,
+    'CorreoElectrónico.max'=>'La longitud maxima del correo electronico es:25' ,
+    'CorreoElectrónico.unique'=> 'El Correo Electrónico ya existe',
     'NúmeroTelefónico.required'=>'El Número Telefónico es Obligatorio',
 	'NúmeroTelefónico.unique'=> 'El Número De Telefóno ya existe',
     'NúmeroTelefónico.regex'=>'El Número Telefónico debe iniciar con (2)(3),(8),(9)',
@@ -136,7 +139,7 @@ public function search(Request $request){
     'Domicilio.max'=> 'El Domicilio debe tener maximo:50 letras' ,
     'FechaDeIngreso.required'=> 'La Fecha De Ingreso es Obligatorio',
     'FechaDeIngreso.date'=> 'La Fecha De Ingreso no es valida',
-    'Estado.required'=> 'El Estado es un Obligatorio' 
+    'Estado.required'=> 'El Estado es un Obligatorio'
 ]);
 
     /*Variable para reconocer los nuevos registros a la tabla*/
@@ -156,7 +159,7 @@ public function search(Request $request){
     $creado = $Empleado->save();
     if($creado){
         return redirect()->route('empleado.index')->with('mensaje', "El empleado ".$Empleado->NombreCompleto." se actualizo correctamente");
-    } 
+    }
 }
 // editar empleado
 public function editar ($id){
