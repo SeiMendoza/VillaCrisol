@@ -14,7 +14,7 @@
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('NombreCompleto') is-invalid @enderror" id="NombreCompleto"
       name="NombreCompleto" type="text" 
-      placeholder="" value="{{old('NombreCompleto',$empleado->NombreCompleto)}}" />
+      placeholder="" value="{{old('NombreCompleto',$empleado->NombreCompleto)}}" maxlength="45" />
       <label for="NombreCompleto">Nombre Completo</label>
       @error('NombreCompleto')
       <small class="invalid-feedback">
@@ -27,7 +27,7 @@
      <div class="col-md-6">
                 <div class="form-floating">
                     <input class="form-control @error('NúmeroDeIdentidad') is-invalid @enderror" id="NúmeroDeIdentidad" name="NúmeroDeIdentidad" type="num"
-                    value="{{old('NúmeroDeIdentidad',$empleado->NúmeroDeIdentidad)}}" />
+                    value="{{old('NúmeroDeIdentidad',$empleado->NúmeroDeIdentidad)}}" maxlength="15"/>
                     <label for="NúmeroDeIdentidad">Número De Identidad</label>
                     @error('NúmeroDeIdentidad')
                         <small class="invalid-feedback" >
@@ -43,7 +43,7 @@
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('CorreoElectrónico') is-invalid @enderror" id="CorreoElectrónico"
       name="CorreoElectrónico" type="text" 
-     value="{{old('CorreoElectrónico',$empleado->CorreoElectrónico)}}" />
+     value="{{old('CorreoElectrónico',$empleado->CorreoElectrónico)}}" maxlength="25"/>
       <label for="CorreoElectrónico"> Correo Electrónico </label>
       @error('CorreoElectrónico')
       <small class="invalid-feedback">
@@ -56,7 +56,7 @@
      <div class="col-md-6">
                 <div class="form-floating">
                     <input class="form-control @error('NúmeroTelefónico') is-invalid @enderror" id="NúmeroTelefónico" name="NúmeroTelefónico" type="text"
-                    value="{{old('NúmeroTelefónico',$empleado->NúmeroTelefónico)}}" />
+                    value="{{old('NúmeroTelefónico',$empleado->NúmeroTelefónico)}}" maxlength="8" />
                     <label for="NúmeroTelefónico"> Número Telefónico</label>
                     @error('NúmeroTelefónico')
                         <small class="invalid-feedback" >
@@ -72,8 +72,8 @@
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('NúmeroDeReferencia') is-invalid @enderror" id="NúmeroDeReferencia"
       name=" NúmeroDeReferencia" type="text" 
-     value="{{old('NúmeroDeReferencia',$empleado->NúmeroDeReferencia)}}" />
-      <label for="NúmeroDeReferencia"> Número De Referencia</label>
+     value="{{old('NúmeroDeReferencia',$empleado->NúmeroDeReferencia)}}" maxlength="8"/>
+      <label for="NúmeroDeReferencia"> Número de contacto de la Empresa</label>
       @error('NúmeroDeReferencia')
       <small class="invalid-feedback">
      <strong>{{ $message }}</strong>
@@ -86,8 +86,8 @@
                 <div class="form-floating">
                     <input class="form-control @error('NombreDeLaReferencia') is-invalid @enderror" id="NombreDeLaReferencia" name="NombreDeLaReferencia" type="text"
                      placeholder=""
-                    value="{{old('NombreDeLaReferencia',$empleado->NombreDeLaReferencia)}}" />
-                    <label for="NombreDeLaReferencia"> Nombre Contacto de la Empresa</label>
+                    value="{{old('NombreDeLaReferencia',$empleado->NombreDeLaReferencia)}}" maxlength="45"/>
+                    <label for="NombreDeLaReferencia">Nombre Contacto de la Empresa</label>
                     @error('NombreDeLaReferencia')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
@@ -101,7 +101,7 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('FechaDeIngreso') is-invalid @enderror" id="FechaDeIngreso"
-      name="FechaDeIngreso" type="date"  
+      name="FechaDeIngreso" type="date" min="" max=""
        value="{{old('FechaDeIngreso',$empleado-> FechaDeIngreso)}}" />
       <label for="FechaDeIngreso">Fecha De Ingreso</label>
       @error(' FechaDeIngreso')
@@ -115,15 +115,15 @@
      <div class="col-md-6">
                 <div class="form-floating">
                 <select  class="form-control @error('Estado') is-invalid @enderror" name="Estado">   
-      <option value="permanente"{{$empleado->Estado =="permanente" ? 'selected' :''}}>permanente</option>
- <option value="temporal"{{$empleado->Estado =="temporal" ? 'selected' :''}}>temporal</option> 
- <option value="activo"{{$empleado->Estado =="Activo" ? 'selected' :''}}>activo</option>
- <option value="inactivo"{{$empleado->Estado =="inactivo" ? 'selected' :''}}>inactivo</option>     
+      <option value="permanente"{{$empleado->Estado =="permanente" ? 'selected' :''}} >Permanente</option>
+ <option value="temporal"{{$empleado->Estado =="temporal" ? 'selected' :''}}>Temporal</option> 
+ <option value="activo"{{$empleado->Estado =="activo" ? 'selected' :''}}>Activo</option>
+ <option value="inactivo"{{$empleado->Estado =="inactivo" ? 'selected' :''}}>Inactivo</option>     
     </select>
                     <label for="Estado"> Estado </label>
                     @error('Estado')
                         <small class="invalid-feedback" >
-                            <strong>{{ $message }}</strong>
+                            <strong>{{$message}}</strong>
                         </small>
                     @enderror
                 </div>
@@ -132,12 +132,12 @@
  
             <div class="col-md-6">
                 <div class="form-floating">
-             <input class="form-control @error(' Domicilio') is-invalid @enderror" id="Domicilio" name="Domicilio" type="text"
-             value="{{old('Domicilio',$empleado->Domicilio)}}" />
-                    <label for="Domicilio ">Domicilio</label>
-                     @error('Domicilio ')
+             <input class="form-control @error('Domicilio') is-invalid @enderror" id="Domicilio" name="Domicilio" type="text"
+             value="{{old('Domicilio',$empleado->Domicilio)}}" maxlength="45"/>
+                    <label for="Domicilio">Domicilio</label>
+                     @error('Domicilio')
                         <small class="invalid-feedback" >
-                            <strong>{{ $message }}</strong>
+                            <strong>{{$message}}</strong>
                         </small>
                     @enderror
                 </div>
@@ -181,5 +181,7 @@
             </form>
     @endsection
 
- 
+ <?php 
+ $FechaDeIngreso = date(now());
+ ?>
  

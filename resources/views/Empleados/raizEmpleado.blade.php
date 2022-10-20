@@ -23,9 +23,9 @@
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
                     <input class="form-control" type="text" name="busqueda" placeholder="Buscar Empleado..." aria-label="Search for..."
-                    aria-describedby="btnNavbarSearch" value="{{old('text')}}" />
+                    aria-describedby="btnNavbarSearch" value="{{old('$text')}}" />
                     <button class="btn btn-primary" type="submit" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                    <a class="btn btn-primary" href="{{route('empleado.index')}}">Borrar Busqueda</a>
+                    <a class="btn btn-danger" href="{{route('empleado.index')}}">Borrar Busqueda</a>
                 </div>          
             </div>
             <div style="text-align: right">

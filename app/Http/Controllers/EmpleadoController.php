@@ -17,23 +17,24 @@ class EmpleadoController extends Controller
       
         /*Validación de campos*/ 
         $request -> validate([
-            'NombreCompleto'=> 'required|regex:/^[\pLñÑ\s\-]+$/u',
+            'NombreCompleto'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
             'NúmeroDeIdentidad'=> 'required|unique:empleados,NúmeroDeIdentidad|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/',
-            'CorreoElectrónico'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25' , 
-            'NúmeroTelefónico'=>'required|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/',
-            'NúmeroDeReferencia'=>'required|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/',
-            'NombreDeLaReferencia'=> 'required|regex:/^[\pLñÑ\s\-]+$/u' ,
-            'Domicilio'=> 'required|regex:/^[\pL\s\-]+$/u|min:4|max:50' ,
+            'CorreoElectrónico'=>'required|unique:empleados,CorreoElectrónico|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25' , 
+            'NúmeroTelefónico'=>'required|min:8|max:8|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/',
+            'NúmeroDeReferencia'=>'required|min:8|max:8|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/|min:8|max:8',
+            'NombreDeLaReferencia'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u' ,
+            'Domicilio'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u|min:4|max:50' ,
             'FechaDeIngreso'=> 'required|date',
             'Estado'=> 'required|in:temporal,permanente' 
             ],[
                 
-                'NombreCompleto.required'=> 'El Nombre es un Campo Obligatorio', 
+                'NombreCompleto.required'=> 'El Nombre es Obligatorio', 
                 'NombreCompleto.regex'=> 'El Nombre debe Inciar con letra Mayuscula', 
-                'NúmeroDeIdentidad.required'=> 'El Número De Identidad es un Campo Obligatorio ',
+                'NúmeroDeIdentidad.required'=> 'El Número De Identidad es Obligatorio ',
                 'NúmeroDeIdentidad.regex'=> 'El Número De Identidad debe iniciar con (0 o 1) separado por (-) ejempl(####-####-#####)',
                 'NúmeroDeIdentidad.unique'=> 'El Número De Identidad ya existe',
-                'CorreoElectrónico.required'=>'El correo es un Campo Obligatorio' , 
+                'CorreoElectrónico.required'=>'El correo es un Obligatorio' , 
+                'CorreoElectrónico.unique'=> 'El Número De Identidad ya existe',
                 'CorreoElectrónico.regex'=>'El correo es incorrecto ejempl:(usuario@gmail.com,usuario@yahoo.es)' ,
                 'CorreoElectrónico.min'=>'La longitud minima del correo electronico es:12' , 
                 'CorreoElectrónico.max'=>'La longitud maxima del correo electronico es:25' ,  
@@ -42,20 +43,20 @@ class EmpleadoController extends Controller
                 'NúmeroTelefónico.regex'=>'El Número Telefónico debe iniciar con (2),(3),(8),(9)',
                 'NúmeroTelefónico.min'=>'El Número Telefónico debe tener minimo:8 digitos',
                 'NúmeroTelefónico.max'=>'El Número Telefónico debe tener maximo:8 digitos',
-				'NúmeroDeReferencia.required'=>'El Número De Referencia es un Campo Obligatorio ',
-				'NúmeroDeReferencia.unique'=> 'El Número De Referencia ya existe',
-                'NúmeroDeReferencia.regex'=>'El Número De Referencia debe iniciar con (2),(3),(8),(9)',
-                'NúmeroDeReferencia.min'=>'El Número De Referencia debe tener minimo:8 digitos',
-                'NúmeroDeReferencia.max'=>'El Número De Referencia debe tener maximo:8 digitos',
-                'NombreDeLaReferencia.required'=> 'El Nombre De La Referencia es un Campo Obligatorio' ,
-                'NombreDeLaReferencia.regex'=> 'El Nombre De La Referencia debe Inciar con letra Mayuscula' ,
-                'Domicilio.required'=> 'El Domicilio es un Campo Obligatorio' ,
+				'NúmeroDeReferencia.required'=>'El Número Contacto de la Empresa es Obligatorio ',
+				'NúmeroDeReferencia.unique'=> 'El Número Contacto de la Empresa ya existe',
+                'NúmeroDeReferencia.regex'=>'El Número Contacto de la Empresa debe iniciar con (2),(3),(8),(9)',
+                'NúmeroDeReferencia.min'=>'El Número Contacto de la Empresa debe tener minimo:8 digitos',
+                'NúmeroDeReferencia.max'=>'El Número Contacto de la Empresa debe tener maximo:8 digitos',
+                'NombreDeLaReferencia.required'=> 'El Nombre Contacto de la Empresa es Obligatorio' ,
+                'NombreDeLaReferencia.regex'=> 'El Nombre Contacto de la Empresa debe Inciar con letra Mayuscula' ,
+                'Domicilio.required'=> 'El Domicilio es un Obligatorio' ,
                 'Domicilio.regex'=> 'El Domicilio debe Inciar con letra Mayuscula' ,
                 'Domicilio.min'=> 'El Domicilio debe tener minimo:4 letras' ,
                 'Domicilio.max'=> 'El Domicilio debe tener maximo:50 letras' ,
                 'FechaDeIngreso.required'=> 'La Fecha De Ingreso es un Campo Obligatorio',
                 'FechaDeIngreso.date'=> 'La Fecha De Ingreso no es valida',
-                'Estado.required'=> 'El Estado es un Campo Obligatorio' 
+                'Estado.required'=> 'El Estado es Obligatorio' 
             ]);
     
             /*Variable para reconocer los nuevos registros a la tabla*/
@@ -81,8 +82,7 @@ class EmpleadoController extends Controller
     $empleados= Empleado :: paginate(10);
     return view ('empleados.raizEmpleado')->with('empleados', $empleados);
 }
-
-//buscar compras
+//buscar empleado
 public function search(Request $request){
     $text =trim($request->get('busqueda'));
     $empleados = Empleado::where('NombreCompleto', 'like', '%'.$text.'%')->
@@ -91,51 +91,51 @@ public function search(Request $request){
 
     
 }
- 
    //Funcion para actualizar empleado agregado mediante el formulario//
    public function update(Request $request, $id){
     
     /*Validación de campos*/ 
     $request -> validate([
-        'NombreCompleto'=> 'required|regex:/^[\pLñÑ\s\-]+$/u',
+        'NombreCompleto'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
         'NúmeroDeIdentidad'=> 'required|unique:empleados,NúmeroDeIdentidad|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/',
-        'CorreoElectrónico'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25' , 
-        'NúmeroTelefónico'=>'required|regex:/^[2,3,8,9][0-9]{7}$/',
-        'NúmeroDeReferencia'=>'required|regex:/^[2,3,8,9][0-9]{7}$/',
-        'NombreDeLaReferencia'=> 'required|regex:/^[\pLñÑ\s\-]+$/u' ,
-        'Domicilio'=> 'required|regex:/^[\pLñÑ\s\-]+$/u|min:4|max:50' ,
+        'CorreoElectrónico'=>'required|unique:empleados,CorreoElectrónico|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25' , 
+        'NúmeroTelefónico'=>'required|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/',
+        'NúmeroDeReferencia'=>'required|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/',
+        'NombreDeLaReferencia'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u' ,
+        'Domicilio'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u|min:4|max:50' ,
         'FechaDeIngreso'=> 'required|date',
-        'Estado'=> 'required|in:temporal,permanente' 
+        'Estado'=> 'required|in:temporal,permanente,activo,inactivo' 
 ],[
     
-    'NombreCompleto.required'=> 'El Nombre es un Campo Obligatorio', 
+    'NombreCompleto.required'=> 'El Nombre es Obligatorio', 
     'NombreCompleto.regex'=> 'El Nombre debe Inciar con letra Mayuscula', 
-    'NúmeroDeIdentidad.required'=> 'El Número De Identidad es un Campo Obligatorio ',
-    'NúmeroDeIdentidad.regex'=> 'El Número De Identidad debe iniciar con (0 o 1) separado por (-) ejempl(####-####-#####)',
+    'NúmeroDeIdentidad.required'=> 'El Número De Identidad es Obligatorio ',
+    'NúmeroDeIdentidad.regex'=> 'El Número De Identidad debe iniciar con (0 o 1) separado por (-) ejemplo(####-####-#####)',
     'NúmeroDeIdentidad.unique'=> 'El Número De Identidad ya existe',
-    'CorreoElectrónico.required'=>'El correo es un Campo Obligatorio' , 
+    'CorreoElectrónico.required'=>'El correo es Obligatorio' , 
     'CorreoElectrónico.regex'=>'El correo es incorrecto ejempl:(usuario@gmail.com,usuario@yahoo.es)' ,
     'CorreoElectrónico.min'=>'La longitud minima del correo electronico es:12' , 
-    'CorreoElectrónico.max'=>'La longitud maxima del correo electronico es:25' ,  
-    'NúmeroTelefónico.required'=>'El Número Telefónico es un Campo Obligatorio',
+    'CorreoElectrónico.max'=>'La longitud maxima del correo electronico es:25' , 
+    'CorreoElectrónico.unique'=> 'El Correo Electrónico ya existe', 
+    'NúmeroTelefónico.required'=>'El Número Telefónico es Obligatorio',
 	'NúmeroTelefónico.unique'=> 'El Número De Telefóno ya existe',
     'NúmeroTelefónico.regex'=>'El Número Telefónico debe iniciar con (2)(3),(8),(9)',
     'NúmeroTelefónico.min'=>'El Número Telefónico debe tener minimo:8 digitos',
     'NúmeroTelefónico.max'=>'El Número Telefónico debe tener maximo:8 digitos',
-    'NúmeroDeReferencia.required'=>'El Número De Referencia es un Campo Obligatorio ',
+    'NúmeroDeReferencia.required'=>'El Número De Referencia es Obligatorio ',
 	'NúmeroDeReferencia.unique'=> 'El Número De Referencia ya existe',
     'NúmeroDeReferencia.regex'=>'El Número De Referencia debe iniciar con (2),(3),(8),(9)',
     'NúmeroDeReferencia.min'=>'El Número De Referencia debe tener minimo:8 digitos',
     'NúmeroDeReferencia.max'=>'El Número De Referencia debe tener maximo:8 digitos',
-    'NombreDeLaReferencia.required'=> 'El Nombre De La Referencia es un Campo Obligatorio' ,
+    'NombreDeLaReferencia.required'=> 'El Nombre De La Referencia es Obligatorio' ,
     'NombreDeLaReferencia.regex'=> 'El Nombre De La Referencia debe Inciar con letra Mayuscula' ,
-    'Domicilio.required'=> 'El Domicilio es un Campo Obligatorio' ,
+    'Domicilio.required'=> 'El Domicilio es Obligatorio' ,
     'Domicilio.regex'=> 'El Domicilio debe Inciar con letra Mayuscula' ,
     'Domicilio.min'=> 'El Domicilio debe tener minimo:4 letras' ,
     'Domicilio.max'=> 'El Domicilio debe tener maximo:50 letras' ,
-    'FechaDeIngreso.required'=> 'La Fecha De Ingreso es un Campo Obligatorio',
+    'FechaDeIngreso.required'=> 'La Fecha De Ingreso es Obligatorio',
     'FechaDeIngreso.date'=> 'La Fecha De Ingreso no es valida',
-    'Estado.required'=> 'El Estado es un Campo Obligatorio' 
+    'Estado.required'=> 'El Estado es un Obligatorio' 
 ]);
 
     /*Variable para reconocer los nuevos registros a la tabla*/
