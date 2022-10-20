@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Rule;
 use App\Models\Empleado;
 
 class EmpleadoController extends Controller
@@ -97,10 +98,10 @@ public function search(Request $request){
     /*Validación de campos*/ 
     $request -> validate([
         'NombreCompleto'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
-        'NúmeroDeIdentidad'=> 'required|unique:empleados,NúmeroDeIdentidad|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/',
-        'CorreoElectrónico'=>'required|unique:empleados,CorreoElectrónico|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25' , 
-        'NúmeroTelefónico'=>'required|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/',
-        'NúmeroDeReferencia'=>'required|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/',
+        'NúmeroDeIdentidad'=> 'required|unique:empleados,NúmeroDeIdentidad|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/'Rule::unique('empleados')->ignore($empleado->id) ,
+        'CorreoElectrónico'=>'required|unique:empleados,CorreoElectrónico|regex:/(.+)@(.+)\.(.+)$/|min:12|max:25',Rule::unique('empleados')->ignore($empleado->id) , 
+        'NúmeroTelefónico'=>'required|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/'Rule::unique('empleados')->ignore($empleado->id) ,
+        'NúmeroDeReferencia'=>'required|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/'Rule::unique('empleados')->ignore($empleado->id) ,
         'NombreDeLaReferencia'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u' ,
         'Domicilio'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u|min:4|max:50' ,
         'FechaDeIngreso'=> 'required|date',

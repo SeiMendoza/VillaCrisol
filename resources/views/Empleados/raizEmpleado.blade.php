@@ -25,7 +25,7 @@
                     <input class="form-control" type="text" name="busqueda" placeholder="Buscar Empleado..." aria-label="Search for..."
                     aria-describedby="btnNavbarSearch" value="{{old('$text')}}" />
                     <button class="btn btn-primary" type="submit" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                    <a class="btn btn-danger" href="{{route('empleado.index')}}">Borrar Busqueda</a>
+                    <a class="btn btn-secundary" href="{{route('empleado.index')}}">Borrar Busqueda</a>
                 </div>          
             </div>
             <div style="text-align: right">
@@ -51,7 +51,7 @@
   <tbody>
   @forelse($empleados as $empleado)
     <tr>
-    <th scope="col">{{$empleado->id}}</th>
+    <th scope="col">{{$empleado->N}}</th>
       <td scope="col">{{$empleado->NombreCompleto}}</td>
       <td scope="col">{{$empleado->NúmeroDeIdentidad}}</td>
       <td scope="col">{{$empleado->NúmeroTelefónico}}</td>
