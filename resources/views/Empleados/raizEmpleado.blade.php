@@ -51,7 +51,7 @@
   <tbody>
   @forelse($empleados as $empleado)
     <tr>
-    <th scope="col">{{$empleado->N}}</th>
+    <th scope="col">{{$empleado->id}}</th>
       <td scope="col">{{$empleado->NombreCompleto}}</td>
       <td scope="col">{{$empleado->NúmeroDeIdentidad}}</td>
       <td scope="col">{{$empleado->NúmeroTelefónico}}</td>
