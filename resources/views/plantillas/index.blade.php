@@ -10,16 +10,17 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href={{ asset("css/styles.css") }} rel="stylesheet" type="text/css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="/crisol.png" type="image/x-icon">
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="">Villa Crisol</a>
+            <a class="navbar-brand ps-3" href="{{route('index')}}">Villa Crisol</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"
              href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-           
+
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">

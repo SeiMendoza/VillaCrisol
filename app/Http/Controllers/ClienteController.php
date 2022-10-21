@@ -67,19 +67,25 @@ class ClienteController extends Controller
         ]);
 
         /*Variable para reconocer los nuevos registros a la tabla*/
-            $nuevoCliente = new Cliente();
-            $nuevoCliente->nombreCompleto=$request->input('nombreCompleto');
-            $nuevoCliente->numeroId=$request->input('numeroId');
-            $nuevoCliente->correo=$request->input('correo');
-            $nuevoCliente->numeroTelefono=$request->input('numeroTelefono');
-            $nuevoCliente->domicilio=$request->input('domicilio');
+        $nuevoCliente = new Cliente();
+        $nuevoCliente->nombreCompleto=$request->input('nombreCompleto');
+        $nuevoCliente->numeroId=$request->input('numeroId');
+        $nuevoCliente->correo=$request->input('correo');
+        $nuevoCliente->numeroTelefono=$request->input('numeroTelefono');
+        $nuevoCliente->domicilio=$request->input('domicilio');
 
-            /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
-            $creado = $nuevoCliente->save();
-            if($creado){
-                return redirect()->route('clientes.index')
-                ->with('mensaje', "El cliente se registró correctamente");
+        /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
+        $creado = $nuevoCliente->save();
+        if($creado){
+            return redirect()->route('clientes.index')
+            ->with('mensaje', "El cliente se registró correctamente");
         }
    }
+
+   // muestra los detalles del empleado
+    public function show ($id){
+        $cliente = Cliente::findOrfail($id);// muestra un solo empleado
+        return view('clientes.detalleClientes')->with('cliente',$cliente);
+    }
 
 }

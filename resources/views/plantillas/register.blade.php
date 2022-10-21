@@ -9,6 +9,7 @@
         <title>@yield('title')</title>
         <link href={{ asset("css/styles.css") }} rel="stylesheet" type="text/css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="/crisol.png" type="image/x-icon">
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">

@@ -58,7 +58,7 @@
                             <td scope="col">{{$cliente->nombreCompleto}}</td>
                             <td scope="col">{{$cliente->numeroId}}</td>
                             <td scope="col">{{$cliente->numeroTelefono}}</td>
-                            <td style=" text-align: center"><a class="btn btn-info" href="#">Detalles</a></td>
+                            <td style=" text-align: center"><a class="btn btn-info" href="{{route('clientes.show' , ['id'=>$cliente->id])}}">Detalles</a></td>
                             </tr>
                         @empty
                             <tr><td colspan = "7" style="text-align: center">No hay clientes registrados</td>
