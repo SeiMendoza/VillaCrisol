@@ -1,18 +1,18 @@
-<!DOCTYPE html>
 @extends('plantillas.index')
 
 @section('title', 'Empleados')
 
 @section('content')
-<br>
-@if (session('mensaje'))
-<div class="alert alert-success">
-  {{session('mensaje')}}
-</div>
+
+@if(session('mensaje'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong> {{session('mensaje')}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 @endif
 
 <div class="container-fluid px-4">
-
+    Empleados
     <div class="card shadow col-md-12">
         <div class="card-header" style="background: #25416b; color: white">
             <div>
@@ -61,7 +61,7 @@
       <td scope="col">{{$empleado->NúmeroTelefónico}}</td>
       <td scope="col">{{$empleado->Estado}}</td>
       <td style=" text-align: center"><a class="btn btn-info" href="{{route('empleado.mostrar' , ['id'=>$empleado->id])}}">Detalles</a></td>
-      
+
     </tr>
     @empty
     <tr>
@@ -84,6 +84,6 @@
         </div>
     </div>
 </div>
- 
+
 @endsection
 
