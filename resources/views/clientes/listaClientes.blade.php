@@ -23,10 +23,12 @@
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input class="form-control" type="text" id="busqueda" name="busqueda" placeholder="Buscar por nombre o identidad" aria-label="Buscar por nombre o identidad"
-                        aria-describedby="" maxlength="50" required
-                            value="{{$text}}" />
-                        <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
+                        aria-describedby="basic-addon2" maxlength="50" required
+                            value="<?php if(isset($text)) echo $text;?>" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('clientes.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
+                        </div>
                     </div>
                 </form>
             </div>
