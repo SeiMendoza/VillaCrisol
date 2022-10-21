@@ -36,12 +36,13 @@ class ClienteController extends Controller
             'numeroId'=> 'required|unique:clientes,numeroId|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/|max:15|min:15',
             'correo'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:50|unique:clientes',
             'numeroTelefono'=>['required', 'min:8', 'numeric', 'regex:/^[2,3,8,9][0-9]{7}+$/', 'unique:clientes,numeroTelefono'],
-            'domicilio'=> 'required|regex:/^[\pL\s\-]+$/u|min:4|max:50',
+            'domicilio'=> 'required|regex:/^[a-zA-Z\0-9\s\.]+$/|min:4|max:50',
             ],[
 
             'nombreCompleto.required'=> 'El nombre es obligatorio',
             'nombreCompleto.regex'=> 'El nombre completo debe tener solo letras',
             'nombreCompleto.max'=> 'El nombre completo no puede exceder de 50 letras',
+            'nombreCompleto.regex'=>'Solo se permiten letras',
 
             'numeroId.required'=> 'El número de identidad es obligatorio ',
             'numeroId.regex'=> 'El número De identidad debe iniciar con (0 o 1) separado por (-) ejemplo (####-####-#####)',
@@ -62,6 +63,7 @@ class ClienteController extends Controller
             'domicilio.required'=> 'El domicilio es obligatorio' ,
             'domicilio.min'=> 'El domicilio debe tener minimo:4 letras' ,
             'domicilio.max'=> 'El domicilio debe tener maximo:50 letras' ,
+            'domicilio.regex'=> 'Un caracter ingresado no es permitido'
         ]);
 
         /*Variable para reconocer los nuevos registros a la tabla*/

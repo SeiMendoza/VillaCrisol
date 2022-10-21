@@ -37,7 +37,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating mb-3 mb-md-0">
-                    <input class="form-control @error('fecha') is-invalid @enderror" id="fecha" max="{{date('Y-m-d')}}"
+                    <input class="form-control @error('fecha') is-invalid @enderror" id="fecha"  min="{{date('Y-m-d')}}" max=""
                     name="fecha" type="date" placeholder="12/05/1999" value="{{ old('fecha') }}" />
                     <label for="fecha">Fecha de la compra</label>
                     @error('fecha')
