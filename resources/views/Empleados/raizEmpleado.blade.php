@@ -17,16 +17,20 @@
         <div class="card-header" style="background: #25416b; color: white">
             <div>
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Lista de Empleados</h2>
-            </div>
-            <div style="float: left; width: 400px;">
-                <form action="{{ route('empleados.search') }}" method="GET"
+                </div><br>
+            <div style="float: left; width: 450px;">
+                <form action="{{ route('empleados.search') }}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input class="form-control" type="text" name="busqueda" placeholder="Buscar Empleado..." aria-label="Search for..."
-                    aria-describedby="btnNavbarSearch" value="{{old('$text')}}" />
-                    <button class="btn btn-primary" type="submit" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                    <a class="btn btn-secundary" href="{{route('empleado.index')}}">Borrar Busqueda</a>
-                </div>          
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="busqueda" name="busqueda" placeholder="Buscar por nombre o identidad" aria-label="Buscar por nombre o identidad"
+                        aria-describedby="basic-addon2" maxlength="50" required
+                            value="<?php if(isset($text)) echo $text;?>" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
+                            <a href="{{route('empleado.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div style="text-align: right">
                 Agregar un nuevo empleado a la lista:

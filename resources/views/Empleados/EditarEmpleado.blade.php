@@ -101,7 +101,7 @@
      <div class="col-md-6">
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('FechaDeIngreso') is-invalid @enderror" id="FechaDeIngreso"
-      name="FechaDeIngreso" type="date" min="" max=""
+      name="FechaDeIngreso" type="date" min="{{ now()->toDateString('Y-m-d') }}" max="2022-12-21"
        value="{{old('FechaDeIngreso',$empleado-> FechaDeIngreso)}}" />
       <label for="FechaDeIngreso">Fecha De Ingreso</label>
       @error(' FechaDeIngreso')

@@ -16,8 +16,8 @@
 <table class="table">
     <thead class="thead-light ">
         <tr> 
-            <th scope="col">campo</th>
-            <th scope="col">valor</th>
+            <th scope="col">Datos</th>
+            <th scope="col">Información</th>
             <th scope=""><a class="btn btn-warning" href="{{route('empleado.editar', ['id'=>$empleado->id])}}">Editar</a></th>
         </tr>
     </thead>
@@ -40,11 +40,11 @@
         <td>{{$empleado->NúmeroTelefónico}}</td>
     </tr>
     <tr>
-        <th scope="row">Nombre Referencia:</th>
+        <th scope="row">Nombre Contacto de la Empresa:</th>
         <td>{{$empleado->NombreDeLaReferencia}}</td>
     </tr>
     <tr>
-        <th scope="row">Número Referencia:</th>
+        <th scope="row">Número Contacto de la Empresa:</th>
         <td>{{$empleado->NúmeroDeReferencia}}</td>
     </tr>
     <tr>

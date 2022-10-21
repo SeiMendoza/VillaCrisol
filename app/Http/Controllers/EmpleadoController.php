@@ -25,7 +25,7 @@ class EmpleadoController extends Controller
             'NúmeroTelefónico'=>'required|min:8|max:8|unique:empleados,NúmeroTelefónico|regex:/^[2,3,8,9][0-9]{7}$/',
             'NúmeroDeReferencia'=>'required|min:8|max:8|unique:empleados,NúmeroDeReferencia|regex:/^[2,3,8,9][0-9]{7}$/|min:8|max:8',
             'NombreDeLaReferencia'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u' ,
-            'Domicilio'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u|min:4|max:50' ,
+            'Domicilio'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u|min:4|max:50' ,
             'FechaDeIngreso'=> 'required|date',
             'Estado'=> 'required|in:temporal,permanente'
             ],[
@@ -53,7 +53,6 @@ class EmpleadoController extends Controller
                 'NombreDeLaReferencia.required'=> 'El Nombre Contacto de la Empresa es Obligatorio' ,
                 'NombreDeLaReferencia.regex'=> 'El Nombre Contacto de la Empresa debe Inciar con letra Mayuscula' ,
                 'Domicilio.required'=> 'El Domicilio es un Obligatorio' ,
-                'Domicilio.regex'=> 'El Domicilio debe Inciar con letra Mayuscula' ,
                 'Domicilio.min'=> 'El Domicilio debe tener minimo:4 letras' ,
                 'Domicilio.max'=> 'El Domicilio debe tener maximo:50 letras' ,
                 'FechaDeIngreso.required'=> 'La Fecha De Ingreso es un Campo Obligatorio',
@@ -89,7 +88,7 @@ public function search(Request $request){
     $text =trim($request->get('busqueda'));
     $empleados = Empleado::where('NombreCompleto', 'like', '%'.$text.'%')->
 	orwhere('NúmeroDeIdentidad', 'like', '%'.$text.'%')->paginate(10);
-    return view('Empleados/raizEmpleado')->with('empleados', $empleados);
+    return view('Empleados/raizEmpleado', compact('empleados', 'text'));
 
 
 }
@@ -106,7 +105,7 @@ public function search(Request $request){
         'NúmeroTelefónico'=>['required', 'regex:/^[2,3,8,9][0-9]{7}$/', ValidationRule::unique('empleados')->ignore($empleados->id)],
         'NúmeroDeReferencia'=>['required', 'regex:/^[2,3,8,9][0-9]{7}$/', ValidationRule::unique('empleados')->ignore($empleados->id)],
         'NombreDeLaReferencia'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u' ,
-        'Domicilio'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u|min:4|max:50' ,
+        'Domicilio'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u|min:4|max:50' ,
         'FechaDeIngreso'=> 'required|date',
         'Estado'=> 'required|in:temporal,permanente,activo,inactivo'
 ],[
@@ -134,7 +133,6 @@ public function search(Request $request){
     'NombreDeLaReferencia.required'=> 'El Nombre De La Referencia es Obligatorio' ,
     'NombreDeLaReferencia.regex'=> 'El Nombre De La Referencia debe Inciar con letra Mayuscula' ,
     'Domicilio.required'=> 'El Domicilio es Obligatorio' ,
-    'Domicilio.regex'=> 'El Domicilio debe Inciar con letra Mayuscula' ,
     'Domicilio.min'=> 'El Domicilio debe tener minimo:4 letras' ,
     'Domicilio.max'=> 'El Domicilio debe tener maximo:50 letras' ,
     'FechaDeIngreso.required'=> 'La Fecha De Ingreso es Obligatorio',
