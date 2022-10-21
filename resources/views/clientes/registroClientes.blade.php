@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
                         <input class="form-control @error('nombreCompleto') is-invalid @enderror" id="nombreCompleto"
-                        name="nombreCompleto" type="text"
+                        name="nombreCompleto" type="text" maxlength="50"
                         placeholder="" value="{{old('nombreCompleto')}}" minlength="3"/>
                         <label for="nombreCompleto">Nombre Completo</label>
                         @error('nombreCompleto')
@@ -26,7 +26,7 @@
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
                         <input class="form-control @error('numeroId') is-invalid @enderror" id="numeroId" name="numeroId" type="num"
-                        value="{{old('numeroId')}}" />
+                        value="{{old('numeroId')}}" maxlength="15" minlength="15"/>
                         <label for="numeroId">Número De Identidad</label>
                         @error('numeroId')
                             <small class="invalid-feedback" >
@@ -40,7 +40,7 @@
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
                         <input class="form-control @error('correo') is-invalid @enderror" id="correo"
-                        name="correo" type="email"
+                        name="correo" type="email" minlength="12" maxlength="50"
                         value="{{old('correo')}}" />
                         <label for="correo"> Correo Electrónico </label>
                         @error('correo')
@@ -67,7 +67,7 @@
                 <div class="">
                     <div class="form-floating">
                         <input class="form-control @error('domicilio') is-invalid @enderror" id="domicilio" name="domicilio" type="text"
-                        value="{{old('domicilio')}}" maxlength="50" minlength="4"/>
+                        value="{{old('domicilio')}}" maxlength="100" minlength="4"/>
                         <label for="domicilio ">Domicilio</label>
                         @error('domicilio')
                             <small class="invalid-feedback" >

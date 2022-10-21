@@ -18,16 +18,15 @@
             <div>
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Lista de Clientes</h2>
             </div><br>
-            <div style="float: left; width: 400px;">
-                <form action="{{ route('clientes.search') }}" method="get"
+            <div style="float: left; width: 450px;">
+                <form action="{{ route('clientes.search') }}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input class="form-control" type="text" name="busqueda" placeholder="Buscar" aria-label="Buscar"
-                        aria-describedby="btnNavbarSearch" value="" />
-                        <button class="btn btn-primary" type="submit" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                        <div>
-                            <a href="{{route('clientes.index')}}" id="btnNavbarSearch" class="btn btn-secondary">Borrar Busqueda</a>
-                        </div>
+                        <input class="form-control" type="text" id="busqueda" name="busqueda" placeholder="Buscar por nombre o identidad" aria-label="Buscar por nombre o identidad"
+                        aria-describedby="" maxlength="50" required
+                            value="{{$text}}" />
+                        <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
+                            <a href="{{route('clientes.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
                     </div>
                 </form>
             </div>

@@ -19,7 +19,7 @@ class ClienteController extends Controller
         $text =trim($request->get('busqueda'));
         $clientes = Cliente::where('nombreCompleto', 'like', '%'.$text.'%')
         ->orWhere('numeroId', 'like', '%'.$text.'%')->paginate(10);
-        return view('clientes/listaClientes')->with('clientes', $clientes);
+        return view('clientes/listaClientes', compact('clientes', 'text'));
     }
 
     //Lista de clientes
@@ -32,35 +32,36 @@ class ClienteController extends Controller
 
         /*Validación de campos*/
         $request -> validate([
-            'nombreCompleto'=> 'required|regex:/^[a-zA-Z\s]+$/',
-            'numeroId'=> 'required|unique:clientes,numeroId|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/',
-            'correo'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:30|unique:clientes',
-            'numeroTelefono'=>['min:8','required', 'numeric', 'regex:/^[2,3,8,9][0-9]{7}+$/', 'unique:clientes,numeroTelefono'],
+            'nombreCompleto'=> 'required|regex:/^[a-zA-Z\s\.]+$/|max:50|min:3',
+            'numeroId'=> 'required|unique:clientes,numeroId|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/|max:15|min:15',
+            'correo'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:50|unique:clientes',
+            'numeroTelefono'=>['required', 'min:8', 'numeric', 'regex:/^[2,3,8,9][0-9]{7}+$/', 'unique:clientes,numeroTelefono'],
             'domicilio'=> 'required|regex:/^[\pL\s\-]+$/u|min:4|max:50',
             ],[
 
-            'nombreCompleto.required'=> 'El Nombre es un Campo Obligatorio',
-            'nombreCompleto.regex'=> 'El Nombre Completo debe tener solo letras',
+            'nombreCompleto.required'=> 'El nombre es obligatorio',
+            'nombreCompleto.regex'=> 'El nombre completo debe tener solo letras',
+            'nombreCompleto.max'=> 'El nombre completo no puede exceder de 50 letras',
 
-            'numeroId.required'=> 'El Número De Identidad es un Campo Obligatorio ',
-            'numeroId.regex'=> 'El Número De Identidad debe iniciar con (0 o 1) separado por (-) ejempl(####-####-#####)',
-            'numeroId.unique'=> 'El Número De Identidad ya existe',
+            'numeroId.required'=> 'El número de identidad es obligatorio ',
+            'numeroId.regex'=> 'El número De identidad debe iniciar con (0 o 1) separado por (-) ejemplo (####-####-#####)',
+            'numeroId.unique'=> 'El número De identidad ya existe',
 
-            'correo.required'=>'El correo es un Campo Obligatorio',
+            'correo.required'=>'El correo es obligatorio',
             'correo.regex'=>'El correo es incorrecto ejemplo:(usuario@mail.com ó usuario@mail.es)' ,
             'correo.min'=>'La longitud minima del correo electronico es: 12' ,
-            'correo.max'=>'La longitud maxima del correo electronico es: 30' ,
+            'correo.max'=>'La longitud maxima del correo electronico es: 50' ,
             'correo.unique'=>'El correo ingresado ya existe',
 
-            'numeroTelefono.required'=>'El Número Telefónico es un Campo Obligatorio',
-            'numeroTelefono.min'=>'El Número Telefónico debe tener 8 dígitos',
-            'numeroTelefono.numeric'=>'El Número Telefónico debe ser unicamente numérico',
-            'numeroTelefono.regex'=>'El Número Telefónico debe iniciar con (2),(3),(8) ó (9)',
-            'numeroTelefono.unique'=>'El Número Telefónico ingresado ya existe',
+            'numeroTelefono.required'=>'El número telefónico es obligatorio',
+            'numeroTelefono.min'=>'El número telefónico debe tener 8 dígitos',
+            'numeroTelefono.numeric'=>'El número telefónico debe ser unicamente numérico',
+            'numeroTelefono.regex'=>'El número telefónico debe iniciar con (2),(3),(8) ó (9)',
+            'numeroTelefono.unique'=>'El número telefónico ingresado ya existe',
 
-            'domicilio.required'=> 'El Domicilio es un Campo Obligatorio' ,
-            'domicilio.min'=> 'El Domicilio debe tener minimo:4 letras' ,
-            'domicilio.max'=> 'El Domicilio debe tener maximo:50 letras' ,
+            'domicilio.required'=> 'El domicilio es obligatorio' ,
+            'domicilio.min'=> 'El domicilio debe tener minimo:4 letras' ,
+            'domicilio.max'=> 'El domicilio debe tener maximo:50 letras' ,
         ]);
 
         /*Variable para reconocer los nuevos registros a la tabla*/
