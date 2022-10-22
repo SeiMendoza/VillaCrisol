@@ -1,7 +1,7 @@
 @extends('plantillas.register')
 @section('title', 'Registrar Clientes')
 
-@section('encabezado', 'Registro cliente')
+@section('encabezado', 'Registro de clientes')
 @section('content')
 
 

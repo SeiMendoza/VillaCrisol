@@ -115,10 +115,10 @@ Route::post('/clientes/create', [ClienteController::class, 'store'])
 //Ruta para mostrar los detalles del cliente
 Route::get('/clientes/{id}' , [ClienteController::class,'show'])
 ->name('clientes.show')
-->where('id' ,'[0-9]+');
+->where('id','[0-9]+');
 
 //ruta para editar el cliente
-Route::get('/clientes/{id}/editar', [ClienteController::class,'editar'])
+Route::get('/clientes/{id}/editar', [ClienteController::class, 'edit'])
 ->name('clientes.edit')->where('id','[0-9]+');
 
 // ruta para actualizar datos del cliente

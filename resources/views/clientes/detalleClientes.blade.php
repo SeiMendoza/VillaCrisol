@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Detalles de: {{ $cliente->nombreCompleto }}</title>
+        <link rel="shortcut icon" href="/crisol.png" type="image/x-icon">
     </head>
     <body>
         <div class="container-fluid px-4">
@@ -21,7 +22,7 @@
                                 <tr>
                                     <th scope="col">Datos</th>
                                     <th scope="col">Información</th>
-                                    <th scope=""><a class="btn btn-warning" href="">Editar</a></th>
+                                    <th scope=""><a class="btn btn-warning" href="{{route('clientes.edit', ['id' => $cliente->id])}}">Editar</a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +40,7 @@
                                     <td>{{$cliente->correo}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Telefono:</th>
+                                    <th scope="row">Teléfono:</th>
                                     <td>{{$cliente->numeroTelefono}}</td>
                                 </tr>
                                 <tr>

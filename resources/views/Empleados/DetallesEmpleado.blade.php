@@ -7,10 +7,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Detalles de: {{$empleado-> NombreCompleto }}</title>
+        <link rel="shortcut icon" href="/crisol.png" type="image/x-icon">
     </head>
     <body>
         <div class="container-fluid px-4">
-            
+            Empleados
             <br><br>
             <div class="card shadow col-md-12 items-center">
                 <h1 class="text-center">Detalles de: {{$empleado-> NombreCompleto }}<br></h1>
