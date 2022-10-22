@@ -4,6 +4,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareaController;
 
@@ -125,4 +126,16 @@ Route::get('/clientes/{id}/editar', [ClienteController::class, 'edit'])
 Route::put('/clientes/{id}/editar', [ClienteController::class,'update'])
 ->name('clientes.update')->where('id','[0-9]+');
 
+/*
+   |----------------|
+   |   Rutas Menú   |
+   |----------------|
+*/
 
+//Menú de comidas y bebidas
+Route::get('/menu', [MenuController::class,'index'])
+->name('menu.index');
+
+//Buscar clientes
+Route::get('/menu/busqueda', [MenuController::class,'search'])
+->name('menu.search');

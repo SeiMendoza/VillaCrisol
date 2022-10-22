@@ -58,7 +58,7 @@
                                     <a class="nav-link" href="#"><div class="sb-nav-link-icon">
                                         <i class="fa fa-shopping-bag"></i></div>
                                         Compras</a>
-                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon">
+                                    <a class="nav-link" href="{{route('menu.index')}}"><div class="sb-nav-link-icon">
                                             <i class="fa fa-list"></i></div>
                                         Menú</a>
                                 </nav>

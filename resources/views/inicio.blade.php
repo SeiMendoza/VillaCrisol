@@ -56,13 +56,13 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html"><div class="sb-nav-link-icon">
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon">
                                         <i class="fa fa-list-alt"></i></div>
                                         Inventario</a>
                                     <a class="nav-link" href="{{route('compras.index')}}"><div class="sb-nav-link-icon">
                                         <i class="fa fa-shopping-bag"></i></div>
                                         Compras</a>
-                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon">
+                                    <a class="nav-link" href="{{route('menu.index')}}"><div class="sb-nav-link-icon">
                                             <i class="fa fa-list"></i></div>
                                         Menú</a>
                                 </nav>
@@ -167,7 +167,7 @@
                                                 <div class="card text-white mb-4" style="background-color: rgba(56, 155, 122, 0.712)">
                                                     <div class="card-body">MENU</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
+                                                        <a class="small text-white stretched-link" href="{{route('menu.index')}}">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                                     </div>
                                                 </div>
