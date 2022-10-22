@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
-                            <thead class="thead-light ">
+                            <thead class="thead" style="background-color: rgba(0, 174, 255, 0.101)">
                                 <tr>
                                     <th scope="col">Datos</th>
                                     <th scope="col">Información</th>

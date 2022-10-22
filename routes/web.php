@@ -139,3 +139,8 @@ Route::get('/menu', [MenuController::class,'index'])
 //Buscar clientes
 Route::get('/menu/busqueda', [MenuController::class,'search'])
 ->name('menu.search');
+
+//Detalle Comida y bebida
+
+Route::get('/menu/detalle', [MenuController::class,'show'])
+->name('menu.show');

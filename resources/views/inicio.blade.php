@@ -181,13 +181,13 @@
                         <div class="row">
                             <div class="container-fluid px-4">
                                 <div class="card shadow col-md-12 items-center">
-                                    <div class="card-header" style="background-image : url('imagenes/personas.jpg'); background-position: bottom;">
+                                    <div class="card-header" style="background-image : url('imagenes/personas.png'); background-position: bottom;">
                                         <h3  class="text-center font-weight-light my-4"
-                                        style="background-color: rgba(255, 255, 255, 0.525);" >Personas</h3></div>
-                                    <div class="card-body" style="background-color: rgba(197, 95, 0, 0.715); ">
+                                        style="background-color: rgba(255, 255, 255, 0.862);" >Personas</h3></div>
+                                    <div class="card-body" style="background-color: #25416b;">
                                         <div class="row mb-3">
                                             <div class="col-xl-3 col-md-6">
-                                                <div class="card text-white mb-4 bot" style="background-color: rgba(169, 110, 0, 0.712)">
+                                                <div class="card text-white mb-4 bot" style="background-color: rgba(0, 0, 169, 0.712)">
                                                     <div class="card-body"> EMPLEADOS</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white stretched-link"
@@ -197,7 +197,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
-                                                <div class="card text-white mb-4" style="background-color: rgba(155, 135, 56, 0.712)">
+                                                <div class="card text-white mb-4" style="background-color: rgba(48, 74, 191, 0.712)">
                                                     <div class="card-body">CLIENTES</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white stretched-link" href="{{route('clientes.index')}}">MOSTRAR</a>
@@ -206,7 +206,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
-                                                <div class="card text-white mb-4" style="background-color: rgba(155, 107, 56, 0.712)">
+                                                <div class="card text-white mb-4" style="background-color: rgba(21, 31, 168, 0.712)">
                                                     <div class="card-body">USUARIOS</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white stretched-link" href="#">MOSTRAR</a>

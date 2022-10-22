@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MenuController extends Controller
 {
     public function index(){
-        return view ('menuIndex');
+        return view ('MenuRestaurante/menuIndex');
     }
 
     //buscar clientes
@@ -16,6 +16,10 @@ class MenuController extends Controller
         $text =trim($request->get('busqueda'));
         $menu = Menu::where('nombre', 'like', '%'.$text.'%')
         ->orWhere('precio', 'like', '%'.$text.'%')->paginate(10);
-        return view('clientes/listaClientes', compact('menu', 'text'));
+        return view('menuIndex', compact('menu', 'text'));
+    }
+
+    public function show(){
+        return view ('MenuRestaurante/detalleComidasBebidas');
     }
 }
