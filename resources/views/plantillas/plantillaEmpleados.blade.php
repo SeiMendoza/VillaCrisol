@@ -9,6 +9,7 @@
         <title>@yield('title')</title>
         <link href={{ asset("css/styles.css") }} rel="stylesheet" type="text/css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="/crisol.png" type="image/x-icon">
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">
@@ -36,11 +37,6 @@
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Villa Crisol 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
                         </div>
                     </div>
                 </footer>

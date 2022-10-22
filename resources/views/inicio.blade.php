@@ -62,9 +62,9 @@
                                     <a class="nav-link" href="{{route('compras.index')}}"><div class="sb-nav-link-icon">
                                         <i class="fa fa-shopping-bag"></i></div>
                                         Compras</a>
-                                    <a class="nav-link" href="{{ route('tarea.create') }}"><div class="sb-nav-link-icon">
-                                            <i class="fa fa-list-alt"></i></div>
-                                            Productos</a>
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon">
+                                            <i class="fa fa-list"></i></div>
+                                        Menú</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -131,52 +131,95 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
+            <div id="layoutSidenav_content" style="background-color: rgb(216, 216, 216);">
                 <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Página de inicio</h1>
+                        <h1 class="mt-4 text-center" >Página de inicio</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">EMPLEADOS</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link"
-                                        href="{{route('empleado.index')}}">MOSTRAR</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">RESTAURANTE</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('restaurante')}}">MOSTRAR</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">CLIENTES</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('clientes.index')}}">MOSTRAR</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">PROPIEDAD PRIVADA</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            <div class="container-fluid px-4">
+                                <div class="card shadow col-md-12 items-center">
+                                    <div class="card-header" style="background-image : url('imagenes/restaurante.jpg');background-position: center;">
+                                    <h3 class="text-center font-weight-light my-4" style="background-color: rgba(255, 255, 255, 0.679);" >Restaurante</h3></div>
+                                    <div class="card-body" style="background-color: rgba(191, 215, 58, 0.51)">
+                                        <div class="row mb-3">
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4" style="background-color: rgba(42, 142, 33, 0.51)">
+                                                    <div class="card-body">INVENTARIO</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link"
+                                                        href="#">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4" style="background-color: rgba(58, 215, 131, 0.51)">
+                                                    <div class="card-body">COMPRAS</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4" style="background-color: rgba(56, 155, 122, 0.712)">
+                                                    <div class="card-body">MENU</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <div class="row">
+                            <div class="container-fluid px-4">
+                                <div class="card shadow col-md-12 items-center">
+                                    <div class="card-header" style="background-image : url('imagenes/personas.jpg'); background-position: bottom;">
+                                        <h3  class="text-center font-weight-light my-4"
+                                        style="background-color: rgba(255, 255, 255, 0.525);" >Personas</h3></div>
+                                    <div class="card-body" style="background-color: rgba(197, 95, 0, 0.715); ">
+                                        <div class="row mb-3">
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4 bot" style="background-color: rgba(169, 110, 0, 0.712)">
+                                                    <div class="card-body"> EMPLEADOS</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link"
+                                                        href="{{route('empleado.index')}}">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4" style="background-color: rgba(155, 135, 56, 0.712)">
+                                                    <div class="card-body">CLIENTES</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link" href="{{route('clientes.index')}}">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4" style="background-color: rgba(155, 107, 56, 0.712)">
+                                                    <div class="card-body">USUARIOS</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
