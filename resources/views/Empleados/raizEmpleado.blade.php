@@ -12,7 +12,7 @@
 @endif
 
 <div class="container-fluid px-4">
-    Empleados
+    
     <div class="card shadow col-md-12">
         <div class="card-header" style="background: #25416b; color: white">
             <div>
