@@ -36,7 +36,7 @@ class MenuController extends Controller
             'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
             'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
             'Tipo'=>'required|in:bebida,plato,combo' ,
-            'Precio'=>'requerid',
+            'Precio'=>'required',
             'Tamaño'=>'required|in:personal,2 personas,familiar',
             'Imagen'=>'required| mimes:jpg,jpeg,png',
             'Activo'=> 'required|in:si,no',
