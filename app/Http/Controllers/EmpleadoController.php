@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule as ValidationRule;
 
 class EmpleadoController extends Controller
 {
-    //Funcion para crear un nuevo libro//
+    //Funcion para crear un nuevo empleado//
     public function create(){
         return view ('empleados.formularioregistroempleado');
      }

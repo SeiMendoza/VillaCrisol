@@ -34,7 +34,7 @@
             </div>
             <div style="float: right">
                 Agregar nueva comida o bebida:
-                <a class="btn btn-primary" href="#">Nuevo</a>
+                <a class="btn btn-primary" href="{{route('menu.create')}}">Nuevo</a>
             </div>
         </div>
 

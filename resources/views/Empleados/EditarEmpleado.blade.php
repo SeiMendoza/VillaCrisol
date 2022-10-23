@@ -181,7 +181,5 @@
             </form>
     @endsection
 
- <?php 
- $FechaDeIngreso = date(now());
- ?>
+ 
  

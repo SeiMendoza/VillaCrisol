@@ -144,3 +144,17 @@ Route::get('/menu/busqueda', [MenuController::class,'search'])
 
 Route::get('/menu/detalle', [MenuController::class,'show'])
 ->name('menu.show');
+
+//Agregar nueva Comida y bebida
+Route::get('/menu/create', [MenuController::class,'create'])
+->name('menu.create');
+
+Route::post('/menu/create', [MenuController::class, 'store'])
+->name('menu.store');
+
+//ruta para editar Comidas y Bebidas
+Route::get('/menu/{id}/editar', [MenuController::class,'editar'])
+->name('menu.editar')->where('id','[0-9]+');
+// ruta para actualizar la comida y bebida
+Route::put('/menu/{id}/editar', [MenuController::class,'update'])//envia los datos al servidor
+->name('menu.update')->where('id','[0-9]+');
