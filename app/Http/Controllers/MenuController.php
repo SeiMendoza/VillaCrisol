@@ -36,6 +36,7 @@ class MenuController extends Controller
             'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
             'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
             'Tipo'=>'required|in:bebida,plato,combo' ,
+            'Precio'=>'requerid',
             'Tamaño'=>'required|in:personal,2 personas,familiar',
             'Imagen'=>'required| mimes:jpg,jpeg,png',
             'Activo'=> 'required|in:si,no',
@@ -43,9 +44,9 @@ class MenuController extends Controller
 
                 'Nombre.required'=> 'El Nombre es Obligatorio',
                 'Nombre.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
-                 
                 'Descripción.required'=>'La Descripción es Obligatorio',
                 'Tipo.required'=>'El Tipo de menu Obligatorio',
+                'Precio.required'=>'El Precio del menu Obligatorio',
 				'Tamaño.required'=>'El Tamaño es obligatorio',
                 'Imagen.required'=>'La Imagen es obligatoria',
                 'Imagen.mimes'=>'Solo se aceptan imagenes formato:jpg,jpeg,png',
@@ -71,16 +72,17 @@ class MenuController extends Controller
         'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
         'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
         'Tipo'=>'required|in:bebida,plato,combo' ,
+        'Precio'=>'required|',
         'Tamaño'=>'required|in:personal,2 personas,familiar',
         'Imagen'=>'required| mimes:jpg,jpeg,png',
         'Activo'=> 'required|in:si,no',
-        ],[
+    ],[
 
             'Nombre.required'=> 'El Nombre es Obligatorio',
             'Nombre.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
-             
             'Descripción.required'=>'La Descripción es Obligatorio',
             'Tipo.required'=>'El Tipo de menu Obligatorio',
+            'Precio.required'=>'El Precio del menu Obligatorio',
             'Tamaño.required'=>'El Tamaño es obligatorio',
             'Imagen.required'=>'La Imagen es obligatoria',
             'Imagen.mimes'=>'Solo se aceptan imagenes formato:jpg,jpeg,png',
