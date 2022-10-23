@@ -3,7 +3,7 @@
 
 @section('encabezado', 'Registro de Comidas y Bebidas')
 @section('content')
-<form method="post" action="">
+<form method="post" action="{{route('menu.create')}}">
     @csrf
     <div class="modal-body">
     <div class="row mb-3">
