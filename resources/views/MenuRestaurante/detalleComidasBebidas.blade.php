@@ -14,23 +14,25 @@
             Menú
             <br><br>
             <div class="card shadow col-md-12 items-center">
-                <h1 class="text-center">Comida X<br></h1>
+                <h1 class="text-center">{{$comidaBebida->Nombre}}<br></h1>
+                <div style="text-align: right">
+                    <a class="btn btn-warning" href="{{route('menu.editar', ['id'=>$comidaBebida->id])}}">Editar</a>
+                </div>
                 <div class="card-body" style="text-align: center">
                     <div>
                         <img class="" src="/imagenes/restaurante.jpg" width="300px" height="200px" alt="Imagen" />
                     </div>
                     <br>
                     <div class="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, repellendus corrupti totam fuga rem esse
-                        vero dignissimos expedita? Excepturi expedita assumenda quia alias reiciendis magnam esse sint error cumque odit!
+                        {{$comidaBebida->Descripción}}
                     </div>
                     <br>
                     <div class="table-responsive" style="background-color: rgba(0, 128, 0, 0.634);" >
-                        <table class="table" style="color: white">
+                        <table class="table" style="color: white;">
                         <tr>
-                            <th scope= "col">Tipo: Comida </th>
-                            <th scope= "col">Precio: L 120 </th>
-                            <th scope= "col">Tamaño: Grande </th>
+                            <th  scope= "col">Tipo: {{$comidaBebida->Tipo}} </th>
+                            <th  scope= "col">Precio: L {{$comidaBebida->Precio}} </th>
+                            <th  scope= "col">Tamaño: {{$comidaBebida->Tamaño}} </th>
                         </tr>
                         </table>
                     </div>

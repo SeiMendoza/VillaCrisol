@@ -70,7 +70,7 @@
             <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating">
-                <select  class="form-control @error('TamañoBebida') is-invalid @enderror" name="Tamaño">   
+                <select  class="form-control @error('TamañoBebida') is-invalid @enderror" name="Tamaño">
                 <option value="">--seleccione un Tamaño--</option>
                 <option value="Personal">Personal</option>
                 <option value="3 personas">3 personas</option>
@@ -88,7 +88,7 @@
                 <div class="form-floating">
                     <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" type="file"
                      placeholder=""
-                     value="{{old('Imagen',$comidasbebidas->Imagen)}}"/>
+                     value="{{old('Imagen',$comidabebidas->Imagen)}}"/>
                     <label for="Imagen">Seleccione Una Imagen</label>
                     @error('Imagen')
                         <small class="invalid-feedback" >
@@ -98,8 +98,8 @@
                 </div>
             </div>
         </div>
-          
-      
+
+
 <br>
     <div class="row mb-3">
             <div class="col-md-6">
@@ -136,6 +136,6 @@
             </form>
     @endsection
 
- 
- 
- 
+
+
+
