@@ -142,14 +142,14 @@
                                 <div class="card shadow col-md-12 items-center">
                                     <div class="card-header" style="background-image : url('imagenes/restaurante.jpg');background-position: center;">
                                     <h3 class="text-center font-weight-light my-4" style="background-color: rgba(255, 255, 255, 0.679);" >Restaurante</h3></div>
-                                    <div class="card-body" style="background-color: rgba(191, 215, 58, 0.51)">
+                                    <div class="card-body" style="background-color: rgba(31, 118, 23, 0.51)">
                                         <div class="row mb-3">
                                             <div class="col-xl-3 col-md-6">
-                                                <div class="card text-white mb-4" style="background-color: rgba(42, 142, 33, 0.51)">
+                                                <div class="card text-white mb-4" style="background-color: rgba(18, 212, 0, 0.51)">
                                                     <div class="card-body">INVENTARIO</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white stretched-link"
-                                                        href="{{route('producto.create')}}">MOSTRAR</a>
+                                                        href="#">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                                     </div>
                                                 </div>
@@ -208,6 +208,39 @@
                                             <div class="col-xl-3 col-md-6">
                                                 <div class="card text-white mb-4" style="background-color: rgba(21, 31, 168, 0.712)">
                                                     <div class="card-body">USUARIOS</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="container-fluid px-4">
+                                <div class="card shadow col-md-12 items-center">
+                                    <div class="card-header" style="background-image : url('/imagenes/registro.png'); background-position: bottom;">
+                                        <h3  class="text-center font-weight-light my-4"
+                                        style="background-color: rgba(255, 255, 255, 0.862);" >Registros</h3></div>
+                                    <div class="card-body" style="background-color: #310072c5;">
+                                        <div class="row mb-3">
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4 bot" style="background-color: rgba(136, 0, 255, 0.715)">
+                                                    <div class="card-body">REGISTRO DE PRODUCTOS</div>
+                                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        <a class="small text-white stretched-link"
+                                                        href="{{route('producto.create')}}">MOSTRAR</a>
+                                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card text-white mb-4" style="background-color: rgba(145, 84, 203, 0.619)">
+                                                    <div class="card-body">REGISTRO DE COMPRAS</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white stretched-link" href="#">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
