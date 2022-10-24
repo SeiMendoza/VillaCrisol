@@ -149,7 +149,7 @@
                                                     <div class="card-body">INVENTARIO</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white stretched-link"
-                                                        href="#">MOSTRAR</a>
+                                                        href="{{route('producto.create')}}">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                                     </div>
                                                 </div>

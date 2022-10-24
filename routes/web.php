@@ -5,6 +5,7 @@ use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareaController;
 
@@ -163,3 +164,16 @@ Route::put('/menu/{id}/editar', [MenuController::class,'update'])//envia los dat
 //ruta para activar o desactivar comidas o bebidas
 Route::put('/menu/{id}/activar', [MenuController::class,'activo'])
 ->name('menu.activar')->where('id','[0-9]+');
+
+
+/*
+   |------------------------|
+   |   Rutas de Registros   |
+   |------------------------|
+*/
+
+Route::get('/create/producto', [RegistroController::class,'createProducto'])
+->name('producto.create');
+
+Route::post('/create/producto', [RegistroController::class, 'storeProducto'])
+->name('producto.store');
