@@ -3,7 +3,7 @@
 
 @section('encabezado', 'Registro de Comidas y Bebidas')
 @section('content')
-<form method='post' action="{{route('menu.update',['id'=>$comidabebidas->id])}}">
+<form method='post' action="{{route('menu.update',['id'=>$comidabebidas->id])}}" enctype="multipart/form-data">
     @method('put')
     @csrf
     <div class="modal-body">
@@ -40,10 +40,9 @@
             <div class="col-md-6">
                 <div class="form-floating mb-3 mb-md-0">
                 <select  class="form-control @error('Tipo') is-invalid @enderror" name="Tipo">   
-                <option value="">--seleccione--</option>
-                <option value="Bebida">Bebida</option>
-                <option value="Plato">Plato</option>
-                <option value="Combo">Combo</option>
+                <option value="bebida"{{$comidabebidas->Tipo =="bebida" ? 'selected' :''}} >Bebida</option>
+                <option value="plato"{{$comidabebidas->Tipo =="plato" ? 'selected' :''}} >Plato</option>
+                <option value="combo"{{$comidabebidas->Tipo =="combo" ? 'selected' :''}} >Combo</option>
                 </select>
 <label for="Tipo">seleccione un Tipo</label>
                     @error('Tipo')
@@ -70,11 +69,10 @@
             <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating">
-                <select  class="form-control @error('TamañoBebida') is-invalid @enderror" name="Tamaño">
-                <option value="">--seleccione un Tamaño--</option>
-                <option value="Personal">Personal</option>
-                <option value="3 personas">3 personas</option>
-                <option value="Familiar">Familiar</option>
+                <select  class="form-control @error('Tamaño') is-invalid @enderror" name="Tamaño">
+                <option value="personal"{{$comidabebidas->Tamaño =="pesonal" ? 'selected' :''}} >Personal</option>
+                <option value="2 personas"{{$comidabebidas->Tamaño =="2 personas" ? 'selected' :''}} >2 personas</option>
+                <option value="familiar"{{$comidabebidas->Tamaño =="familiar" ? 'selected' :''}} >Familiar</option>
 </select>
 <label for="Tamaño">seleccione un Tamaño</label>
                     @error('Tamaño')
@@ -87,8 +85,7 @@
         <div class="col-md-6">
                 <div class="form-floating">
                     <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" type="file"
-                     placeholder=""
-                     value="{{old('Imagen',$comidabebidas->Imagen)}}"/>
+                     placeholder="" value="{{old('Imagen',$comidabebidas->Imagen)}}"/>
                     <label for="Imagen">Seleccione Una Imagen</label>
                     @error('Imagen')
                         <small class="invalid-feedback" >

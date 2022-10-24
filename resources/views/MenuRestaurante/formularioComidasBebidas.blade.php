@@ -3,7 +3,7 @@
 
 @section('encabezado', 'Registro de Comidas y Bebidas')
 @section('content')
-<form method="post" action="{{route('menu.create')}}">
+<form method="post" action="{{route('menu.create')}}" enctype="multipart/form-data">
     @csrf
     <div class="modal-body">
     <div class="row mb-3">
@@ -40,9 +40,9 @@
                 <div class="form-floating mb-3 mb-md-0">
                 <select  class="form-control @error('Tipo') is-invalid @enderror" name="Tipo">   
                 <option value="">--seleccione--</option>
-                <option value="Bebida">Bebida</option>
-                <option value="Plato">Plato</option>
-                <option value="Combo">Combo</option>
+                <option value="bebida" @if(old('Tipo') == "bebida") {{ 'selected' }} @endif>Bebida</option>
+                <option value="plato" @if(old('Tipo') == "plato") {{ 'selected' }} @endif>Plato</option>
+                <option value="combo" @if(old('Tipo') == "combo") {{ 'selected' }} @endif>Combo</option>
                 </select>
 <label for="Tipo">seleccione un Tipo</label>
                     @error('Tipo')
@@ -71,9 +71,9 @@
                 <div class="form-floating">
                 <select  class="form-control @error('Tamaño') is-invalid @enderror" name="Tamaño">   
                 <option value="">--seleccione un Tamaño--</option>
-                <option value="Personal">Personal</option>
-                <option value="3 personas">3 personas</option>
-                <option value="Familiar">Familiar</option>
+                <option value="personal" @if(old('Tamaño') == "personal") {{ 'selected' }} @endif>Personal</option>
+                <option value="2 personas" @if(old('Tamaño') == "2 personas") {{ 'selected' }} @endif>2 personas</option>
+                <option value="familiar" @if(old('Tamaño') == "familiar") {{ 'selected' }} @endif>Familiar</option>
 </select>
 <label for="Tamaño">seleccione un Tamaño</label>
                     @error('Tamaño')
@@ -85,8 +85,8 @@
             </div>
         <div class="col-md-6">
                 <div class="form-floating">
-                    <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" type="file"
-                     placeholder=""
+                    <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" 
+                    type="file" accept="image/*" placeholder=""
                     value="{{old('Imagen')}}" />
                     <label for="Imagen">Seleccione Una Imagen</label>
                     @error('Imagen')

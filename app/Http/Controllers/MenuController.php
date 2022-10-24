@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use Illuminate\Support\Str;
 use App\Models\ComidaBebida;
 use Illuminate\Http\Request;
 
@@ -37,9 +38,9 @@ class MenuController extends Controller
             'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
             'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
             'Tipo'=>'required|in:bebida,plato,combo' ,
-            'Precio'=>'required',
+            'Precio'=>'required|regex:/^\d{1,4}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
             'Tamaño'=>'required|in:personal,2 personas,familiar',
-            'Imagen'=>'required| mimes:jpg,jpeg,png',
+            'Imagen'=>'|image|mimes:jpg,jpeg,png',
             //'Activo'=> 'required|in:si,no',
             ],[
 
@@ -61,9 +62,15 @@ class MenuController extends Controller
             $nuevaComidaBebida->Tipo=$request->input('Tipo');
             $nuevaComidaBebida->Tamaño=$request->input('Tamaño');
             $nuevaComidaBebida->Imagen=$request->input('Imagen');
+           // $imagen = $request->file('Imagen');
+           // $imagen->move('imagenes',$imagen->getClientOriginalName());
+            //$comidabebidas->Imagen = image ->getClientOriginalName();
             //$nuevaComidaBebida->Activo=$request->input('Activo');
-
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
+            $creado = $nuevaComidaBebida->save();
+            if($creado){
+                return redirect()->route('menu.index')->with('mensaje', "El menu registró correctamente");
+        }
 
    }
 
@@ -78,7 +85,7 @@ class MenuController extends Controller
         'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
         'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
         'Tipo'=>'required|in:bebida,plato,combo' ,
-        'Precio'=>'required|',
+        'Precio'=>'required|regex:/^\d{1,4}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
         'Tamaño'=>'required|in:personal,2 personas,familiar',
         'Imagen'=>'required| mimes:jpg,jpeg,png',
         //'Activo'=> 'required|in:si,no',
@@ -97,15 +104,25 @@ class MenuController extends Controller
 
         /*Variable para reconocer los nuevos registros a la tabla*/
         $comidabebida = ComidaBebida::findOrFail($id);
+       /* if($request->hasFile('Imagen')){
+$archivoImagen=$request->file('Imagen');
+$nombreImagen=time().$archivoImagen->getClientOriginalName();
+$archivoImagen->move(public_path().'/images/',$nombreImagen);
+$comidabebida->Imagen=$nombreImagen;*/
+        
         $comidabebida->Nombre=$request->input('Nombre');
         $comidabebida->Descripción=$request->input('Descripción');
         $comidabebida->Tipo=$request->input('Tipo');
         $comidabebida->Tamaño=$request->input('Tamaño');
         $comidabebida->Imagen=$request->input('Imagen');
+       // }
         //$comidabebida->Activo=$request->input('Activo');
 
         /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
-
+        $creado = $comidabebida->save();
+        if($creado){
+            return redirect()->route('menu.index')->with('mensaje', "El ".$comidabebida->Nombre." se actualizo correctamente");
+        }
 }
 
         public function activo(Request $request,  $id){
