@@ -1,8 +1,10 @@
 @extends('plantillas.register')
-@section('title', 'Registro de Comidas y Bebidas')
+@section('title', 'Editar Comidas y Bebidas')
 
-@section('encabezado', 'Registro de Comidas y Bebidas')
+ 
 @section('content')
+<h1 class="text-center">Editando a: {{$comidabebidas->Nombre}}</h1><br>
+
 <form method='post' action="{{route('menu.update',['id'=>$comidabebidas->id])}}" enctype="multipart/form-data">
     @method('put')
     @csrf
