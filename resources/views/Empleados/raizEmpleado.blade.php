@@ -12,7 +12,7 @@
 @endif
 
 <div class="container-fluid px-4">
-    
+
     <div class="card shadow col-md-12">
         <div class="card-header" style="background: #25416b; color: white">
             <div>
@@ -22,7 +22,8 @@
                 <form action="{{ route('empleados.search') }}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input class="form-control" type="text" id="busqueda" name="busqueda" placeholder="Buscar por nombre o identidad" aria-label="Buscar por nombre o identidad"
+                        <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 250px"
+                        placeholder="Buscar por nombre o identidad" aria-label="Buscar por nombre o identidad"
                         aria-describedby="basic-addon2" maxlength="50" required
                             value="<?php if(isset($text)) echo $text;?>" />
                         <div class="input-group-append">
