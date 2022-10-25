@@ -168,7 +168,7 @@
             <div class="col-md-6">
                 <div class="form mb-3 mb-md-0">
                     <label for="imagenFactura">Agregue una Imagen</label><br>
-                    <input type="file" name="imagenFactura" id="imagenFactura" class="form-control @error('imagenFactura') is-invalid @enderror" value="{{ old('imagenFactura') }}">
+                    <input type="file" accept="jpg" name="imagenFactura" id="imagenFactura" class="form-control @error('imagenFactura') is-invalid @enderror" value="{{ old('imagenFactura') }}">
                     @error('imagenFactura')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
