@@ -37,7 +37,7 @@ class ClienteController extends Controller
             'numeroId'=> 'required|unique:clientes,numeroId|regex:/^[0,1]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{5}$/|max:15|min:15',
             'correo'=>'required|regex:/(.+)@(.+)\.(.+)$/|min:12|max:50|unique:clientes',
             'numeroTelefono'=>['required', 'min:8', 'numeric', 'regex:/^[2,3,8,9][0-9]{7}+$/', 'unique:clientes,numeroTelefono'],
-            'domicilio'=> 'required|regex:/^[a-zA-Z\0-9\s\.]+$/|min:4|max:50',
+            'domicilio'=> 'required|regex:/^[a-zA-Z\pLñÑ\0-9\s\.]+$/|min:4|max:50',
             ],[
 
             'nombreCompleto.required'=> 'El nombre es obligatorio',
