@@ -18,11 +18,11 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control @error('nombreProducto') is-invalid @enderror" id="nombreProducto"
-                        name="nombreProducto" type="text" maxlength="50"
-                        placeholder="" value="{{old('nombreProducto')}}" minlength="3"/>
-                        <label for="nombreProducto">Nombre del Producto</label>
-                        @error('nombreProducto')
+                        <input class="form-control @error('nombre') is-invalid @enderror" id="nombre"
+                        name="nombre" type="text" maxlength="50"
+                        placeholder="" value="{{old('nombre')}}" minlength="3"/>
+                        <label for="nombre">Nombre del Producto</label>
+                        @error('nombre')
                             <small class="invalid-feedback">
                                 <strong>{{ $message }}</strong>
                             </small>
@@ -33,10 +33,10 @@
                     <div class="form-floating">
                         <select  class="form-control @error('categoria') is-invalid @enderror" name="categoria">
                         <option value="" >--seleccione una opcion--</option>
-                        <option value="restaurante">Restaurante</option>
-                        <option value="piscina">Piscina</option>
-                        <option value="siembras">Siembras</option>
-                        <option value="animales">Animales</option>
+                        <option value="restaurante" @if(old('categoria') == "restaurante") {{ 'selected' }} @endif>Restaurante</option>
+                        <option value="piscina" @if(old('categoria') == "piscina") {{ 'selected' }} @endif>Piscina</option>
+                        <option value="siembras" @if(old('categoria') == "siembras") {{ 'selected' }} @endif>Siembras</option>
+                        <option value="animales" @if(old('categoria') == "animales") {{ 'selected' }} @endif>Animales</option>
                         </select>
                         <label for="categoria">Categoría del Producto</label>
                         @error('categoria')
