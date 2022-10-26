@@ -95,10 +95,10 @@
                         </small>
                     @enderror
                 </div>
-            </div>
-                    <div style="display: flex">
+                <div style="display: flex">
                     <img id="imagenSeleccionada" style="max-height: 150px;">
-                    </div>
+                </div>
+            </div>
         </div>
           
       
@@ -136,7 +136,7 @@
                 </div>
                 </div>
             </form>
-    @endsection
+    
 
     <script>
                 const $seleccionArchivos = document.querySelector("#Imagen"),
@@ -161,3 +161,4 @@
             </script>
  
  
+ @endsection

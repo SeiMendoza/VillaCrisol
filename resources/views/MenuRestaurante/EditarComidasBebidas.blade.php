@@ -136,7 +136,7 @@
                 </div>
                 </div>
             </form>
-    @endsection
+     
 
     <script>
                 const $seleccionArchivos = document.querySelector("#Imagen"),
@@ -160,4 +160,4 @@
                 });
             </script>
 
-
+@endsection
