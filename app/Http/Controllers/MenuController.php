@@ -84,7 +84,7 @@ class MenuController extends Controller
 
     /*Validación de campos*/
     $request -> validate([
-        'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
+        'Nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/u',
         'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
         'Tipo'=>'required|in:bebida,plato,combo' ,
         'Precio'=>'required|regex:/^\d{1,5}(?:\.\d\d\d\d\d)*(?:.\d{1,2})?$/',

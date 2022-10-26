@@ -38,7 +38,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating mb-3 mb-md-0">
-                <select  class="form-control @error('Tipo') is-invalid @enderror" name="Tipo">   
+                <select  class="form-control @error('Tipo') is-invalid @enderror" name="Tipo">
                 <option value="">--seleccione--</option>
                 <option value="bebida" @if(old('Tipo') == "bebida") {{ 'selected' }} @endif>Bebida</option>
                 <option value="plato" @if(old('Tipo') == "plato") {{ 'selected' }} @endif>Plato</option>
@@ -55,7 +55,7 @@
             <div class="col-md-6">
                 <div class="form-floating">
                     <input class="form-control @error('Precio') is-invalid @enderror" id="Precio" name="Precio" type="text"
-                     placeholder="" maxlength="10"
+                     placeholder="" maxlength="7"
                     value="{{old('Precio')}}" />
                     <label for="Precio">Precio</label>
                     @error('Precio')
@@ -69,7 +69,7 @@
             <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating">
-                <select  class="form-control @error('Tamaño') is-invalid @enderror" name="Tamaño">   
+                <select  class="form-control @error('Tamaño') is-invalid @enderror" name="Tamaño">
                 <option value="">--seleccione un Tamaño--</option>
                 <option value="personal" @if(old('Tamaño') == "personal") {{ 'selected' }} @endif>Personal</option>
                 <option value="2 personas" @if(old('Tamaño') == "2 personas") {{ 'selected' }} @endif>2 personas</option>
@@ -85,7 +85,7 @@
             </div>
         <div class="col-md-6">
                 <div class="form-floating">
-                    <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" 
+                    <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen"
                     type="file" accept="image/*" placeholder=""
                     value="{{old('Imagen')}}" />
                     <label for="Imagen">Seleccione Una Imagen</label>
@@ -100,8 +100,8 @@
                 </div>
             </div>
         </div>
-          
-      
+
+
 <br>
     <div class="row mb-3">
             <div class="col-md-6">
@@ -136,7 +136,7 @@
                 </div>
                 </div>
             </form>
-    
+
 
     <script>
                 const $seleccionArchivos = document.querySelector("#Imagen"),
@@ -159,6 +159,6 @@
                 $imagenPrevisualizacion.src = objectURL;
                 });
             </script>
- 
- 
+
+
  @endsection
