@@ -81,7 +81,7 @@
                                         </div>
                                     </div>
                                     <!-- image-->
-                                    <img class="card-img-top" src="/imagenes/crisol.png" width="00px" height="150px" alt="Imagen" />
+                                    <img class="card-img-top" src="/imagenes/menu/{{$m->Imagen}}" width="00px" height="150px" alt="Imagen" />
                                     <div class="" style="text-align:center ;">
                                         <div class="text-center" style="padding: 0px; margin:0px;">
                                             <!-- Nombre-->

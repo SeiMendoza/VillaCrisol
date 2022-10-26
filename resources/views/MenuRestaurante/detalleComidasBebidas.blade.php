@@ -15,19 +15,16 @@
             <br><br>
             <div class="card shadow col-md-12 items-center">
                 <h1 class="text-center">{{$comidaBebida->Nombre}}<br></h1>
-                <div style="text-align: right">
-                    <a class="btn btn-warning" href="{{route('menu.editar', ['id'=>$comidaBebida->id])}}">Editar</a>
-                </div>
                 <div class="card-body" style="text-align: center">
                     <div>
-                        <img class="" src="/imagenes/restaurante.jpg" width="300px" height="200px" alt="Imagen" />
+                        <img class="" src="/imagenes/menu/{{$comidaBebida->Imagen}}" width="300px" height="200px" alt="Imagen" />
                     </div>
                     <br>
                     <div class="text-center">
                         {{$comidaBebida->Descripción}}
                     </div>
                     <br>
-                    <div class="table-responsive" style="background-color: rgba(0, 128, 0, 0.634);" >
+                    <div class="table-responsive text-center" style="background-color: rgba(0, 128, 0, 0.634);" >
                         <table class="table" style="color: white;">
                         <tr>
                             <th  scope= "col">Tipo: {{$comidaBebida->Tipo}} </th>
@@ -41,8 +38,9 @@
 
         <br>
         <div class="card shadow col-md-12" style="background-color: rgba(42, 142, 33, 0)" >
-            <div class="card-body" style="text-align: center">
-                <a class="btn btn-primary" href="{{route('menu.index')}}">Volver</a>
+            <div class="card-body" style="float">
+                <a class="btn btn-primary" style="float: left" href="{{route('menu.index')}}">Volver</a>
+                <a class="btn btn-warning" style="float: right" href="{{route('menu.editar', ['id'=>$comidaBebida->id])}}">Editar</a>
             </div>
         </div>
         <br>
