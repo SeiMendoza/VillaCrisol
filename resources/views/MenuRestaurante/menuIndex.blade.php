@@ -51,11 +51,11 @@
                                 <div class="card" style="border: 1px solid green; background-color: rgba(3, 197, 0, 0.278)">
                                     <!-- activo o inactivo -->
                                     <button type="button" class="btn badge bg-success position-absolute
-                                    " data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="top: 0.5rem; right: 0.5rem">
+                                    " data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$m->id}}" style="top: 0.5rem; right: 0.5rem">
                                         <i class="fas fa-check"></i>
                                     </button>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                    <div class="modal fade" id="staticBackdrop{{$m->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -149,7 +149,7 @@
                                     </div>
                                 </div>
                                 <!-- image-->
-                                <img class="card-img-top" src="/imagenes/crisol.png" width="00px" height="150px" alt="Imagen" />
+                                <img class="card-img-top" src="/imagenes/menu/{{$c->Imagen}}" width="00px" height="150px" alt="Imagen" />
                                 <div class="" style="text-align:center ;">
                                     <div class="text-center">
                                         <!-- Nombre-->
