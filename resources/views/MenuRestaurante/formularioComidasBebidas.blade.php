@@ -88,6 +88,9 @@
                     <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" 
                     type="file" accept="image/*" placeholder=""
                     value="{{old('Imagen')}}" />
+                    <div class="grid grid-cols-1 mt-3 mx-5">
+                    <img id="imagenSeleccionada" style="max-height: 300px;"> 
+                </div> 
                     <label for="Imagen">Seleccione Una Imagen</label>
                     @error('Imagen')
                         <small class="invalid-feedback" >

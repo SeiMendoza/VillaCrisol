@@ -88,6 +88,9 @@
                 <div class="form-floating">
                     <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" type="file"
                      placeholder="" value="{{old('Imagen',$comidabebidas->Imagen)}}"/>
+                     <div class="grid grid-cols-1 mt-3 mx-5">
+                    <img src="/imagenes/menu/{{$comidabebidas->Imagen}}" width="200px" id="imagenSeleccionada">
+                </div> 
                     <label for="Imagen">Seleccione Una Imagen</label>
                     @error('Imagen')
                         <small class="invalid-feedback" >

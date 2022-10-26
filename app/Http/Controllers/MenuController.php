@@ -89,7 +89,7 @@ class MenuController extends Controller
         'Tipo'=>'required|in:bebida,plato,combo' ,
         'Precio'=>'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:.\d{1,2})?$/',
         'Tamaño'=>'required|in:personal,2 personas,familiar',
-        'Imagen'=>'required|image|mimes:jpg,jpeg,png',
+        'Imagen'=>'|image|mimes:jpg,jpeg,png',
          
     ],[
 
@@ -114,14 +114,14 @@ class MenuController extends Controller
         $comidabebida->Tipo=$request->input('Tipo');
         $comidabebida->Precio=$request->input('Precio');
         $comidabebida->Tamaño=$request->input('Tamaño');
-        $comidabebida->Imagen=$request->input('Imagen');
+        //$comidabebida->Imagen=$request->input('Imagen');
         
         if($request->hasFile('Imagen')){
             $archivo=$request->file('Imagen');
-            $archivo->move(public_path().'/imagenes/menu/',$archivo->getClientOriginalName());
+            $archivo->move(public_path().'/imagenes/menu',$archivo->getClientOriginalName());
             $comidabebida->Imagen=$archivo->getClientOriginalName();
                 }else{
-                    unset($comidabebidas['Imagen']);
+                    unset($comidabebida['Imagen']);
                 }
         /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
         $creado = $comidabebida->save();
