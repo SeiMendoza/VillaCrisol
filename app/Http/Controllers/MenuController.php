@@ -38,7 +38,7 @@ class MenuController extends Controller
             'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
             'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
             'Tipo'=>'required|in:bebida,plato,combo' ,
-            'Precio'=>'required|regex:/^\d{1,4}(?:\.\d\d\d)*(?:,\d{1,2})?$/',
+            'Precio'=>'required|regex:/^\d{1,5}(?:\.\d\d\d\d\d)*(?:.\d{1,2})?$/',
             'Tamaño'=>'required|in:personal,2 personas,familiar',
             'Imagen'=>'required|image|mimes:jpg,jpeg,png',
         
@@ -47,11 +47,11 @@ class MenuController extends Controller
                 'Nombre.required'=> 'El Nombre es Obligatorio',
                 'Nombre.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
                 'Descripción.required'=>'La Descripción es Obligatorio',
-                'Tipo.required'=>'El Tipo de menu Obligatorio',
+                'Tipo.required'=>'El Tipo es Obligatorio',
                 'Precio.required'=>'El Precio es Obligatorio',
                 'Precio.regex'=>'El Precio puede tener (.) y uno o dos decimales despues',
-				'Tamaño.required'=>'El Tamaño es obligatorio',
-                'Imagen.required'=>'La Imagen es obligatoria',
+				'Tamaño.required'=>'El Tamaño es Obligatorio',
+                'Imagen.required'=>'La Imagen es Obligatoria',
                 'Imagen.mimes'=>'Solo se aceptan imagenes formato:jpg,jpeg,png',
                  
             ]);
@@ -63,7 +63,7 @@ class MenuController extends Controller
             $nuevaComidaBebida->Tipo=$request->input('Tipo');
             $nuevaComidaBebida->Precio=$request->input('Precio');
             $nuevaComidaBebida->Tamaño=$request->input('Tamaño');
-             
+             /*Guarda la  imagen */
             if($request->hasFile('Imagen')){
         $archivo=$request->file('Imagen');
         $archivo->move(public_path().'/imagenes/menu/',$archivo->getClientOriginalName());
@@ -87,7 +87,7 @@ class MenuController extends Controller
         'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
         'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
         'Tipo'=>'required|in:bebida,plato,combo' ,
-        'Precio'=>'required|regex:/^\d{1,3}(?:\.\d\d\d)*(?:.\d{1,2})?$/',
+        'Precio'=>'required|regex:/^\d{1,5}(?:\.\d\d\d\d\d)*(?:.\d{1,2})?$/',
         'Tamaño'=>'required|in:personal,2 personas,familiar',
         'Imagen'=>'|image|mimes:jpg,jpeg,png',
          
@@ -96,8 +96,8 @@ class MenuController extends Controller
             'Nombre.required'=> 'El Nombre es Obligatorio',
             'Nombre.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
             'Descripción.required'=>'La Descripción es Obligatorio',
-            'Tipo.required'=>'El Tipo de menu Obligatorio',
-            'Precio.required'=>'El Precio  Obligatorio',
+            'Tipo.required'=>'El Tipo es Obligatorio',
+            'Precio.required'=>'El Precio es Obligatorio',
             'Precio.regex'=>'El Precio puede tener (.) y uno o dos decimales despues',
             'Tamaño.required'=>'El Tamaño es Obligatorio',
             'Imagen.required'=>'La Imagen es Obligatoria',
@@ -114,8 +114,7 @@ class MenuController extends Controller
         $comidabebida->Tipo=$request->input('Tipo');
         $comidabebida->Precio=$request->input('Precio');
         $comidabebida->Tamaño=$request->input('Tamaño');
-        //$comidabebida->Imagen=$request->input('Imagen');
-        
+       /*Guarda la  imagen */  
         if($request->hasFile('Imagen')){
             $archivo=$request->file('Imagen');
             $archivo->move(public_path().'/imagenes/menu',$archivo->getClientOriginalName());
@@ -126,7 +125,7 @@ class MenuController extends Controller
         /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
         $creado = $comidabebida->save();
         if($creado){
-            return redirect()->route('menu.index')->with('mensaje', "El ".$comidabebida->Nombre." se actualizo correctamente");
+            return redirect()->route('menu.index')->with('mensaje', "".$comidabebida->Nombre." se actualizo correctamente");
         }
 }
 

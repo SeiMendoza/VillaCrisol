@@ -87,7 +87,7 @@
         <div class="col-md-6">
                 <div class="form-floating">
                     <input class="form-control @error('Imagen') is-invalid @enderror" id="Imagen" name="Imagen" type="file"
-                     placeholder="" value="{{old('Imagen',$comidabebidas->Imagen)}}"/>
+                     placeholder="" value="{{old('Imagen',$comidabebidas->Imagen)}}"/> 
                      <div class="grid grid-cols-1 mt-3 mx-5">
                     <img src="/imagenes/menu/{{$comidabebidas->Imagen}}" width="200px" id="imagenSeleccionada">
                 </div> 
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-
+        
 
 <br>
     <div class="row mb-3">
@@ -138,6 +138,26 @@
             </form>
     @endsection
 
+    <script>
+                const $seleccionArchivos = document.querySelector("#Imagen"),
+                $imagenPrevisualizacion = document.querySelector("#imagenSeleccionada");
 
+                // Escuchar cuando cambie
+                $seleccionArchivos.addEventListener("change", () => {
+                // Los archivos seleccionados, pueden ser muchos o uno
+                const archivos = $seleccionArchivos.files;
+                // Si no hay archivos salimos de la función y quitamos la imagen
+                if (!archivos || !archivos.length) {
+                    $imagenPrevisualizacion.src = "";
+                    return;
+                }
+                // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+                const primerArchivo = archivos[0];
+                // Lo convertimos a un objeto de tipo objectURL
+                const objectURL = URL.createObjectURL(primerArchivo);
+                // Y a la fuente de la imagen le ponemos el objectURL
+                $imagenPrevisualizacion.src = objectURL;
+                });
+            </script>
 
 
