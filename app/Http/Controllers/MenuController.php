@@ -14,7 +14,7 @@ class MenuController extends Controller
         return view ('MenuRestaurante/menuIndex')->with('menu', $menu);
     }
 
-    //buscar comida 
+    //buscar comida
     public function search(Request $request){
         $text =trim($request->get('busqueda'));
         $menu = ComidaBebida::where('Nombre', 'like', '%'.$text.'%')
@@ -35,17 +35,17 @@ class MenuController extends Controller
 
         /*Validación de campos*/
         $request -> validate([
-            'Nombre'=> 'required|regex:/^[A-Z][\pLñÑ.\s\-]+$/u',
+            'Nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/u',
             'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
             'Tipo'=>'required|in:bebida,plato,combo' ,
             'Precio'=>'required|regex:/^\d{1,5}(?:\.\d\d\d\d\d)*(?:.\d{1,2})?$/',
             'Tamaño'=>'required|in:personal,2 personas,familiar',
             'Imagen'=>'required|image|mimes:jpg,jpeg,png',
-        
+
             ],[
 
                 'Nombre.required'=> 'El Nombre es Obligatorio',
-                'Nombre.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
+                'Nombre.regex'=> 'El Nombre tiene un caracter no permitido',
                 'Descripción.required'=>'La Descripción es Obligatorio',
                 'Tipo.required'=>'El Tipo es Obligatorio',
                 'Precio.required'=>'El Precio es Obligatorio',
@@ -53,7 +53,7 @@ class MenuController extends Controller
 				'Tamaño.required'=>'El Tamaño es Obligatorio',
                 'Imagen.required'=>'La Imagen es Obligatoria',
                 'Imagen.mimes'=>'Solo se aceptan imagenes formato:jpg,jpeg,png',
-                 
+
             ]);
 
             /*Variable para reconocer los nuevos registros a la tabla*/
@@ -90,7 +90,7 @@ class MenuController extends Controller
         'Precio'=>'required|regex:/^\d{1,5}(?:\.\d\d\d\d\d)*(?:.\d{1,2})?$/',
         'Tamaño'=>'required|in:personal,2 personas,familiar',
         'Imagen'=>'|image|mimes:jpg,jpeg,png',
-         
+
     ],[
 
             'Nombre.required'=> 'El Nombre es Obligatorio',
@@ -103,18 +103,18 @@ class MenuController extends Controller
             'Imagen.required'=>'La Imagen es Obligatoria',
             'Imagen.mimes'=>'Solo se aceptan imagenes formato:jpg,jpeg,png',
             'Imagen.image'=>'Solo se aceptan imagenes',
-             
+
         ]);
 
         /*Variable para reconocer los nuevos registros a la tabla*/
         $comidabebida = ComidaBebida::findOrFail($id);
-        
+
         $comidabebida->Nombre=$request->input('Nombre');
         $comidabebida->Descripción=$request->input('Descripción');
         $comidabebida->Tipo=$request->input('Tipo');
         $comidabebida->Precio=$request->input('Precio');
         $comidabebida->Tamaño=$request->input('Tamaño');
-       /*Guarda la  imagen */  
+       /*Guarda la  imagen */
         if($request->hasFile('Imagen')){
             $archivo=$request->file('Imagen');
             $archivo->move(public_path().'/imagenes/menu',$archivo->getClientOriginalName());
