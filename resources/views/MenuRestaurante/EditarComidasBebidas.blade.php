@@ -1,5 +1,5 @@
 @extends('plantillas.register')
-@section('title', 'Editar Comidas y Bebidas')
+@section('title', 'Editar comidas y bebidas')
 
  
 @section('content')
@@ -16,7 +16,7 @@
                      name="Nombre" type="text" maxlength="45"
                     placeholder=""  value="{{old('Nombre',$comidabebidas->Nombre)}}" />
                     <label for="Nombre">Nombre</label>
-                    @error('NombrePlato')
+                    @error('Nombre')
                     <small class="invalid-feedback">
                         <strong>{{ $message }}</strong>
                     </small>
@@ -25,11 +25,13 @@
             </div>
             <div class="col-md-6">
                 <div class="form-floating">
-                    <input class="form-control @error('Descripción') is-invalid @enderror" id="Descripción" name="Descripción" type="text"
-                     placeholder="" maxlength="45"
-                     value="{{old('Descripción',$comidabebidas->Descripción)}}" />
-                    <label for="Descripción">Descripción</label>
-                    @error('Descripción')
+                <select  class="form-control @error('Tamaño') is-invalid @enderror" name="Tamaño">
+                <option value="personal"{{$comidabebidas->Tamaño =="pesonal" ? 'selected' :''}} >Personal</option>
+                <option value="2 personas"{{$comidabebidas->Tamaño =="2 personas" ? 'selected' :''}} >2 personas</option>
+                <option value="familiar"{{$comidabebidas->Tamaño =="familiar" ? 'selected' :''}} >Familiar</option>
+</select>
+<label for="Tamaño">seleccione un tamaño de menú </label>
+                    @error('Tamaño')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
                         </small>
@@ -43,10 +45,10 @@
                 <div class="form-floating mb-3 mb-md-0">
                 <select  class="form-control @error('Tipo') is-invalid @enderror" name="Tipo">   
                 <option value="bebida"{{$comidabebidas->Tipo =="bebida" ? 'selected' :''}} >Bebida</option>
-                <option value="plato"{{$comidabebidas->Tipo =="plato" ? 'selected' :''}} >Plato</option>
+                <option value="comida"{{$comidabebidas->Tipo =="comida" ? 'selected' :''}} >Comida</option>
                 <option value="combo"{{$comidabebidas->Tipo =="combo" ? 'selected' :''}} >Combo</option>
                 </select>
-<label for="Tipo">seleccione un Tipo</label>
+<label for="Tipo">seleccione un tipo de menú </label>
                     @error('Tipo')
                     <small class="invalid-feedback">
                         <strong>{{ $message }}</strong>
@@ -56,8 +58,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-floating">
-                    <input class="form-control @error('Precio') is-invalid @enderror" id="Precio" name="Precio" type="text"
-                     placeholder="" maxlength="10"
+                    <input class="form-control @error('Precio') is-invalid @enderror" id="Precio" name="Precio" type="num"
+                     placeholder="" maxlength="3"
                      value="{{old('Precio',$comidabebidas->Precio)}}"/>
                     <label for="Precio">Precio</label>
                     @error('Precio')
@@ -71,13 +73,10 @@
             <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating">
-                <select  class="form-control @error('Tamaño') is-invalid @enderror" name="Tamaño">
-                <option value="personal"{{$comidabebidas->Tamaño =="pesonal" ? 'selected' :''}} >Personal</option>
-                <option value="2 personas"{{$comidabebidas->Tamaño =="2 personas" ? 'selected' :''}} >2 personas</option>
-                <option value="familiar"{{$comidabebidas->Tamaño =="familiar" ? 'selected' :''}} >Familiar</option>
-</select>
-<label for="Tamaño">seleccione un Tamaño</label>
-                    @error('Tamaño')
+                <textarea class="form-control @error('Descripción') is-invalid @enderror" id="Descripción" name="Descripción" type="text"
+                  maxlength="150" style="height:145px">{{old('Descripción',$comidabebidas->Descripción)}}</textarea>
+                    <label for="Descripción">Descripción del menú </label>
+                    @error('Descripción')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
                         </small>
@@ -91,7 +90,7 @@
                      <div class="grid grid-cols-1 mt-3 mx-5">
                     <img src="/imagenes/menu/{{$comidabebidas->Imagen}}" width="200px" id="imagenSeleccionada">
                 </div> 
-                    <label for="Imagen">Seleccione Una Imagen</label>
+                    <label for="Imagen">Seleccione una imagen</label>
                     @error('Imagen')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>

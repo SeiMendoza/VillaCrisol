@@ -16,7 +16,7 @@
     <div class="card shadow col-md-12">
         <div class="card-header" style="background: #25416b; color: white">
             <div>
-                <h2 style=" text-align: center;" class="m-0 font-weight-bold">Lista de Empleados</h2>
+                <h2 style=" text-align: center;" class="m-0 font-weight-bold">Lista de empleados</h2>
                 </div><br>
             <div style="float: left; width: 450px;">
                 <form action="{{ route('empleados.search') }}" method="get" role="search"

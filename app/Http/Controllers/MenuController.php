@@ -37,21 +37,21 @@ class MenuController extends Controller
         $request -> validate([
             'Nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/u',
             'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
-            'Tipo'=>'required|in:bebida,plato,combo' ,
-            'Precio'=>'required|regex:/^\d{1,5}(?:\.\d\d\d\d\d)*(?:.\d{1,2})?$/',
+            'Tipo'=>'required|in:bebida,comida,combo' ,
+            'Precio'=>'required|numeric',
             'Tamaño'=>'required|in:personal,2 personas,familiar',
             'Imagen'=>'required|image|mimes:jpg,jpeg,png',
 
             ],[
 
-                'Nombre.required'=> 'El Nombre es Obligatorio',
-                'Nombre.regex'=> 'El Nombre tiene un caracter no permitido',
-                'Descripción.required'=>'La Descripción es Obligatorio',
-                'Tipo.required'=>'El Tipo es Obligatorio',
-                'Precio.required'=>'El Precio es Obligatorio',
-                'Precio.regex'=>'El Precio puede tener (.) y uno o dos decimales despues',
-				'Tamaño.required'=>'El Tamaño es Obligatorio',
-                'Imagen.required'=>'La Imagen es Obligatoria',
+                'Nombre.required'=> 'El nombre es obligatorio',
+                'Nombre.regex'=> 'El nombre tiene un caracter no permitido',
+                'Descripción.required'=>'La descripción es obligatorio',
+                'Tipo.required'=>'El tipo de menú es obligatorio',
+                'Precio.required'=>'El precio del menú es obligatorio',
+                'Precio.numeric'=>'El precio del menú solo acepta numeros enteros',
+				'Tamaño.required'=>'El tamaño del menú es obligatorio',
+                'Imagen.required'=>'La imagen del menú es obligatoria',
                 'Imagen.mimes'=>'Solo se aceptan imagenes formato:jpg,jpeg,png',
 
             ]);
@@ -86,21 +86,21 @@ class MenuController extends Controller
     $request -> validate([
         'Nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/u',
         'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
-        'Tipo'=>'required|in:bebida,plato,combo' ,
-        'Precio'=>'required|regex:/^\d{1,5}(?:\.\d\d\d\d\d)*(?:.\d{1,2})?$/',
+        'Tipo'=>'required|in:bebida,comida,combo' ,
+        'Precio'=>'required|numeric',
         'Tamaño'=>'required|in:personal,2 personas,familiar',
         'Imagen'=>'|image|mimes:jpg,jpeg,png',
 
     ],[
 
-            'Nombre.required'=> 'El Nombre es Obligatorio',
-            'Nombre.regex'=> 'El Nombre debe Inciar con letra Mayuscula',
-            'Descripción.required'=>'La Descripción es Obligatorio',
-            'Tipo.required'=>'El Tipo es Obligatorio',
-            'Precio.required'=>'El Precio es Obligatorio',
-            'Precio.regex'=>'El Precio puede tener (.) y uno o dos decimales despues',
-            'Tamaño.required'=>'El Tamaño es Obligatorio',
-            'Imagen.required'=>'La Imagen es Obligatoria',
+            'Nombre.required'=> 'El nombre es obligatorio',
+            'Nombre.regex'=> 'El nombre solo acepta letras',
+            'Descripción.required'=>'La descripción del menú es obligatorio',
+            'Tipo.required'=>'El tipo de menú es obligatorio', 
+            'Precio.required'=>'El precio de menú es obligatorio',
+            'Precio.numeric'=>'El precio solo acepta numeros enteros',
+            'Tamaño.required'=>'El tamaño de menú es obligatorio',
+            'Imagen.required'=>'La imagen de menú es obligatoria',
             'Imagen.mimes'=>'Solo se aceptan imagenes formato:jpg,jpeg,png',
             'Imagen.image'=>'Solo se aceptan imagenes',
 

@@ -19,8 +19,8 @@ class ComidaBebidaFactory extends Factory
         return [
              'Nombre'=>$this->faker->name,
              'Descripción'=>$this->faker->word,
-             'Tipo'=>$this->faker->randomElement(['Bebida','plato','combo']),
-             'Precio'=>$this->faker->numberBetween(50,200),
+             'Tipo'=>$this->faker->randomElement(['bebida','comida','combo']),
+             'Precio'=>$this->faker->numberBetween(10,300),
              'Tamaño'=>$this->faker->randomElement(['personal','2 personas','familiar']),
              'Imagen'=>$this->faker->imageUrl(),
              'Activo'=>$this->faker->randomElement(['si','no']),

@@ -1,7 +1,7 @@
 @extends('plantillas.plantillaEmpleados')
-@section('title', 'Registrar Empleado')
+@section('title', 'Registrar empleado')
 
-@section('encabezado', 'Registro de Empleados')
+@section('encabezado', 'Registro de empleados')
 @section('content')
     
     
@@ -15,7 +15,7 @@
     <div class="form-floating mb-3 mb-md-0">
      <input class="form-control @error('NombreCompleto') is-invalid @enderror" id="NombreCompleto"
       name="NombreCompleto" type="text" placeholder="" value="{{old('NombreCompleto')}}" maxlength="45"/>
-      <label for="NombreCompleto">Nombre Completo</label>
+      <label for="NombreCompleto">Nombre completo</label>
       @error('NombreCompleto')
       <small class="invalid-feedback">
      <strong>{{ $message }}</strong>
@@ -28,7 +28,7 @@
                 <div class="form-floating">
                     <input class="form-control @error('NúmeroDeIdentidad') is-invalid @enderror" id="NúmeroDeIdentidad" name="NúmeroDeIdentidad" type="num"
                     value="{{old('NúmeroDeIdentidad')}}" maxlength="15"/>
-                    <label for="NúmeroDeIdentidad">Número De Identidad</label>
+                    <label for="NúmeroDeIdentidad">Número De identidad</label>
                     @error('NúmeroDeIdentidad')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
      <input class="form-control @error('CorreoElectrónico') is-invalid @enderror" id="CorreoElectrónico"
       name="CorreoElectrónico" type="text" 
      value="{{old('CorreoElectrónico')}}" maxlength="25"/>
-      <label for="CorreoElectrónico"> Correo Electrónico </label>
+      <label for="CorreoElectrónico"> Correo electrónico </label>
       @error('CorreoElectrónico')
       <small class="invalid-feedback">
      <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
                 <div class="form-floating">
                     <input class="form-control @error('NúmeroTelefónico') is-invalid @enderror" id="NúmeroTelefónico" name="NúmeroTelefónico" type="text"
                     value="{{old('NúmeroTelefónico')}}" maxlength="8"/>
-                    <label for="NúmeroTelefónico"> Número Telefónico</label>
+                    <label for="NúmeroTelefónico"> Número telefónico</label>
                     @error('NúmeroTelefónico')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
@@ -73,7 +73,7 @@
      <input class="form-control @error('NúmeroDeReferencia') is-invalid @enderror" id="NúmeroDeReferencia"
       name=" NúmeroDeReferencia" type="text" 
      value="{{old('NúmeroDeReferencia')}}" maxlength="8"/>
-      <label for="NúmeroDeReferencia"> Número Contacto de la Empresa</label>
+      <label for="NúmeroDeReferencia"> Número contacto de la empresa</label>
       @error('NúmeroDeReferencia')
       <small class="invalid-feedback">
      <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
                     <input class="form-control @error('NombreDeLaReferencia') is-invalid @enderror" id="NombreDeLaReferencia" name="NombreDeLaReferencia" type="text"
                      placeholder=""
                     value="{{old('NombreDeLaReferencia')}}" maxlength="45" />
-                    <label for="NombreDeLaReferencia"> Nombre de contacto de la Empresa</label>
+                    <label for="NombreDeLaReferencia"> Nombre de contacto de la empresa</label>
                     @error('NombreDeLaReferencia')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
@@ -133,7 +133,7 @@
                 <div class="form-floating">
              <input class="form-control @error('Domicilio') is-invalid @enderror" id="Domicilio" name="Domicilio" type="text"
              value="{{old('Domicilio')}}" maxlength="45"/>
-                    <label for="Domicilio ">Domicilio</label>
+                    <label for="Domicilio">Domicilio</label>
                      @error('Domicilio')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>

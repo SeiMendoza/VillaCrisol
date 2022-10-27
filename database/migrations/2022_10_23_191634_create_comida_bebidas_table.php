@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('Nombre');
             $table->string('Descripción');
             $table->string('Tipo');
-            $table->decimal('Precio',8,2);
+            $table->integer('Precio');
             $table->string('Tamaño');
             $table->string('Imagen');
             $table->string('Activo')->default('si');

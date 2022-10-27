@@ -22,21 +22,20 @@
                                 <tr>
                                     <th scope="col">Datos</th>
                                     <th scope="col">Información</th>
-                                    <th scope=""><a class="btn btn-warning" href="{{route('empleado.editar', ['id'=>$empleado->id])}}">Editar</a></th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <tr>
-                                    <th scope="row">Nombre Completo:</th>
+                                    <th scope="row">Nombre completo:</th>
                                     <td>{{$empleado->NombreCompleto}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Número De Identidad:</th>
+                                    <th scope="row">Número de identidad:</th>
                                     <td>{{$empleado->NúmeroDeIdentidad}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Correo Electrónico:</th>
+                                    <th scope="row">Correo electrónico:</th>
                                     <td>{{$empleado->CorreoElectrónico}}</td>
                                 </tr>
                                 <tr>
@@ -44,11 +43,11 @@
                                     <td>{{$empleado->NúmeroTelefónico}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Nombre Contacto de la Empresa:</th>
+                                    <th scope="row">Nombre contacto de la empresa:</th>
                                     <td>{{$empleado->NombreDeLaReferencia}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Número Contacto de la Empresa:</th>
+                                    <th scope="row">Número contacto de la empresa:</th>
                                     <td>{{$empleado->NúmeroDeReferencia}}</td>
                                 </tr>
                                 <tr>
@@ -56,11 +55,11 @@
                                     <td>{{$empleado->Domicilio}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Fecha Ingreso:</th>
+                                    <th scope="row">Fecha ingreso:</th>
                                     <td>{{$empleado->FechaDeIngreso}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Estado del Empleado:</th>
+                                    <th scope="row">Estado del empleado:</th>
                                     <td>{{$empleado->Estado}}</td>
                                 </tr>
                             </tbody>
@@ -70,9 +69,10 @@
             </div>
         </div>
         <br>
-        <div class="card shadow col-md-12">
-            <div class="card-body" style="text-align: center">
-                <a class='btn btn-primary' href="{{route('empleado.index')}}">volver</a>
+        <div class="card shadow col-md-12" style="background-color: rgba(42, 142, 33, 0)" >
+            <div class="card-body" style="float">
+                <a class="btn btn-primary" style="float: left" href="{{route('empleado.index')}}">Volver</a>
+                <a class="btn btn-warning" style="float: right" href="{{route('empleado.editar', ['id'=>$empleado->id])}}">Editar</a>
             </div>
         </div>
         <br>
