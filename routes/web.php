@@ -8,6 +8,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareaController;
+use App\Http\Controllers\RegCompraProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -177,3 +178,19 @@ Route::get('/create/producto', [RegistroController::class,'createProducto'])
 
 Route::post('/create/producto', [RegistroController::class, 'storeProducto'])
 ->name('producto.store');
+
+
+/*
+   |---------------------------------------------|
+   |   Rutas de Registros  compras de productos  |
+   |---------------------------------------------|
+*/
+
+Route::get('/create/regcompra', [RegCompraProductController::class,'create'])
+->name('regcompra.create');
+
+Route::post('/create/regcompra', [RegCompraProductController::class, 'store'])
+->name('regcompra.store');
+
+Route::delete('/regcompra/{id}/borrar',[RegCompraProductController::class,'destroy'])
+->name('regcompra.borrar')->where('id','[0-9]+');
