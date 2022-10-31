@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class RegistroController extends Controller
+class ProductoController extends Controller
 {
 
     //funcion para crear un nuevo producto
     public function createProducto(){
-        return view('registros.registroProducto');
+        return view('productos.registroProducto');
     }
 
     //funcion para validar y guardar el nuevo producto
@@ -45,7 +45,29 @@ class RegistroController extends Controller
          /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
          $creado = $nuevoProducto->save();
          if($creado){
-             return redirect()->route('producto.create')->with('mensaje', "El producto se registró correctamente");
+             return redirect()->route('index')->with('mensaje', "El producto se registró correctamente");
          }
     }
+
+    // ----------------------------------Restaurante----------------------------------------- //
+
+    //Lista de productos
+    public function indexRestaurante(){
+        $productos= Producto::where('categoria', '=', 'restaurante')->paginate(10);
+        return view ('productos/restaurante/inventarioRestaurante')->with('productos', $productos);
+    }
+
+    //buscar clientes
+    public function searchRestaurante(Request $request){
+        $text =trim($request->get('busqueda'));
+        $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10);
+        return view('productos/restaurante/inventarioRestaurante', compact('productos', 'text'));
+    }
+
+    //función para ver productos
+    public function showRestaurante($id){
+        $producto = Producto::findOrfail($id);
+        return view ('productos/restaurante/detalleRestaurante')->with('producto', $producto);
+    }
+
 }

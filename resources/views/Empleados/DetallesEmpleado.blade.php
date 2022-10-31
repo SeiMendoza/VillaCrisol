@@ -70,9 +70,9 @@
         </div>
         <br>
         <div class="card shadow col-md-12" style="background-color: rgba(42, 142, 33, 0)" >
-            <div class="card-body" style="float">
-                <a class="btn btn-primary" style="float: left" href="{{route('empleado.index')}}">Volver</a>
-                <a class="btn btn-warning" style="float: right" href="{{route('empleado.editar', ['id'=>$empleado->id])}}">Editar</a>
+            <div class="card-body" style="text-align: right">
+                <a class="btn btn-primary" href="{{route('empleado.index')}}">Volver</a>
+                <a class="btn btn-warning" href="{{route('empleado.editar', ['id'=>$empleado->id])}}">Editar</a>
             </div>
         </div>
         <br>

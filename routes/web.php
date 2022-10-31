@@ -5,9 +5,8 @@ use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TareaController;
 use App\Http\Controllers\RegCompraProductController;
 
 /*
@@ -91,8 +90,6 @@ Route::post('/compras/create', [CompraController::class, 'store'])
 Route::get('/compras/{id}', [CompraController::class,'show'])
 ->name('compras.show')->where('id', '[0-9]+');
 
-// Productos
-Route::resource('tarea', TareaController::class);
 
 /*
    |----------------|
@@ -173,10 +170,10 @@ Route::put('/menu/{id}/activar', [MenuController::class,'activo'])
    |------------------------|
 */
 
-Route::get('/create/producto', [RegistroController::class,'createProducto'])
+Route::get('/create/producto', [ProductoController::class,'createProducto'])
 ->name('producto.create');
 
-Route::post('/create/producto', [RegistroController::class, 'storeProducto'])
+Route::post('/create/producto', [ProductoController::class, 'storeProducto'])
 ->name('producto.store');
 
 
@@ -194,3 +191,24 @@ Route::post('/create/regcompra', [RegCompraProductController::class, 'store'])
 
 Route::delete('/regcompra/{id}/borrar',[RegCompraProductController::class,'destroy'])
 ->name('regcompra.borrar')->where('id','[0-9]+');
+
+
+/*
+   |----------------------------|
+   | Rutas Productos Restaurante|
+   |----------------------------|
+*/
+
+//Menú de comidas y bebidas
+Route::get('/restaurante', [ProductoController::class,'indexRestaurante'])
+->name('restaurante.index');
+
+//Buscar clientes
+Route::get('/restaurante/busqueda', [ProductoController::class,'searchRestaurante'])
+->name('restaurante.search');
+
+//Detalle Comida y bebida
+
+Route::get('/restaurante/detalle/{id}', [ProductoController::class,'showRestaurante'])
+->name('restaurante.show')->where('id','[0-9]+');
+

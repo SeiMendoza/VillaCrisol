@@ -19,7 +19,7 @@ class ProductoFactory extends Factory
         return [
             'nombre'=>$this->faker->word,
             'descripcion'=>$this->faker->words(10, true),
-            'categoria'=>$this->faker->randomElement(['Restaurante','Piscina','Siembras','Animales']),
+            'categoria'=>$this->faker->randomElement(['restaurante','piscina','siembras','animales']),
         ];
     }
 }

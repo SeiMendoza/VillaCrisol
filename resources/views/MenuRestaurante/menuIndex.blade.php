@@ -22,8 +22,8 @@
                 <form action="{{route('menu.search')}}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group" >
-                        <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 230px"
-                        placeholder="Buscar por nombre o precio" aria-label="Buscar por nombre"
+                        <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 410px"
+                        placeholder="Buscar por nombre, tamaño o tipo de comida/bebida" aria-label="Buscar por nombre"
                         aria-describedby="basic-addon2" maxlength="50" required
                             value="<?php if(isset($text)) echo $text;?>" />
                         <div class="input-group-append">

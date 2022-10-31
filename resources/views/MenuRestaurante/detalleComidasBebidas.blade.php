@@ -9,11 +9,11 @@
         <title>Detalles de: {{$comidaBebida->Nombre}}</title>
         <link rel="shortcut icon" href="/crisol.png" type="image/x-icon">
     </head>
-    <body style="background-color: rgba(0, 179, 0, 0.163)">
+    <body style="background-color: rgba(60, 255, 0, 0.07)">
         <div class="container-fluid px-4">
             Menú
             <br><br>
-            <div class="card shadow col-md-12 items-center">
+            <div class="card shadow col-md-12">
                 <h1 class="text-center">{{$comidaBebida->Nombre}}<br></h1>
                 <div class="card-body" style="text-align: center">
                     <div>
@@ -24,23 +24,24 @@
                         {{$comidaBebida->Descripción}}
                     </div>
                     <br>
-                    <div class="table-responsive text-center" style="background-color: rgba(0, 128, 0, 0.634);" >
+                    <div style="background-color: rgba(25, 163, 25, 0.553);" >
                         <table class="table" style="color: white;">
                         <tr>
-                            <th  scope= "col">Tipo: {{$comidaBebida->Tipo}} </th>
-                            <th  scope= "col">Precio: L {{$comidaBebida->Precio}} </th>
-                            <th  scope= "col">Tamaño: {{$comidaBebida->Tamaño}} </th>
+                            <th  scope= "col" colspan="1">Tipo: {{$comidaBebida->Tipo}} </th>
+                            <th></th>
+                            <th  scope= "col" colspan="1">Precio: L {{$comidaBebida->Precio}}</th>
+                            <th  scope= "col" colspan="1">Tamaño: {{$comidaBebida->Tamaño}} </th>
                         </tr>
                         </table>
                     </div>
                 </div>
             </div>
-
+        </div>
         <br>
-        <div class="card shadow col-md-12" style="background-color: rgba(42, 142, 33, 0)" >
-            <div class="card-body" style="float">
-                <a class="btn btn-primary" style="float: left" href="{{route('menu.index')}}">Volver</a>
-                <a class="btn btn-warning" style="float: right" href="{{route('menu.editar', ['id'=>$comidaBebida->id])}}">Editar</a>
+        <div class="card shadow col-md-12">
+            <div class="card-body" style="text-align: right">
+                <a class="btn btn-primary" href="{{route('menu.index')}}">Volver</a>
+                <a class="btn btn-warning" href="{{route('menu.editar', ['id'=>$comidaBebida->id])}}">Editar</a>
             </div>
         </div>
         <br>

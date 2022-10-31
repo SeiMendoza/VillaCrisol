@@ -133,6 +133,12 @@
             </div>
             <div id="layoutSidenav_content" style="background-color: rgb(216, 216, 216);">
                 <main>
+                    @if(session('mensaje'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong> {{session('mensaje')}}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                         <h1 class="mt-4 text-center" >Página de inicio</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
@@ -149,7 +155,7 @@
                                                     <div class="card-body">INVENTARIO</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                                         <a class="small text-white stretched-link"
-                                                        href="{{route('compras.index')}}">MOSTRAR</a>
+                                                        href="{{route('restaurante.index')}}">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                                     </div>
                                                 </div>
@@ -158,7 +164,7 @@
                                                 <div class="card text-white mb-4" style="background-color: rgba(58, 215, 131, 0.51)">
                                                     <div class="card-body">COMPRAS</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
+                                                        <a class="small text-white stretched-link" href="{{route('regcompra.create')}}">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                                     </div>
                                                 </div>
@@ -240,9 +246,9 @@
                                             </div>
                                             <div class="col-xl-3 col-md-6">
                                                 <div class="card text-white mb-4" style="background-color: rgba(145, 84, 203, 0.619)">
-                                                    <div class="card-body">REGISTRO DE COMPRAS</div>
+                                                    <div class="card-body">COMPRAS</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                                        <a class="small text-white stretched-link" href="{{route('regcompra.create')}}">MOSTRAR</a>
+                                                        <a class="small text-white stretched-link" href="#">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                                     </div>
                                                 </div>

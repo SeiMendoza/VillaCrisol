@@ -18,7 +18,8 @@ class MenuController extends Controller
     public function search(Request $request){
         $text =trim($request->get('busqueda'));
         $menu = ComidaBebida::where('Nombre', 'like', '%'.$text.'%')
-        ->orWhere('Precio', 'like', '%'.$text.'%')->paginate(10);
+        ->orWhere('tamaño', 'like', '%'.$text.'%')
+        ->orWhere('tipo', 'like', '%'.$text.'%')->paginate(10);
         return view('MenuRestaurante/menuIndex', compact('menu', 'text'));
     }
 
@@ -96,7 +97,7 @@ class MenuController extends Controller
             'Nombre.required'=> 'El nombre es obligatorio',
             'Nombre.regex'=> 'El nombre solo acepta letras',
             'Descripción.required'=>'La descripción del menú es obligatorio',
-            'Tipo.required'=>'El tipo de menú es obligatorio', 
+            'Tipo.required'=>'El tipo de menú es obligatorio',
             'Precio.required'=>'El precio de menú es obligatorio',
             'Precio.numeric'=>'El precio solo acepta numeros enteros',
             'Tamaño.required'=>'El tamaño de menú es obligatorio',
