@@ -18,7 +18,7 @@ class RegCompraProductController extends Controller
         $request -> validate([
             'numfactura'=>'required|numeric', 
             'proveedor'=>'regex:/^[\pLñÑ.\s\-]+$/u',
-            'descripción'=>'required|regex:/^[\pLñÑ.\s\-]+$/u', 
+            'descripción'=>'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u', 
             'categoria'=>'required|in:Restaurante','Piscina','Siembra','Animales',
             'fecha'=>'required|date',
             'total'=>'required|numeric'
@@ -28,6 +28,7 @@ class RegCompraProductController extends Controller
                 'numfactura.numeric'=>'Solo se aceptan numeros',
                 'proveedor.regex'=>'Solo se aceptan letras',
                 'descripción.required'=>'La descripción es obligatoria',
+                'descripción.regex'=>'La descripción tiene un caracter no permitido',
                 'fecha.required'=>'La fecha es obligatoria',
                 'fecha.date'=>'fecha incorrecta',
                 'total.required'=>'El total es obligatorio',

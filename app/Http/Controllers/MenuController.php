@@ -37,7 +37,7 @@ class MenuController extends Controller
         /*Validación de campos*/
         $request -> validate([
             'Nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/u',
-            'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
+            'Descripción'=> 'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u',
             'Tipo'=>'required|in:bebida,comida,combo' ,
             'Precio'=>'required|numeric',
             'Tamaño'=>'required|in:personal,2 personas,familiar',
@@ -48,6 +48,7 @@ class MenuController extends Controller
                 'Nombre.required'=> 'El nombre es obligatorio',
                 'Nombre.regex'=> 'El nombre tiene un caracter no permitido',
                 'Descripción.required'=>'La descripción es obligatorio',
+                'Descripción.regex'=>'La descripción tiene un caracter no permitido',
                 'Tipo.required'=>'El tipo de menú es obligatorio',
                 'Precio.required'=>'El precio del menú es obligatorio',
                 'Precio.numeric'=>'El precio del menú solo acepta numeros enteros',
@@ -86,7 +87,7 @@ class MenuController extends Controller
     /*Validación de campos*/
     $request -> validate([
         'Nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/u',
-        'Descripción'=> 'required|regex:/^[\pLñÑ.\s\-]+$/u',
+        'Descripción'=> 'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u',
         'Tipo'=>'required|in:bebida,comida,combo' ,
         'Precio'=>'required|numeric',
         'Tamaño'=>'required|in:personal,2 personas,familiar',
@@ -97,6 +98,7 @@ class MenuController extends Controller
             'Nombre.required'=> 'El nombre es obligatorio',
             'Nombre.regex'=> 'El nombre solo acepta letras',
             'Descripción.required'=>'La descripción del menú es obligatorio',
+            'Descripción.regex'=>'La descripción tiene un caracter no permitido',
             'Tipo.required'=>'El tipo de menú es obligatorio',
             'Precio.required'=>'El precio de menú es obligatorio',
             'Precio.numeric'=>'El precio solo acepta numeros enteros',
