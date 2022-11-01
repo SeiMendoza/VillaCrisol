@@ -15,6 +15,6 @@ class ComidaBebidaSeeder extends Seeder
      */
     public function run()
     {
-        ComidaBebida::factory(100)->create();
+        ComidaBebida::factory(20)->create();
     }
 }

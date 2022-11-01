@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href={{ asset("css/styles.css") }} rel="stylesheet" type="text/css">
         <title>Detalles de: {{$producto->nombre}}</title>
         <link rel="shortcut icon" href="/crisol.png" type="image/x-icon">
     </head>
@@ -20,12 +21,11 @@
                         <table class="table">
                             <thead class="thead" style="background-color: rgba(81, 255, 0, 0.182)">
                                 <tr>
-                                    <th scope="col">Datos</th>
+                                    <th class="col-2">Datos</th>
                                     <th scope="col">Información</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <tr>
                                     <th scope="row">Nombre del Producto:</th>
                                     <td>{{$producto->nombre}}</td>

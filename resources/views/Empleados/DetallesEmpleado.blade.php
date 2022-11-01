@@ -20,7 +20,7 @@
                         <table class="table">
                             <thead class="thead" style="background-color: rgba(0, 174, 255, 0.101)">
                                 <tr>
-                                    <th scope="col">Datos</th>
+                                    <th class="col-2">Datos</th>
                                     <th scope="col">Información</th>
                                 </tr>
                             </thead>
