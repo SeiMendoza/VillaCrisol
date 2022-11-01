@@ -8,7 +8,7 @@
   </div>
 @endif
 
-@section('encabezado', 'Registro de Productos')
+@section('encabezado', 'Registro de productos')
 @section('content')
 
     <form method='post' action="{{route('producto.store')}}">
@@ -50,8 +50,9 @@
             <div class="row mb-3">
                 <div class="">
                     <div class="form-floating">
-                        <input class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" type="text"
-                        value="{{old('descripcion')}}" maxlength="100" minlength="5"/>
+                        <textarea class="form-control @error('descripcion') is-invalid @enderror"
+                            id="descripcion" name="descripcion" type="text" style="height:100px"
+                            placeholder="" maxlength="150">{{old('descripcion')}}</textarea>
                         <label for="descripcion">Descripción del Producto</label>
                         @error('descripcion')
                             <small class="invalid-feedback" >

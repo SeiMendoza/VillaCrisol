@@ -20,7 +20,7 @@ class ProductoController extends Controller
         $request -> validate([
             'nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/|min:3|max:50',
             'categoria' => 'required|in:restaurante,piscina,siembras,animales',
-            'descripcion'=> 'required|regex:/^[a-zA-Z\0-9\pLñÑ.\s\-]+$/u|min:5|max:100'
+            'descripcion'=> 'required|regex:/^[a-zA-Z\0-9\pLñÑ.\s\-]+$/u|min:5|max:150'
         ],
         [
             'nombre.required'=> 'El nombre es obligatorio',
@@ -33,7 +33,7 @@ class ProductoController extends Controller
             'descripcion.required'=>'La descripción es obligatoria',
             'descripcion.regex'=>'La descripción tiene un caracter no valido',
             'descripcion.min'=>'La descripción requiere una longitud mínima de 5',
-            'descripcion.max'=>'La descripción requiere una longitud máxima de 100',
+            'descripcion.max'=>'La descripción requiere una longitud máxima de 150',
         ]);
 
          /*Variable para reconocer los nuevos registros a la tabla*/

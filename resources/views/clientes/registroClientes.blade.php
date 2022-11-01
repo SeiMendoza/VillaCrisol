@@ -66,9 +66,10 @@
             <div class="row mb-3">
                 <div class="">
                     <div class="form-floating">
-                        <input class="form-control @error('domicilio') is-invalid @enderror" id="domicilio" name="domicilio" type="text"
-                        value="{{old('domicilio')}}" maxlength="100" minlength="4"/>
-                        <label for="domicilio ">Domicilio</label>
+                        <textarea class="form-control @error('domicilio') is-invalid @enderror"
+                            id="domicilio" name="domicilio" type="text" style="height:100px"
+                            placeholder="" maxlength="150">{{old('domicilio')}}</textarea>
+                        <label for="domicilio">Domicilio</label>
                         @error('domicilio')
                             <small class="invalid-feedback" >
                                 <strong>{{ $message }}</strong>
