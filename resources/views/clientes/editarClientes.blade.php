@@ -68,7 +68,7 @@
                     <div class="form-floating">
                         <textarea class="form-control @error('domicilio') is-invalid @enderror"
                             id="domicilio" name="domicilio" type="text" style="height:100px"
-                            placeholder="" maxlength="150">{{old('domicilio')}}</textarea>
+                            placeholder="" maxlength="150">{{old('domicilio',$cliente->domicilio)}}</textarea>
                         <label for="domicilio ">Domicilio</label>
                         @error('domicilio')
                             <small class="invalid-feedback" >
