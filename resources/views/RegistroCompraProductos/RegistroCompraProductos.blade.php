@@ -1,6 +1,6 @@
 @extends('plantillas.register')
 @section('title', 'Registro de compra de productos')
-
+ 
 @section('encabezado', 'Registro de compras de productos')
 @section('content')
 <form method="post" action="{{route('regcompra.create')}}">
@@ -37,10 +37,10 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating mb-3 mb-md-0">
-                <textarea class="form-control @error('descripción') is-invalid @enderror" id="descripción"
-                     name="descripción" type="text" maxlength="150">{{ old('descripción') }}"</textarea>
-                    <label for="descripción">Descripción de la compra</label>
-                    @error('descripción')
+                <input class="form-control @error('total') is-invalid @enderror" id="total"
+      name="total" type="num" value="{{old('total')}}" maxlength="6"/>
+      <label for="total">Ingrese el total de la compra</label>
+                    @error('total')
                     <small class="invalid-feedback">
                         <strong>{{ $message }}</strong>
                     </small>
@@ -79,81 +79,21 @@
                     @enderror
                 </div>
             </div>
-        <div class="col-md-6">
-                <div class="form-floating">
-                    <input class="form-control @error('impuesto') is-invalid @enderror" id="impuesto" name="impuesto"
-                    type="num" value="{{old('impuesto')}}"/>
-                    <label for="impuesto">Ingrese el impuesto</label>
-                    @error('impuesto')
-                        <small class="invalid-feedback" >
-                            <strong>{{ $message }}</strong>
-                        </small>
-                    @enderror
-                </div>
-            </div>
-        </div>
-        <div class="row mb-3">
+      
+         
             <div class="col-md-6">
                 <div class="form-floating">
-                <input class="form-control @error('total') is-invalid @enderror" id="total"
-      name="total" type="num" value="{{old('total')}}" maxlength="6"/>
-      <label for="total">Ingrese el total de la compra</label>
-                    @error('total')
+                <textarea class="form-control @error('descripción') is-invalid @enderror" id="descripción"
+                     name="descripción" type="text" style="height:145px" maxlength="150">{{ old('descripción') }}</textarea>
+                    <label for="descripción">Descripción de la compra</label>
+                    @error('descripción')
                         <small class="invalid-feedback" >
                             <strong>{{ $message }}</strong>
                         </small>
                     @enderror
                 </div>
             </div>
-<-------lista de productos-------->
-<div class="card-body">
-            <div class="table-responsive">
-            <table class="table" id="table">
-                    <thead class="card-header" style="background: rgb(49, 63, 95); color:white;">
-    <tr>
-      <th scope="col">N</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">Precio</th>
-    </tr>
-  </thead>
-  <tbody>
-  @forelse($rcompraproductos as $rcompraproducto)
-    <tr>
-    <th scope="col">{{$rcompraproducto->id}}</th>
-      <td scope="col">{{$rcompraproducto->nombre}}</td>
-      <td scope="col">{{$rcompraproducto->cantidad}}</td>
-      <td scope="col">{{$rcompraproducto->precio}}</td>
-      <td style=" text-align: center"><a class="btn btn-info" href="">Editar</a></td>
-      <td>
-            <form method="post" action="{{route('regcompra.borrar', ['id'=>$rcompraproducto->id])}}"> 
-            @csrf
-            @method('delete')
-            <input type="submit" value="eliminar" class="btn btn-danger">
-            </form>
-        </td>
-    </tr>
-    @empty
-    <tr>
-     <td colspan = "7" style="text-align: center">No hay compras</td>
-</tr> 
-  @endforelse
-    </tbody>
-   </table>
-            </div>
-            <div class="col-md-5" style="text-align: center; margin: 0 auto; margin-bottom: 10px; margin-top: 12px;">
-                {{ $rcompraproductos->links('pagination::bootstrap-4') }}
-            </div>
         </div>
-    </div>
-
-    <div class="card shadow col-md-12">
-        <div class="card-body row justify-content-center">
-            <a class="btn btn-primary" href="">Volver</a>
-        </div>
-    </div>
-</div>
-
 <br>
     <div class="row mb-3">
             <div class="col-md-6">
@@ -188,5 +128,33 @@
                 </div>
                 </div>
             </form>
+     
+
+             
+<div class="card-body">
+            <div class="table-responsive">
+            <table class="table" id="table">
+                    <thead class="card-header" style="background: rgb(49, 63, 95); color:white;">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+   </table>
+            </div>
+            <div class="col-md-5" style="text-align: center; margin: 0 auto; margin-bottom: 10px; margin-top: 12px;">
+                 
+            </div>
+        </div>
+    </div>
+                </div>
+              </div>
+</div>
+
 
  @endsection
