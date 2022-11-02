@@ -41,13 +41,13 @@
         <!-- Menú de comidas y bebidas -->
         <div class="card" style="color: #035700">
             <h5 style="text-align: center">Menú Activo</h5>
-            <div class="" style=" height: 670px; overflow:scroll;">
-                <section class="container-fluid" style="">
+            <div class="table-responsive" style="height: 680px;">
+                <section class="container-fluid">
                     <br>
-                    <div class="tb" style="display: grid; grid-template-columns: 277px 277px 277px 277px 277px; ">
+                    <div class="tb">
                         @foreach ($menu as $m)
                         @if (($m->Activo)=="si")
-                            <div class="" style="display:block; border:rounded; height: 310px; width: 260px; ">
+                            <div style="display:grid; grid-auto-columns: 277px; justify-content: space-evenly; float: left; margin: 5px;">
                                 <div class="card" style="border: 1px solid green; background-color: rgba(3, 197, 0, 0.278)">
                                     <!-- activo o inactivo -->
                                     <button type="button" class="btn badge bg-success position-absolute
@@ -109,13 +109,13 @@
         <!-- Menú de comidas y bebidas desactivado -->
         <div class="card text-muted" style="background-color: rgba(216, 216, 216, 0.796); color:gray">
             <h5 style="text-align: center">Menú Desactivado</h5>
-        <div class="" style=" height: 370px; overflow:scroll;">
+        <div class="table-responsive" style="height: 370px;">
             <section class="container-fluid">
                 <br>
-                <div class="tb" style="display: grid; grid-template-columns: 277px 277px 277px 277px 277px; ">
+                <div class="tb">
                     @foreach ($menu as $c)
                     @if (($c->Activo)=="no")
-                        <div class="" style="display:block;  border:rounded; height: 310px; width: 260px;  ">
+                        <div style="display:grid; grid-auto-columns: 277px; justify-content: space-evenly; float: left; margin: 5px;">
                             <div class="card" style="background-color: rgba(184, 184, 184, 0.511)">
                                 <!-- activo o inactivo -->
                                 <button type="button" class="btn badge bg-secondary position-absolute
