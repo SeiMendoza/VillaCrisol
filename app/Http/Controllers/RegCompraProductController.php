@@ -17,15 +17,16 @@ class RegCompraProductController extends Controller
         /*Validación de campos*/
         $request -> validate([
             'numfactura'=>'required|numeric', 
-            'proveedor'=>'regex:/^[\pLñÑ.\s\-]+$/u',
+            'impuesto'=>'nullable|numeric',
+            'proveedor'=>'nullable|regex:/^[\pLñÑ.\s\-]+$/u',
             'descripción'=>'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u', 
-            'categoria'=>'required|in:Restaurante','Piscina','Siembra','Animales',
+            'categoria'=>'required|in:restaurante,piscina,siembra,animales',
             'fecha'=>'required|date',
             'total'=>'required|numeric'
-
             ],[
                 'numfactura.required'=>'El codigo de factura es obligatorio',
                 'numfactura.numeric'=>'Solo se aceptan numeros',
+                'impuesto.numeric'=>'Solo se aceptan numeros',
                 'proveedor.regex'=>'Solo se aceptan letras',
                 'descripción.required'=>'La descripción es obligatoria',
                 'descripción.regex'=>'La descripción tiene un caracter no permitido',
@@ -42,6 +43,7 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->descripción=$request->input('descripción');
             $nuevorcompraproducto->fecha=$request->input('fecha');
             $nuevorcompraproducto->total=$request->input('total');
+            $nuevorcompraproducto->impuesto=$request->input('impuesto');
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
             $creado = $nuevorcompraproducto->save();
             if($creado){
