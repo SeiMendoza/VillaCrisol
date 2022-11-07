@@ -65,31 +65,6 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/restaurante', [HomeController::class, 'restaurante'])->name('restaurante');
 
-/*
-   |---------------|
-   | Rutas compras |
-   |---------------|
-*/
-
-// Visualizar lista de compras
-Route::get('/compras', [CompraController::class,'index'])
-->name('compras.index');
-
-//Buscar compras
-Route::get('/compras/busqueda', [CompraController::class,'search'])
-->name('compras.search');
-
-//Agregar nueva compra
-Route::get('/compras/create', [CompraController::class,'create'])
-->name('compras.create');
-
-Route::post('/compras/create', [CompraController::class, 'store'])
-->name('compras.store');
-
-//Ver detalles de compras
-Route::get('/compras/{id}', [CompraController::class,'show'])
-->name('compras.show')->where('id', '[0-9]+');
-
 
 /*
    |----------------|
@@ -192,6 +167,8 @@ Route::post('/create/regcompra', [RegCompraProductController::class, 'store'])
 Route::delete('/regcompra/{id}/borrar',[RegCompraProductController::class,'destroy'])
 ->name('regcompra.borrar')->where('id','[0-9]+');
 
+Route::post('/create/regcompra/detalle',[RegCompraProductController::class, 'detalle'])
+->name('regcompra.detalle');
 
 /*
    |----------------------------|

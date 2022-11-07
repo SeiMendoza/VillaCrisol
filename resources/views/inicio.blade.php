@@ -59,7 +59,7 @@
                                     <a class="nav-link" href="#"><div class="sb-nav-link-icon">
                                         <i class="fa fa-list-alt"></i></div>
                                         Inventario</a>
-                                    <a class="nav-link" href="{{route('compras.index')}}"><div class="sb-nav-link-icon">
+                                    <a class="nav-link" href="#"><div class="sb-nav-link-icon">
                                         <i class="fa fa-shopping-bag"></i></div>
                                         Compras</a>
                                     <a class="nav-link" href="{{route('menu.index')}}"><div class="sb-nav-link-icon">
