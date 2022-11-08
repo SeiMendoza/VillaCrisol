@@ -140,7 +140,7 @@
                     </form>
                     </div>
                 </div>
-         
+
                 <div class="col-lg-7">
                     <div class="table-responsive" id="tblaBody">
                         <table class="table table" id="dataTable">
@@ -153,11 +153,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             
+
                             @forelse($detalles as $detalle)
     <tr>
       <td scope="col">{{$detalle->producto->nombre}}</td>
-      <td scope="col">{{$detalle->cantidad}}</td> 
+      <td scope="col">{{$detalle->cantidad}}</td>
       <td scope="col">{{$detalle->precio}}</td>
       <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_cliente">
         <i class="fa fa-edit" style="color: white"></i></a>
@@ -177,7 +177,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                                <form style="text-align:center;" method="post" action="{{route('regcompra.borrar', ['id'=>$detalle->id])}}"> 
+                                                <form style="text-align:center;" method="post" action="{{route('regcompra.borrar', ['id'=>$detalle->id])}}">
                                                  @csrf
                                                 @method('delete')
                                                 <input type="submit" value="si" class="btn btn-danger">
@@ -193,7 +193,7 @@
     <tr>
                                 <td colspan = "7" style="text-align: center">No hay compras</td>
                             </tr>
-                       
+
                         @endforelse
                             </tbody>
                         </table>
@@ -207,10 +207,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar productos en la lista de compras</h1>
+                    <h1 class="modal-title fs-3" id="staticBackdropLabel">Agregar productos</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-body">
                     <form action="{{route('regcompra.detalle')}}" method="post">
                         @csrf
                         <div class="col-sm-8">
@@ -232,7 +232,7 @@
                         <div class="col-sm-8">
                             <label for="cantidad">Ingrese la cantidad de productos</label>
                             <input class="form-control @error('cantidad') is-invalid @enderror" id="cantidad"
-                            name="cantidad" type="number" value="{{old('cantidad')}}" maxlength="3" />
+                            name="cantidad" type="number" value="{{old('cantidad')}}" maxlength="3" required/>
                             @error('cantidad')
                                 <small class="invalid-feedback" >
                                     <strong>{{ $message }}</strong>
@@ -242,7 +242,7 @@
                         <div class="col-sm-8">
                             <label for="precio">Ingrese el precio del producto</label>
                             <input class="form-control @error('precio') is-invalid @enderror" id="precio"
-                            name="precio" type="number" value="{{old('precio')}}" maxlength="6"/>
+                            name="precio" type="number" value="{{old('precio')}}" maxlength="6" required/>
                             @error('precio')
                                 <small class="invalid-feedback" >
                                     <strong>{{ $message }}</strong>
@@ -259,8 +259,11 @@
                                 </small>
                             @enderror
                         </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <input type="submit" class="btn btn-primary" value="Agregar">
+                        <br>
+                        <div style="text-align: center">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </div>
                     </form>
                 </div>
             </div>
