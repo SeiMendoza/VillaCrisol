@@ -10,11 +10,14 @@ use Illuminate\Http\Request;
 class RegCompraProductController extends Controller
 {
     public function create(){
-        $productos = Producto::all();
-        return view ('RegistroCompraProductos.RegistroCompraProductos')
-        ->with('productos', $productos);
+        //$detalles = DetalleCompra :: all();
+        //$producto = new Producto();
+        $productos = Producto ::all();
+        $detalles = DetalleCompra::all();
+        //$detalles = DetalleCompra::with('producto')->get();
+        return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles'));
+         
     }
-
     public function detalle(Request $request){
         /*Validación de los campos*/
 
@@ -49,7 +52,7 @@ class RegCompraProductController extends Controller
         }
     }
 
-     //Funcion para guardar el nuevo menu agregado mediante el formulario//
+     //Funcion para guardar//
      public function store(Request $request){
 
         /*Validación de campos*/
@@ -89,8 +92,17 @@ class RegCompraProductController extends Controller
         }
    }
    public function destroy($id) {
-    RcompraProducto::destroy($id);
+    //$rcompra = RcompraProducto::find($id)->delete();
+   // Producto::destroy($id);
+//DetalleCompra::destroy($id);
         //redirigir
+        $result = Producto::find($id);
+        $resultprod = DetalleCompra::find($result->producto_id);
+        $resultprod->delete();
+        $result->delete();
+        //$producto = DetalleCompra::where('producto_id',$request->producto_id)->delete();
+        //$producto = Producto::find($request->id);
+        //$producto->delete();
         return redirect('//')->with('mensaje','Compra borrada completamente');
     }
 

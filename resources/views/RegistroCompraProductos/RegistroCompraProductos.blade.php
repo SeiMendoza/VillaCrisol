@@ -1,8 +1,7 @@
-@extends('plantillas.index')
+@extends('plantillas.register1')
 @section('title', 'Registro de compras')
 @section('content')
-
-    <div class="card shadow mb-4 " >
+    <div class="card shadow mb-4">
         <div class="card-header py-2" style="background: #0d6efd">
             <div style="float: left">
                 <h2 class="m-0 font-bold" style="color: white">Ristrar compras</h2>
@@ -141,7 +140,7 @@
                     </form>
                     </div>
                 </div>
-
+         
                 <div class="col-lg-7">
                     <div class="table-responsive" id="tblaBody">
                         <table class="table table" id="dataTable">
@@ -150,21 +149,52 @@
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
-                                    <th colspan="3">Opciones</th>
+                                    <th style="text-align:center;" colspan="3">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <th scope="row"> </th>
-                                <td scope="row"> </td>
-                                <td scope="row"> </td>
-                                <td><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_rcompra">
-                                    <i class="fa fa-edit" style="color: white"></i></a></td>
-                                    <td><a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_rcompra">
-                                    <i class="fa fa-edit" style="color: white"></i></a>
-                                </td>
-                                <tr>
-                                        <td colspan="8">No hay registro de compras</td>
-                                </tr>
+                             
+                            @forelse($detalles as $detalle)
+    <tr>
+      <td scope="col">{{$detalle->producto->nombre}}</td>
+      <td scope="col">{{$detalle->cantidad}}</td> 
+      <td scope="col">{{$detalle->precio}}</td>
+      <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_cliente">
+        <i class="fa fa-edit" style="color: white"></i></a>
+            <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto">
+             <i class="fa fa-fw fa-trash" style="color: white"></i></a></td>
+       </td>
+     <!-- Modal -->
+     <div class="modal fade" id="modal_elimira_producto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Está seguro de eliminar el producto?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                <form style="text-align:center;" method="post" action="{{route('regcompra.borrar', ['id'=>$detalle->id])}}"> 
+                                                 @csrf
+                                                @method('delete')
+                                                <input type="submit" value="si" class="btn btn-danger">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    </tr>
+    @empty
+    <tr>
+                                <td colspan = "7" style="text-align: center">No hay compras</td>
+                            </tr>
+                       
+                        @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -172,7 +202,6 @@
             </div>
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop_detalle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
