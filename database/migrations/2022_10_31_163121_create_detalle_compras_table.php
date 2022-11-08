@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('producto_id')->references('id')->on('productos');
             $table->integer('cantidad');
             $table->decimal('precio',10,2);
+            $table->decimal('impuesto',10,2)->nullable();
             $table->timestamps();
         });
     }

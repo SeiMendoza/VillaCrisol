@@ -15,6 +15,7 @@ class RegCompraProductController extends Controller
         $compra = RcompraProducto::all();
      return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
 }
+ 
     public function detalle(Request $request){
         /*Validación de los campos*/
 
@@ -22,7 +23,7 @@ class RegCompraProductController extends Controller
             'producto'=>'required',
             'cantidad'=>'required|numeric',
             'precio'=>'required|numeric',
-            //'impuesto'=>'nullable|numeric',
+            'impuesto'=>'nullable|numeric',
         ],[
             'producto.required'=>'El producto es obligatorio',
 
@@ -32,7 +33,7 @@ class RegCompraProductController extends Controller
             'precio.required'=>'El producto es obligatorio',
             'precio.numeric'=>'Solo se aceptan números',
 
-            //'impuesto.numeric'=>'Solo se aceptan números',
+            'impuesto.numeric'=>'Solo se aceptan números',
         ]);
 
         /*Variable para reconocer los nuevos registros a la tabla*/
