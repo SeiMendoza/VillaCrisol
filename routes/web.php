@@ -140,9 +140,9 @@ Route::put('/menu/{id}/activar', [MenuController::class,'activo'])
 
 
 /*
-   |------------------------|
-   |   Rutas de Registros   |
-   |------------------------|
+   |------------------------------------|
+   |   Rutas de Registros de productos  |
+   |------------------------------------|
 */
 
 Route::get('/create/producto', [ProductoController::class,'createProducto'])
@@ -171,21 +171,27 @@ Route::post('/create/regcompra/detalle',[RegCompraProductController::class, 'det
 ->name('regcompra.detalle');
 
 /*
-   |----------------------------|
-   | Rutas Productos Restaurante|
-   |----------------------------|
+   |-----------------|
+   | Rutas Productos |
+   |-----------------|
 */
 
-//Menú de comidas y bebidas
-Route::get('/restaurante', [ProductoController::class,'indexRestaurante'])
-->name('restaurante.index');
+//Inventarios
+Route::get('/inventario', [ProductoController::class,'index'])
+->name('inventario.index');
 
-//Buscar clientes
-Route::get('/restaurante/busqueda', [ProductoController::class,'searchRestaurante'])
+//Buscar productos del inventario
+Route::get('inventario/restaurante/busqueda', [ProductoController::class,'searchRestaurante'])
 ->name('restaurante.search');
 
-//Detalle Comida y bebida
-
-Route::get('/restaurante/detalle/{id}', [ProductoController::class,'showRestaurante'])
+//Detalle de productos del inventario
+Route::get('inventario/restaurante/detalle/{id}', [ProductoController::class,'showRestaurante'])
 ->name('restaurante.show')->where('id','[0-9]+');
+
+Route::get('/inventario/{id}/editar', [ProductoController::class,'edit'])
+->name('inventario.edit')->where('id','[0-9]+');
+
+// ruta para actualizar la comida y bebida
+Route::put('/inventario/{id}/editar', [ProductoController::class,'update'])//envia los datos al servidor
+->name('inventario.update')->where('id','[0-9]+');
 

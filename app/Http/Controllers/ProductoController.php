@@ -49,25 +49,68 @@ class ProductoController extends Controller
          }
     }
 
+    // editar productos
+    public function edit($id){
+        $producto = Producto::findOrFail($id);
+        return view('productos/editarProducto', compact('producto'));
+    }
+
+    public function update(Request $request, $id){
+
+        /*Validación de campos*/
+        $request -> validate([
+            'nombre'=> 'required|regex:/^[a-zA-Z\s\pLñÑ.\-]+$/|min:3|max:50',
+            'categoria' => 'required|in:restaurante,piscina,siembras,animales',
+            'descripcion'=> 'required|regex:/^[a-zA-Z\0-9\pLñÑ.;:(),\s\-]+$/u|min:5|max:150'
+        ],
+        [
+            'nombre.required'=> 'El nombre es obligatorio',
+            'nombre.regex'=> 'El nombre tiene un caracter no valido',
+            'nombre.min'=> 'El nombre requiere una longitud mínima de 3',
+            'nombre.max'=> 'El nombre requiere una longitud máxima de 50',
+
+            'categoria.required' =>'La categoría es obligatoria',
+
+            'descripcion.required'=>'La descripción es obligatoria',
+            'descripcion.regex'=>'La descripción tiene un caracter no valido',
+            'descripcion.min'=>'La descripción requiere una longitud mínima de 5',
+            'descripcion.max'=>'La descripción requiere una longitud máxima de 150',
+        ]);
+
+         /*Variable para reconocer los nuevos registros a la tabla*/
+         $producto = Producto::findOrFail($id);
+         $producto->nombre=$request->input('nombre');
+         $producto->descripcion=$request->input('descripcion');
+         $producto->categoria=$request->input('categoria');
+
+         /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
+         $creado = $producto->save();
+         if($creado){
+             return redirect()->route('inventario.index')->with('mensaje', "El producto se actualizó correctamente");
+         }
+    }
+
+
+
     // ----------------------------------Restaurante----------------------------------------- //
 
     //Lista de productos
-    public function indexRestaurante(){
+    public function index(){
         $productos= Producto::where('categoria', '=', 'restaurante')->paginate(10);
-        return view ('productos/restaurante/inventarioRestaurante')->with('productos', $productos);
+        return view ('productos/inventarios')->with('productos', $productos);
     }
 
     //buscar clientes
     public function searchRestaurante(Request $request){
         $text =trim($request->get('busqueda'));
         $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10);
-        return view('productos/restaurante/inventarioRestaurante', compact('productos', 'text'));
+        return view('productos/inventarios', compact('productos', 'text'));
     }
 
     //función para ver productos
     public function showRestaurante($id){
         $producto = Producto::findOrfail($id);
-        return view ('productos/restaurante/detalleRestaurante')->with('producto', $producto);
+        return view ('productos/detalleRestaurante')->with('producto', $producto);
     }
 
 }

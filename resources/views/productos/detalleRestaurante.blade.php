@@ -71,7 +71,8 @@
         <br>
         <div class="card shadow col-md-12">
             <div class="card-body" style="text-align: right">
-                <a class="btn btn-primary" href="{{route('restaurante.index')}}">Volver</a>
+                <a class="btn btn-primary" href="{{route('inventario.index')}}">Volver</a>
+                <a class="btn btn-warning" href="{{route('inventario.edit', ['id'=>$producto->id])}}">Editar</a>
             </div>
         </div>
         <br>
