@@ -1,6 +1,12 @@
 @extends('plantillas.register1')
 @section('title', 'Registro de compras')
 @section('content')
+@if(session('mensaje'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong> {{session('mensaje')}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
     <div class="card shadow mb-4">
         <div class="card-header py-2" style="background: #0d6efd">
             <div style="float: left">

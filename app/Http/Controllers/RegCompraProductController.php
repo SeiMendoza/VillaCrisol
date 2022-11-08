@@ -10,14 +10,11 @@ use Illuminate\Http\Request;
 class RegCompraProductController extends Controller
 {
     public function create(){
-        //$detalles = DetalleCompra :: all();
-        //$producto = new Producto();
         $productos = Producto ::all();
         $detalles = DetalleCompra::all();
-        //$detalles = DetalleCompra::with('producto')->get();
-        return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles'));
-         
-    }
+        $compra = RcompraProducto::all();
+     return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
+}
     public function detalle(Request $request){
         /*Validación de los campos*/
 
@@ -71,6 +68,8 @@ class RegCompraProductController extends Controller
                 'proveedor.regex'=>'Solo se aceptan letras',
                 'descripción.required'=>'La descripción es obligatoria',
                 'descripción.regex'=>'La descripción tiene un caracter no permitido',
+                'categoria.required'=>'La categoria es obligatoria',
+                'categoria.regex'=>'La categoria tiene un caracter no permitido',
                 'fecha.required'=>'La fecha es obligatoria',
                 'fecha.date'=>'fecha incorrecta',
                 'total.required'=>'El total es obligatorio',
@@ -82,28 +81,21 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->numfactura=$request->input('numfactura');
             $nuevorcompraproducto->proveedor=$request->input('proveedor');
             $nuevorcompraproducto->descripción=$request->input('descripción');
+            $nuevorcompraproducto->categoria=$request->input('categoria');
             $nuevorcompraproducto->fecha=$request->input('fecha');
             $nuevorcompraproducto->total=$request->input('total');
             $nuevorcompraproducto->impuesto=$request->input('impuesto');
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
             $creado = $nuevorcompraproducto->save();
             if($creado){
-                return redirect()->route('')->with('mensaje', "Se registró correctamente la compra");
+                return redirect()->route('regcompra.create')->with('mensaje', "Se registró correctamente la compra");
         }
    }
    public function destroy($id) {
-    //$rcompra = RcompraProducto::find($id)->delete();
-   // Producto::destroy($id);
-//DetalleCompra::destroy($id);
-        //redirigir
-        $result = Producto::find($id);
-        $resultprod = DetalleCompra::find($result->producto_id);
-        $resultprod->delete();
-        $result->delete();
-        //$producto = DetalleCompra::where('producto_id',$request->producto_id)->delete();
-        //$producto = Producto::find($request->id);
-        //$producto->delete();
-        return redirect('//')->with('mensaje','Compra borrada completamente');
+    
+DetalleCompra::destroy($id);
+         
+        return redirect()->route('regcompra.create')->with('mensaje','Detalle de compra borrado completamente');
     }
 
 }
