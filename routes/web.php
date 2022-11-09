@@ -157,6 +157,11 @@ Route::post('/create/producto', [ProductoController::class, 'storeProducto'])
    |   Rutas de Registros  compras de productos  |
    |---------------------------------------------|
 */
+Route::get('/regcompra', [RegCompraProductController::class,'index'])
+->name('regcompra.index');
+
+Route::get('/regcompra/busqueda', [RegCompraProductController::class,'search'])
+->name('regcompra.search');
 
 Route::get('/create/regcompra', [RegCompraProductController::class,'create'])
 ->name('regcompra.create');

@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 
 class RegCompraProductController extends Controller
 {
+
+    public function index(){
+        $compras = RcompraProducto::paginate(10);
+        return view ('RegistroCompraProductos/CompraProductosIndex')->with('compras', $compras);
+    }
+    public function search(Request $request){
+        $text =trim($request->get('busqueda'));
+        $compras = RcompraProducto::where('numfactura', 'like', '%'.$text.'%')
+        ->orWhere('categoria', 'like', '%'.$text.'%')
+        ->orWhere('fecha', 'like', '%'.$text.'%')->paginate(10);
+        return view('RegistroCompraProductos/CompraProductosIndex', compact('compras', 'text'));
+    }
     public function create(){
         $productos = Producto ::all();
         $detalles = DetalleCompra::all();
