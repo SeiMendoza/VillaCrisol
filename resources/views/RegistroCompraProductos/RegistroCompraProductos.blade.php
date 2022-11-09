@@ -159,13 +159,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                             @forelse($detalles as $detalle)
     <tr>
       <td scope="col">{{$detalle->producto->nombre}}</td>
       <td scope="col">{{$detalle->cantidad}}</td>
       <td scope="col">{{$detalle->precio}}</td>
-      <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_cliente">
+      <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_producto{{$detalle->id}}">
         <i class="fa fa-edit" style="color: white"></i></a>
             <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto">
              <i class="fa fa-fw fa-trash" style="color: white"></i></a></td>
@@ -194,7 +193,78 @@
                                 </div>
                             </div>
                         </div>
-    </tr>
+    <!-- Modal -->
+    <div class="modal fade" id="modal_editar_producto{{$detalle->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3" id="staticBackdropLabel">Editar productos</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('regcompra.detalleeditar',["id"=>$detalle->id])}}" method="post">
+                        @method("PUT")
+                        @csrf
+                        <div class="col-sm-8">
+                            <input type="text" name="compra_id" id="compra_id" value="" hidden>
+                            <label for="producto">Seleccione el producto</label>
+                            <select  class="form-control @error('producto') is-invalid @enderror" name="producto">
+                                <option value="{{$detalle->producto_id}}">{{$detalle->producto->nombre}}</option>
+                                @foreach ($productos as $producto)
+                                    <option value="{{ $producto->id }}" @if(old('producto') == "{{ $producto->id }}") {{ 'selected' }} @endif>
+                                        {{ $producto->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @error('producto')
+                                <small class="invalid-feedback" >
+                                    <strong>{{ $message }}</strong>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="col-sm-8">
+                            <label for="cantidad">Ingrese la cantidad de productos</label>
+                            <input class="form-control @error('cantidad') is-invalid @enderror" id="cantidad"
+                            name="cantidad" type="number" value="{{$detalle->cantidad}}" maxlength="3" required/>
+                            @error('cantidad')
+                                <small class="invalid-feedback" >
+                                    <strong>{{ $message }}</strong>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="col-sm-8">
+                            <label for="precio">Ingrese el precio del producto</label>
+                            <input class="form-control @error('precio') is-invalid @enderror" id="precio"
+                            name="precio" type="number" value="{{$detalle->precio}}" maxlength="6" required/>
+                            @error('precio')
+                                <small class="invalid-feedback" >
+                                    <strong>{{ $message }}</strong>
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="col-sm-8">
+                            <label for="imp">Ingrese el impuesto del producto</label>
+                            <input class="form-control @error('imp') is-invalid @enderror" id="imp"
+                            name="imp" type="number" value="{{$detalle->impuesto}}" maxlength="6"/>
+                            @error('imp')
+                                <small class="invalid-feedback" >
+                                    <strong>{{ $message }}</strong>
+                                </small>
+                            @enderror
+                        </div>
+                        <br>
+                        <div style="text-align: center">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                        
+    
+                    </tr>
     @empty
     <tr>
                                 <td colspan = "7" style="text-align: center">No hay compras</td>

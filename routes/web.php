@@ -175,6 +175,10 @@ Route::delete('/regcompra/{id}/borrar',[RegCompraProductController::class,'destr
 Route::post('/create/regcompra/detalle',[RegCompraProductController::class, 'detalle'])
 ->name('regcompra.detalle');
 
+Route::put('/create/regcompra/detalle/{id}',[RegCompraProductController::class, 'detalleeditar'])
+->name('regcompra.detalleeditar')->where('id','[0-9]+');
+
+
 /*
    |-----------------|
    | Rutas Productos |

@@ -62,6 +62,44 @@ class RegCompraProductController extends Controller
         }
     }
 
+    //funcion para editar detalles
+    public function detalleeditar(Request $request,$id){
+        /*Validación de los campos*/
+
+        $request ->validate([
+            'producto'=>'required',
+            'cantidad'=>'required|numeric|min:1',
+            'precio'=>'required|numeric|min:1',
+            'impuesto'=>'nullable|numeric|min:1',
+        ],[
+            'producto.required'=>'El producto es obligatorio',
+
+            'cantidad.required'=>'La cantidad es obligatoria',
+            'cantidad.numeric'=>'Solo se aceptan números',
+            'cantidad.min'=>'Solo se aceptan números positivos',
+
+            'precio.required'=>'El producto es obligatorio',
+            'precio.numeric'=>'Solo se aceptan números',
+            'precio.min'=>'Solo se aceptan números positivos',
+
+            'impuesto.numeric'=>'Solo se aceptan números',
+            'impuesto.min'=>'Solo se aceptan números positivos',
+        ]);
+
+        /*Variable para reconocer los nuevos registros a la tabla*/
+        $detalles = DetalleCompra::findOrFail($id);
+        $detalles->producto_id=$request->input('producto');
+        $detalles->cantidad=$request->input('cantidad');
+        $detalles->precio=$request->input('precio');
+        $detalles->impuesto=$request->input('imp');
+
+        $creado = $detalles->save();
+
+        if($creado){
+        return redirect()->route('regcompra.create');
+        }
+    }
+
      //Funcion para guardar//
      public function store(Request $request){
 
