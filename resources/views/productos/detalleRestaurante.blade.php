@@ -58,10 +58,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($detalles as $d)
                                 <tr>
-                                    <td>2021-11-1</td>
-                                    <td style="text-align: right">L 1500000.00</td>
+                                  <th>{{$d->id}}</th>
+                                  <th>{{$d->precio}} </th>
                                 </tr>
+                                @empty
+                                 <tr>
+                                   <td col-span="4">No hay Grados</td>
+                                 </tr>
+                              @endforelse
                             </tbody>
                         </table>
                     </div>

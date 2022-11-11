@@ -27,7 +27,7 @@ class RegCompraProductController extends Controller
         $compra = RcompraProducto::all();
      return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
 }
- 
+
     public function detalle(Request $request){
         /*Validación de los campos*/
 
@@ -144,9 +144,9 @@ class RegCompraProductController extends Controller
         }
    }
    public function destroy($id) {
-    
+
 DetalleCompra::destroy($id);
-         
+
         return redirect()->route('regcompra.create')->with('mensaje','Detalle de compra borrado completamente');
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetalleCompra;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -110,7 +111,9 @@ class ProductoController extends Controller
     //función para ver productos
     public function showRestaurante($id){
         $producto = Producto::findOrfail($id);
-        return view ('productos/detalleRestaurante')->with('producto', $producto);
+        $detalles = DetalleCompra::all();
+        return view ('productos/detalleRestaurante')->with('producto', $producto)
+        ->with('detalles', $detalles);
     }
 
 }
