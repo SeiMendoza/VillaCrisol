@@ -105,7 +105,7 @@ class RegCompraProductController extends Controller
 
         /*Validación de campos*/
         $request -> validate([
-            'numfactura'=>'required|numeric',
+            'numfactura'=>'nullable|numeric|min:11',
             'impuesto'=>'nullable|numeric',
             'proveedor'=>'nullable|regex:/^[\pLñÑ.\s\-]+$/u',
             'descripción'=>'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u',
@@ -113,18 +113,19 @@ class RegCompraProductController extends Controller
             'fecha'=>'required|date',
             'total'=>'required|numeric'
             ],[
-                'numfactura.required'=>'El codigo de factura es obligatorio',
-                'numfactura.numeric'=>'Solo se aceptan numeros',
-                'impuesto.numeric'=>'Solo se aceptan numeros',
+                 
+                'numfactura.numeric'=>'Solo se aceptan números',
+                'numfactura.min'=>'El número de factura deben ser 11 digitos',
+                'impuesto.numeric'=>'Solo se aceptan números',
                 'proveedor.regex'=>'Solo se aceptan letras',
                 'descripción.required'=>'La descripción es obligatoria',
                 'descripción.regex'=>'La descripción tiene un caracter no permitido',
-                'categoria.required'=>'La categoria es obligatoria',
-                'categoria.regex'=>'La categoria tiene un caracter no permitido',
+                'categoria.required'=>'La categoría es obligatoria',
+                'categoria.regex'=>'La categoría tiene un caracter no permitido',
                 'fecha.required'=>'La fecha es obligatoria',
                 'fecha.date'=>'fecha incorrecta',
                 'total.required'=>'El total es obligatorio',
-                'total.numeric'=>'Solo se aceptan numeros'
+                'total.numeric'=>'Solo se aceptan números'
             ]);
 
             /*Variable para reconocer los nuevos registros a la tabla*/
@@ -139,7 +140,7 @@ class RegCompraProductController extends Controller
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
             $creado = $nuevorcompraproducto->save();
             if($creado){
-                return redirect()->route('regcompra.create')->with('mensaje', "Se registró correctamente la compra");
+                return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
         }
    }
    public function destroy($id) {

@@ -164,7 +164,7 @@
                                                 <div class="card text-white mb-4" style="background-color: rgba(58, 215, 131, 0.51)">
                                                     <div class="card-body">COMPRAS</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                                        <a class="small text-white stretched-link" href="{{route('regcompra.create')}}">MOSTRAR</a>
+                                                        <a class="small text-white stretched-link" href="{{route('regcompra.index')}}">MOSTRAR</a>
                                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                                     </div>
                                                 </div>

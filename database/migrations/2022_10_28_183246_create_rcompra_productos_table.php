@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('numfactura')->unique();
             $table->string('proveedor')->nullable();
-            $table->integer('impuesto')->nullable();
+            $table->string('impuesto')->nullable();
             $table->string('descripción');
             $table->string('categoria');
             $table->date('fecha');
-            $table->integer('total');
+            $table->string('total');
             $table->timestamps();
         });
     }

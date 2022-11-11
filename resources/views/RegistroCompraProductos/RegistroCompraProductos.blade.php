@@ -1,16 +1,11 @@
 @extends('plantillas.register1')
 @section('title', 'Registro de compras')
 @section('content')
-@if(session('mensaje'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong> {{session('mensaje')}}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-@endif
+ 
     <div class="card shadow mb-4">
         <div class="card-header py-2" style="background: #0d6efd">
             <div style="float: left">
-                <h2 class="m-0 font-bold" style="color: white">Ristrar compras</h2>
+                <h2 class="m-0 font-bold" style="color: white">Registrar compras</h2>
             </div>
 
         </div>
@@ -26,7 +21,7 @@
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="numfactura">Número de factura</label>
                                 <input class="form-control @error('numfactura') is-invalid @enderror" id="numfactura"
-                                name="numfactura" type="num" maxlength="5" placeholder="" value="{{ old('numfactura') }}" />
+                                name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}" />
                                 @error('numfactura')
                                     <small class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -59,10 +54,13 @@
                                 @enderror
                             </div>
                             <div class="col-sm-6">
-                                <label for="total">Ingrese el total de la compra</label>
-                                <input class="form-control @error('total') is-invalid @enderror" id="total"
-                                name="total" type="num" value="{{old('total')}}" maxlength="6"/>
-                                @error('total')
+                            <label for="impuesto">Seleccione el impuesto</label>
+                                <select  class="form-control @error('impuesto') is-invalid @enderror" name="impuesto">
+                                <option value="">--seleccione un impuesto--</option>
+                                <option value="0.15" @if(old('impuesto') == "0.15") {{ 'selected' }} @endif>0.15%</option>
+                                <option value="0.10" @if(old('impuesto') == "0.18") {{ 'selected' }} @endif>0.18%</option>
+                                </select>
+                                @error('impuesto')
                                     <small class="invalid-feedback" >
                                         <strong>{{ $message }}</strong>
                                     </small>
@@ -71,26 +69,16 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <label for="total">Ingrese el impuesto de la compra</label>
-                                <input class="form-control @error('impuesto') is-invalid @enderror" id="impuesto"
-                                name="impuesto" type="num" value="{{old('impuesto')}}" maxlength="5"/>
-                                @error('impuesto')
-                                    <small class="invalid-feedback">
-                                        <strong>{{ $message }}</strong>
-                                    </small>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="categoria">Seleccione una categoria </label>
-                                <select  class="form-control @error('categoria') is-invalid @enderror" name="categoria">
-                                    <option value="">--seleccione una categoria--</option>
+                            <label for="categoria">Seleccione una categoría </label>
+                            <select  class="form-control @error('categoria') is-invalid @enderror" name="categoria">
+                                    <option value="">--seleccione una categoría--</option>
                                     <option value="restaurante" @if(old('categoria') == "restaurante") {{ 'selected' }} @endif>Restaurante</option>
                                     <option value="piscina" @if(old('categoria') == "piscina") {{ 'selected' }} @endif>Piscina</option>
                                     <option value="siembra" @if(old('categoria') == "siembra") {{ 'selected' }} @endif>Siembra</option>
                                     <option value="animales" @if(old('categoria') == "animales") {{ 'selected' }} @endif>Animales</option>
                                 </select>
-                                @error('categoria')
-                                    <small class="invalid-feedback" >
+                                @error('categoria') 
+                                    <small class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                 @enderror
@@ -155,15 +143,22 @@
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
+                                    <th>Total</th>
                                     <th style="text-align:center;" colspan="3">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            @php
+                                $sum = 0;
+                                $subt = 0;
+                                $total = 0;
+                            @endphp
                             @forelse($detalles as $detalle)
     <tr>
       <td scope="col">{{$detalle->producto->nombre}}</td>
       <td scope="col">{{$detalle->cantidad}}</td>
       <td scope="col">{{$detalle->precio}}</td>
+      <td scope="col">{{$detalle->precio * $detalle->cantidad}}</td>
       <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_producto{{$detalle->id}}">
         <i class="fa fa-edit" style="color: white"></i></a>
             <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto">
@@ -261,17 +256,28 @@
             </div>
         </div>
     </div>
-
-                        
-    
                     </tr>
+                    @php
+        $sum += $detalle->precio*$detalle->cantidad;
+        $subt = $sum * 0.15;
+        $total = $sum + $subt; 
+        @endphp
     @empty
     <tr>
-                                <td colspan = "7" style="text-align: center">No hay compras</td>
+                                <td colspan = "7" style="text-align: center">No hay detalles</td>
                             </tr>
 
                         @endforelse
                             </tbody>
+                            <tfoot>
+                                <td scope="row"></td>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td scope="row"></td>
+                                <th scope="row">Total factura: {{ $total }}</th>
+                                <td></td>
+                                 
+                            </tfoot>
                         </table>
                     </div>
                 </div>
