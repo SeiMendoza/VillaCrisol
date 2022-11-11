@@ -150,4 +150,10 @@ DetalleCompra::destroy($id);
         return redirect()->route('regcompra.create')->with('mensaje','Detalle de compra borrado completamente');
     }
 
+    public function detail($id){
+        $detalles = RcompraProducto::findOrFail($id);
+
+        return view ('RegistroCompraProductos/DetalleCompraProductos')->with('detalles', $detalles);
+    }
+
 }

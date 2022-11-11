@@ -1,6 +1,6 @@
 @extends('plantillas.index')
 
-@section('title', 'Empleados')
+@section('title', 'Compras')
 
 @section('content')
 
@@ -62,7 +62,7 @@
     </td>
       <td scope="col">{{$compra->categoria}}</td>
 
-      <td style=" text-align: center"><a class="btn btn-info" href="{{route('regcompra.detalle' , ['id'=>$compra->id])}}">Detalles</a></td>
+      <td style=" text-align: center"><a class="btn btn-info" href="{{route('regcompra.detail' , ['id'=>$compra->id])}}">Detalles</a></td>
 
     </tr>
     @empty

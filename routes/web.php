@@ -178,6 +178,9 @@ Route::post('/create/regcompra/detalle',[RegCompraProductController::class, 'det
 Route::put('/create/regcompra/detalle/{id}',[RegCompraProductController::class, 'detalleeditar'])
 ->name('regcompra.detalleeditar')->where('id','[0-9]+');
 
+Route::get('/regcompra/detalle/{id}',[RegCompraProductController::class, 'detail'])
+->name('regcompra.detail')->where('id','[0-9]+');
+
 
 /*
    |-----------------|

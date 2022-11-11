@@ -11,6 +11,6 @@ class RcompraProducto extends Model
 
     public function detalle_compra()
     {
-        return $this->hasMany(DetalleCompra::class);
+        return $this->hasMany(DetalleCompra::class,"compra_id");
     }
 }
