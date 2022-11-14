@@ -262,7 +262,9 @@
     </div>
                     </tr>
                     @php
-
+                    $sum += $detalle->precio*$detalle->cantidad;
+        $subt = $sum * 0.15;
+        $total = $sum + $subt;
         @endphp
     @empty
     <tr>
@@ -358,13 +360,6 @@
         </div>
     </div>
     <?php
-    if(isset($_POST['impuesto'])){
-        $impuesto = $_POST['impuesto'];
-         if($_POST['impuesto']== '0.15'){
-        $sum += $detalle->precio*$detalle->cantidad;
-        $subt = $sum * 0.15;
-        $total = $sum + $subt;
-    }
-}
+    
     ?>
 @endsection

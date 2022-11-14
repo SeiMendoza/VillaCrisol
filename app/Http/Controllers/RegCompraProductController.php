@@ -158,22 +158,15 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->save();
 
 
-            foreach ($nuevorcompraproducto->detalle_compra as $key => $value) {
-                $prodcuto = DetalleCompra::findOrFail($value->producto_id);
-                $prodcuto->cantidad = $prodcuto->cantidad + $value->cantidad;
-                $prodcuto->save();
-            }
-
-            return redirect()->route('regcompra.index');
-        }
+        
 
 
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
-      //      $creado = $nuevorcompraproducto->save();
-        //    if($creado){
-          //      return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
-   //     }
-      //   }
+            $creado = $nuevorcompraproducto->save();
+            if($creado){
+                return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
+        }
+         }
         public function destroy($id) {
 
         DetalleCompra::destroy($id);
