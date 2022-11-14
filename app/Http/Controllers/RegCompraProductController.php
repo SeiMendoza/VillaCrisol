@@ -65,7 +65,7 @@ class RegCompraProductController extends Controller
             'impuesto.numeric'=>'Solo se aceptan números',
         ]);
 
-        /*Variable para reconocer los nuevos registros a la tabla*/
+
         $detalles = new DetalleCompra();
         $detalles->compra_id = $request->input('compra');
         $detalles->producto_id = $request->input('producto');
@@ -158,7 +158,7 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->save();
 
 
-        
+
 
 
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/

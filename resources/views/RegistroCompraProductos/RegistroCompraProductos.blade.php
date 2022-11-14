@@ -156,6 +156,7 @@
                                 $total = 0;
                             @endphp
                             @forelse($compra->detalle_compra as $i => $detalle)
+
     <tr>
       <td scope="col">{{$detalle->producto->nombre}}</td>
       <td scope="col">{{$detalle->cantidad}}</td>
@@ -360,6 +361,6 @@
         </div>
     </div>
     <?php
-    
+
     ?>
 @endsection

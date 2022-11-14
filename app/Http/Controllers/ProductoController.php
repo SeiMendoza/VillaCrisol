@@ -100,22 +100,22 @@ class ProductoController extends Controller
     //Lista de productos
     public function index(){
         $productos= Producto::where('categoria', '=', 'restaurante')->paginate(10);
-        $detalles = DetalleCompra::all();
+        $detalles = DetalleCompra::paginate(10);
         return view ('productos/inventarios')->with('productos', $productos)
         ->with('detalles', $detalles);
     }
 
-    //buscar clientes
+    //buscar productos
     public function searchRestaurante(Request $request){
         $text =trim($request->get('busqueda'));
-        $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10);
-        return view('productos/inventarios', compact('productos', 'text'));
+        $detalles = DetalleCompra::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10);
+        return view('productos/inventarios', compact('detalles', 'text'));
     }
 
     //función para ver productos
     public function showRestaurante($id){
         $producto = Producto::findOrfail($id);
-        $producto->detalle_compras;
+        $producto->detalle_compra;
         $detalles = DetalleCompra::all();
         $detalle = DetalleCompra::findOrFail($id);
         $compra = Compra::findOrFail($id);
