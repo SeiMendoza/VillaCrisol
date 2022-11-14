@@ -1,7 +1,7 @@
 @extends('plantillas.register1')
 @section('title', 'Registro de compras')
 @section('content')
- 
+
     <div class="card shadow mb-4">
         <div class="card-header py-2" style="background: #0d6efd">
             <div style="float: left">
@@ -15,11 +15,11 @@
             <div class="row" id="tblaBody">
                 <div class="col-lg-5 d-lg-block">
                     <div class="p-3">
-                    <form method="post" action="{{route('regcompra.create')}}">
+                    <form method="post" action="{{route('regcompra.store')}}">
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
+                                <input  type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
                                 <label for="numfactura">Número de factura</label>
                                 <input class="form-control @error('numfactura') is-invalid @enderror" id="numfactura"
                                 name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}" />
@@ -78,7 +78,7 @@
                                     <option value="siembra" @if(old('categoria') == "siembra") {{ 'selected' }} @endif>Siembra</option>
                                     <option value="animales" @if(old('categoria') == "animales") {{ 'selected' }} @endif>Animales</option>
                                 </select>
-                                @error('categoria') 
+                                @error('categoria')
                                     <small class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </small>
@@ -144,6 +144,7 @@
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
+                                    <th>impuesto</th>
                                     <th>Total</th>
                                     <th style="text-align:center;" colspan="3">Opciones</th>
                                 </tr>
@@ -159,15 +160,16 @@
       <td scope="col">{{$detalle->producto->nombre}}</td>
       <td scope="col">{{$detalle->cantidad}}</td>
       <td scope="col">L {{$detalle->precio}}</td>
-      <td scope="col">L {{$detalle->precio * $detalle->cantidad}}</td>
+      <td scope="col">  {{$detalle->impuesto}}</td>
+      <td scope="col">L {{$detalle->precio * $detalle->cantidad + ($detalle->precio * $detalle->impuesto)}}</td>
       <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_producto{{$detalle->id}}">
         <i class="fa fa-edit" style="color: white"></i></a>
-            <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto">
+            <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto{{$detalle->id}}">
              <i class="fa fa-fw fa-trash" style="color: white"></i></a></td>
        </td>
-    
+
      <!-- Modal -->
-     <div class="modal fade" id="modal_elimira_producto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal fade" id="modal_elimira_producto{{$detalle->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -203,7 +205,7 @@
                         @method("PUT")
                         @csrf
                         <div class="col-sm-8">
-                            <input type="text" name="compra_id" id="compra_id" value="" hidden>
+                            <input type="text" name="compra" id="compra" value="{{$compra->id}}" hidden>
                             <label for="producto">Seleccione el producto</label>
                             <select  class="form-control @error('producto') is-invalid @enderror" name="producto">
                                 <option value="{{$detalle->producto_id}}">{{$detalle->producto->nombre}}</option>
@@ -260,7 +262,7 @@
     </div>
                     </tr>
                     @php
-        
+
         @endphp
     @empty
     <tr>
@@ -268,7 +270,7 @@
                             </tr>
 
                         @endforelse
-                        
+
                             </tbody>
                             <tfoot>
                                 <td scope="row"></td>
@@ -277,7 +279,7 @@
                                 <td scope="row"></td>
                                 <th scope="row">Total factura: L {{ $total }}</th>
                                 <td></td>
-                                 
+
                             </tfoot>
                         </table>
                     </div>
@@ -297,17 +299,17 @@
                     <form action="{{route('regcompra.detalle')}}" method="post">
                         @csrf
                         <div class="col-sm-8">
-                            <input type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
+                            <input type="text" class="form-control" name="compra" id="compra" value="{{$compra->id}}" hidden>
                             <label for="producto">Seleccione el producto</label>
-                            <select  class="form-control @error('producto') is-invalid @enderror" name="producto">
+                            <select  class="form-control @error('producto') is-invalid @enderror" name="producto" required>
                                 <option value="">--seleccione un producto--</option>
                                 @foreach ($productos as $producto)
                                     <option value="{{ $producto->id }}" @if(old('producto') == "{{ $producto->id }}") {{ 'selected' }} @endif>
-                                        {{ $producto->nombre }}</option>
+                                        {{ $producto->nombre }} ({{$producto->categoria}})</option>
                                 @endforeach
                             </select>
                             @error('producto')
-                                <small class="invalid-feedback" >
+                                <small class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </small>
                             @enderror
@@ -315,9 +317,9 @@
                         <div class="col-sm-8">
                             <label for="cantidad">Ingrese la cantidad de productos</label>
                             <input class="form-control @error('cantidad') is-invalid @enderror" id="cantidad"
-                            name="cantidad" type="number" value="{{old('cantidad')}}" maxlength="3" required/>
+                            name="cantidad" type="numb" value="{{old('cantidad')}}" maxlength="3" required/>
                             @error('cantidad')
-                                <small class="invalid-feedback" >
+                                <small class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </small>
                             @enderror
@@ -325,19 +327,22 @@
                         <div class="col-sm-8">
                             <label for="precio">Ingrese el precio del producto</label>
                             <input class="form-control @error('precio') is-invalid @enderror" id="precio"
-                            name="precio" type="number" value="{{old('precio')}}" maxlength="6" required/>
+                            name="precio" type="numb" value="{{old('precio')}}" maxlength="6" required/>
                             @error('precio')
-                                <small class="invalid-feedback" >
+                                <small class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </small>
                             @enderror
                         </div>
                         <div class="col-sm-8">
-                            <label for="imp">Ingrese el impuesto del producto</label>
-                            <input class="form-control @error('imp') is-invalid @enderror" id="imp"
-                            name="imp" type="number" value="{{old('imp')}}" maxlength="6"/>
-                            @error('imp')
-                                <small class="invalid-feedback" >
+                        </select> <label for="impuesto">Ingrese el impuesto del producto</label>
+                            <select  class="form-control @error('impuesto') is-invalid @enderror" name="impuesto">
+                                <option value="">--seleccione un impuesto--</option>
+                                <option value="0.15" @if(old('impuesto') == "0.15") {{ 'selected' }} @endif>15%</option>
+                                <option value="0.18" @if(old('impuesto') == "0.18") {{ 'selected' }} @endif>18%</option>
+                            </select>
+                            @error('impuesto')
+                                <small class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </small>
                             @enderror
@@ -358,7 +363,7 @@
          if($_POST['impuesto']== '0.15'){
         $sum += $detalle->precio*$detalle->cantidad;
         $subt = $sum * 0.15;
-        $total = $sum + $subt; 
+        $total = $sum + $subt;
     }
 }
     ?>

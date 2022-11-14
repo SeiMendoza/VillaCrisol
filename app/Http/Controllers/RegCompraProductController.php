@@ -23,7 +23,6 @@ class RegCompraProductController extends Controller
     }
     public function create(){
         $productos = Producto ::all();
-        $detalles = DetalleCompra::all();
         $compra = Compra::all();
         if($compra->count() == 0){
 
@@ -38,23 +37,22 @@ class RegCompraProductController extends Controller
             $compra_nueva->save();
             return view('RegistroCompraProductos.RegistroCompraProductos')->with('compra', $compra_nueva)
                                                 ->with('productos', $productos)
-                                                ->with('detalles', $detalles);
+                                                ;
         }
         return view('RegistroCompraProductos.RegistroCompraProductos')->with('compra', $compra[0])
                                                 ->with('productos', $productos)
-                                                ->with('detalles', $detalles);
+                                                ;
     // return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
 }
      //return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
 //}
     public function detalle(Request $request){
         /*Validación de los campos*/
-
         $request ->validate([
             'producto'=>'required',
             'cantidad'=>'required|numeric',
             'precio'=>'required|numeric',
-            'impuesto'=>'nullable|numeric',
+            'impuesto'=>'nullable|numeric|in:0.15,0.18',
         ],[
             'producto.required'=>'El producto es obligatorio',
 
@@ -69,16 +67,16 @@ class RegCompraProductController extends Controller
 
         /*Variable para reconocer los nuevos registros a la tabla*/
         $detalles = new DetalleCompra();
-        $detalles->compra_id = '1';
+        $detalles->compra_id = $request->input('compra');
         $detalles->producto_id = $request->input('producto');
         $detalles->cantidad=$request->input('cantidad');
+        $detalles->impuesto=$request->input('impuesto');
         $detalles->precio=$request->input('precio');
-         
-        $creado = $detalles->save();
 
-        if($creado){
+        $detalles->save();
+
         return redirect()->route('regcompra.create');
-        }
+
     }
 
     //funcion para editar detalles
@@ -111,7 +109,7 @@ class RegCompraProductController extends Controller
         $detalles->cantidad=$request->input('cantidad');
         $detalles->precio=$request->input('precio');
         $detalles->impuesto=$request->input('imp');
-         
+
         $creado = $detalles->save();
 
         if($creado){
@@ -132,7 +130,7 @@ class RegCompraProductController extends Controller
             'fecha'=>'required|date',
             //'total'=>'required|numeric'
             ],[
-                 
+
                 'numfactura.numeric'=>'Solo se aceptan números',
                 'numfactura.min'=>'El número de factura deben ser 11 digitos',
                 'impuesto.numeric'=>'Solo se aceptan números',
@@ -149,7 +147,7 @@ class RegCompraProductController extends Controller
 
             /*Variable para reconocer los nuevos registros a la tabla*/
             //$nuevorcompraproducto = new RcompraProducto();
-            $nuevorcompraproducto = new Compra;
+            $nuevorcompraproducto = Compra::findOrFail($request->input('compra_id'));
             $nuevorcompraproducto->numfactura=$request->input('numfactura');
             $nuevorcompraproducto->proveedor=$request->input('proveedor');
             $nuevorcompraproducto->descripción=$request->input('descripción');
@@ -161,25 +159,25 @@ class RegCompraProductController extends Controller
 
 
             foreach ($nuevorcompraproducto->detalle_compra as $key => $value) {
-                $prodcuto = Producto::findOrFail($value->producto_id);
-                $prodcuto->existencia = $prodcuto->existencia + $value->cantidad;
+                $prodcuto = DetalleCompra::findOrFail($value->producto_id);
+                $prodcuto->cantidad = $prodcuto->cantidad + $value->cantidad;
                 $prodcuto->save();
             }
-    
+
             return redirect()->route('regcompra.index');
         }
-    
-             
+
+
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
       //      $creado = $nuevorcompraproducto->save();
         //    if($creado){
           //      return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
    //     }
-//   }
-   public function destroy($id) {
-    
-DetalleCompra::destroy($id);
-         
+      //   }
+        public function destroy($id) {
+
+        DetalleCompra::destroy($id);
+
         return redirect()->route('regcompra.create')->with('mensaje','Detalle de compra borrado completamente');
     }
 

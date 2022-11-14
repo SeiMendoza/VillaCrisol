@@ -36,11 +36,12 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Cantidad:</th>
-                                    <td>1</td>
+                                    <th>{{$producto->detalle_compra->cantidad}}</th>
                                 </tr>
                                 <tr>
                                     <th scope="row">Precio:</th>
-                                    <td >L. 1000.00</td>
+                                    <td >{{$producto->detalle_compra->precio}}</td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -60,12 +61,14 @@
                             <tbody>
                                 @forelse($detalles as $d)
                                 <tr>
-                                  <th>{{$d->id}}</th>
-                                  <th>{{$d->precio}} </th>
+                                    @if ($d->producto_id == $producto->id)
+                                        <th>{{$d->compra->fecha}}</th>
+                                        <th>{{$d->precio}} </th>
+                                    @endif
                                 </tr>
                                 @empty
                                  <tr>
-                                   <td col-span="4">No hay Grados</td>
+                                   <td col-span="4">No hay precios</td>
                                  </tr>
                               @endforelse
                             </tbody>

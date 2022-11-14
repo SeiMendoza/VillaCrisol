@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\RcompraProducto;
+use App\Models\DetalleCompra;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RcompraProductoSeeder extends Seeder
+class DetalleCompraSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class RcompraProductoSeeder extends Seeder
      */
     public function run()
     {
-        //RcompraProducto::factory(100)->create();
+        DetalleCompra::factory(100)->create();
     }
 }

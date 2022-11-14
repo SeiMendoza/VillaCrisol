@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
                     ClienteSeeder::class,
                     ComidaBebidaSeeder::class,
                     ProductoSeeder::class,
-                CompraSeeder::class,]);
+                CompraSeeder::class,
+                    DetalleCompraSeeder::class]);
 
     }
 }

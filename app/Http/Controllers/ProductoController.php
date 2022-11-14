@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compra;
 use App\Models\DetalleCompra;
 use App\Models\Producto;
+use App\Models\RcompraProducto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -98,7 +100,9 @@ class ProductoController extends Controller
     //Lista de productos
     public function index(){
         $productos= Producto::where('categoria', '=', 'restaurante')->paginate(10);
-        return view ('productos/inventarios')->with('productos', $productos);
+        $detalles = DetalleCompra::all();
+        return view ('productos/inventarios')->with('productos', $productos)
+        ->with('detalles', $detalles);
     }
 
     //buscar clientes
@@ -111,9 +115,14 @@ class ProductoController extends Controller
     //función para ver productos
     public function showRestaurante($id){
         $producto = Producto::findOrfail($id);
+        $producto->detalle_compras;
         $detalles = DetalleCompra::all();
+        $detalle = DetalleCompra::findOrFail($id);
+        $compra = Compra::findOrFail($id);
         return view ('productos/detalleRestaurante')->with('producto', $producto)
-        ->with('detalles', $detalles);
+        ->with('detalles', $detalles)
+        ->with('detalle', $detalle)
+        ->with('compra', $compra);
     }
 
 }

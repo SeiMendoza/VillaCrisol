@@ -59,15 +59,14 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @forelse ($productos as $item => $producto)
-                            @if ($producto->categoria == "restaurante")
-                                <tr>
-                                <td><strong>{{ ++$item }}</strong></td>
-                                <td scope="col">{{$producto->nombre}}</td>
-                                <td scope="col">1</td>
-                                <td scope="col" style="text-align: right">L 1000.00</td>
-                                <td><a class="btn btn-info" href="{{route('restaurante.show', ['id'=>$producto->id])}}">Detalles</a></td>
+                            @forelse($detalles as $item => $producto)
+                            @if ($producto->producto->categoria == "restaurante")
+                                    <tr>
+                                        <td><strong>{{ ++$item }}</strong></td>
+                                        <td>{{$producto->producto->nombre}}</td>
+                                        <td>{{$producto->cantidad}}</td>
+                                        <td style="text-align: right">L.{{ number_format($producto->precio,2)}}</td>
+                                        <td><a class="btn btn-info" href="{{route('restaurante.show', ['id'=>$producto->producto->id])}}">Detalles</a></td>
                                 </tr>
                             @endif
                             @empty

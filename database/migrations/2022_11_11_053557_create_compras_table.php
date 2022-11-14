@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->string('numfactura')->unique();
+            $table->string('numfactura');
             $table->string('proveedor')->nullable();
             $table->string('impuesto')->nullable();
             $table->string('descripción');
