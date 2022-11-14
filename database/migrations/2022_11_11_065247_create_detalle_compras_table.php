@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('detalle_compras', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('compra_id');
-            $table->foreign('compra_id')->references('id')->on('rcompra_productos')->onDelate('cascade');
+            $table->foreign('compra_id')->references('id')->on('compras');
             $table->unsignedBigInteger('producto_id');
-            $table->foreign('producto_id')->references('id')->on('productos')->onDelate('cascade');
+            $table->foreign('producto_id')->references('id')->on('productos');
             $table->integer('cantidad');
             $table->decimal('precio',10,2);
             $table->decimal('impuesto',10,2)->nullable();

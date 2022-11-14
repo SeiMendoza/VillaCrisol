@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\DetalleCompra;
 use App\Models\Producto;
-use App\Models\RcompraProducto;
+use App\Models\Compra;
 use Illuminate\Http\Request;
 
 class RegCompraProductController extends Controller
 {
 
     public function index(){
-        $compras = RcompraProducto::paginate(10);
+        $compras = Compra::paginate(10);
         return view ('RegistroCompraProductos/CompraProductosIndex')->with('compras', $compras);
     }
     public function search(Request $request){
         $text =trim($request->get('busqueda'));
-        $compras = RcompraProducto::where('numfactura', 'like', '%'.$text.'%')
+        $compras = Compra::where('numfactura', 'like', '%'.$text.'%')
         ->orWhere('categoria', 'like', '%'.$text.'%')
         ->orWhere('fecha', 'like', '%'.$text.'%')->paginate(10);
         return view('RegistroCompraProductos/CompraProductosIndex', compact('compras', 'text'));
@@ -24,10 +24,29 @@ class RegCompraProductController extends Controller
     public function create(){
         $productos = Producto ::all();
         $detalles = DetalleCompra::all();
-        $compra = RcompraProducto::all();
-     return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
-}
+        $compra = Compra::all();
+        if($compra->count() == 0){
 
+            $compra_nueva = new Compra();
+            $compra_nueva->numfactura = '';
+            $compra_nueva->fecha = '2022-11-12';
+            $compra_nueva->proveedor = '';
+            $compra_nueva->total = '';
+            $compra_nueva->impuesto = '';
+            $compra_nueva->categoria = '';
+            $compra_nueva->descripción = '';
+            $compra_nueva->save();
+            return view('RegistroCompraProductos.RegistroCompraProductos')->with('compra', $compra_nueva)
+                                                ->with('productos', $productos)
+                                                ->with('detalles', $detalles);
+        }
+        return view('RegistroCompraProductos.RegistroCompraProductos')->with('compra', $compra[0])
+                                                ->with('productos', $productos)
+                                                ->with('detalles', $detalles);
+    // return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
+}
+     //return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
+//}
     public function detalle(Request $request){
         /*Validación de los campos*/
 
@@ -50,11 +69,11 @@ class RegCompraProductController extends Controller
 
         /*Variable para reconocer los nuevos registros a la tabla*/
         $detalles = new DetalleCompra();
-        $detalles->compra_id= "1";
-        $detalles->producto_id=$request->input('producto');
+        $detalles->compra_id = '1';
+        $detalles->producto_id = $request->input('producto');
         $detalles->cantidad=$request->input('cantidad');
         $detalles->precio=$request->input('precio');
-
+         
         $creado = $detalles->save();
 
         if($creado){
@@ -92,7 +111,7 @@ class RegCompraProductController extends Controller
         $detalles->cantidad=$request->input('cantidad');
         $detalles->precio=$request->input('precio');
         $detalles->impuesto=$request->input('imp');
-
+         
         $creado = $detalles->save();
 
         if($creado){
@@ -111,7 +130,7 @@ class RegCompraProductController extends Controller
             'descripción'=>'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u',
             'categoria'=>'required|in:restaurante,piscina,siembra,animales',
             'fecha'=>'required|date',
-            'total'=>'required|numeric'
+            //'total'=>'required|numeric'
             ],[
                  
                 'numfactura.numeric'=>'Solo se aceptan números',
@@ -129,7 +148,8 @@ class RegCompraProductController extends Controller
             ]);
 
             /*Variable para reconocer los nuevos registros a la tabla*/
-            $nuevorcompraproducto = new RcompraProducto();
+            //$nuevorcompraproducto = new RcompraProducto();
+            $nuevorcompraproducto = new Compra;
             $nuevorcompraproducto->numfactura=$request->input('numfactura');
             $nuevorcompraproducto->proveedor=$request->input('proveedor');
             $nuevorcompraproducto->descripción=$request->input('descripción');
@@ -137,23 +157,30 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->fecha=$request->input('fecha');
             $nuevorcompraproducto->total=$request->input('total');
             $nuevorcompraproducto->impuesto=$request->input('impuesto');
-            /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
-            $creado = $nuevorcompraproducto->save();
-            if($creado){
-                return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
+            $nuevorcompraproducto->save();
+
+
+            foreach ($nuevorcompraproducto->detalle_compra as $key => $value) {
+                $prodcuto = Producto::findOrFail($value->producto_id);
+                $prodcuto->existencia = $prodcuto->existencia + $value->cantidad;
+                $prodcuto->save();
+            }
+    
+            return redirect()->route('regcompra.index');
         }
-   }
+    
+             
+            /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
+      //      $creado = $nuevorcompraproducto->save();
+        //    if($creado){
+          //      return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
+   //     }
+//   }
    public function destroy($id) {
-
+    
 DetalleCompra::destroy($id);
-
+         
         return redirect()->route('regcompra.create')->with('mensaje','Detalle de compra borrado completamente');
-    }
-
-    public function detail($id){
-        $detalles = RcompraProducto::findOrFail($id);
-
-        return view ('RegistroCompraProductos/DetalleCompraProductos')->with('detalles', $detalles);
     }
 
 }

@@ -19,6 +19,7 @@
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
                                 <label for="numfactura">Número de factura</label>
                                 <input class="form-control @error('numfactura') is-invalid @enderror" id="numfactura"
                                 name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}" />
@@ -124,7 +125,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                                <a href="{{route('index')}}" class="btn btn-primary">Si</a>
+                                                <a href="{{route('regcompra.index')}}" class="btn btn-primary">Si</a>
                                             </div>
                                         </div>
                                     </div>
@@ -153,17 +154,18 @@
                                 $subt = 0;
                                 $total = 0;
                             @endphp
-                            @forelse($detalles as $detalle)
+                            @forelse($compra->detalle_compra as $i => $detalle)
     <tr>
       <td scope="col">{{$detalle->producto->nombre}}</td>
       <td scope="col">{{$detalle->cantidad}}</td>
-      <td scope="col">{{$detalle->precio}}</td>
-      <td scope="col">{{$detalle->precio * $detalle->cantidad}}</td>
+      <td scope="col">L {{$detalle->precio}}</td>
+      <td scope="col">L {{$detalle->precio * $detalle->cantidad}}</td>
       <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_producto{{$detalle->id}}">
         <i class="fa fa-edit" style="color: white"></i></a>
             <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto">
              <i class="fa fa-fw fa-trash" style="color: white"></i></a></td>
        </td>
+    
      <!-- Modal -->
      <div class="modal fade" id="modal_elimira_producto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -258,9 +260,7 @@
     </div>
                     </tr>
                     @php
-        $sum += $detalle->precio*$detalle->cantidad;
-        $subt = $sum * 0.15;
-        $total = $sum + $subt; 
+        
         @endphp
     @empty
     <tr>
@@ -268,13 +268,14 @@
                             </tr>
 
                         @endforelse
+                        
                             </tbody>
                             <tfoot>
                                 <td scope="row"></td>
                                 <td scope="row"></td>
                                 <td></td>
                                 <td scope="row"></td>
-                                <th scope="row">Total factura: {{ $total }}</th>
+                                <th scope="row">Total factura: L {{ $total }}</th>
                                 <td></td>
                                  
                             </tfoot>
@@ -296,7 +297,7 @@
                     <form action="{{route('regcompra.detalle')}}" method="post">
                         @csrf
                         <div class="col-sm-8">
-                            <input type="text" name="compra_id" id="compra_id" value="" hidden>
+                            <input type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
                             <label for="producto">Seleccione el producto</label>
                             <select  class="form-control @error('producto') is-invalid @enderror" name="producto">
                                 <option value="">--seleccione un producto--</option>
@@ -351,4 +352,14 @@
             </div>
         </div>
     </div>
+    <?php
+    if(isset($_POST['impuesto'])){
+        $impuesto = $_POST['impuesto'];
+         if($_POST['impuesto']== '0.15'){
+        $sum += $detalle->precio*$detalle->cantidad;
+        $subt = $sum * 0.15;
+        $total = $sum + $subt; 
+    }
+}
+    ?>
 @endsection

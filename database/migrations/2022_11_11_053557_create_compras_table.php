@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rcompra_productos', function (Blueprint $table) {
+        Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->string('numfactura')->unique();
             $table->string('proveedor')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('descripción');
             $table->string('categoria');
             $table->date('fecha');
-            $table->string('total');
+            $table->string('total')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rcompra_productos');
+        Schema::dropIfExists('compras');
     }
 };

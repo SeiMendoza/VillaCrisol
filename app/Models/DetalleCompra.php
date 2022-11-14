@@ -11,11 +11,12 @@ class DetalleCompra extends Model
 
     public function compra()
     {
-        return $this->belongsTo(RcompraProducto::class);
+       // return $this->belongsTo(RcompraProducto::class);
+       return $this->belongsTo('App\Models\Compra');
     }
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo('App\Models\Producto');
     }
 }
