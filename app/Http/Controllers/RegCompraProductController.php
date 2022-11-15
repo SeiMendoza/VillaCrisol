@@ -87,7 +87,7 @@ class RegCompraProductController extends Controller
             'producto'=>'required',
             'cantidad'=>'required|numeric|min:1',
             'precio'=>'required|numeric|min:1',
-            'impuesto'=>'nullable|numeric|min:1',
+            'impuesto'=>'nullable|numeric',
         ],[
             'producto.required'=>'El producto es obligatorio',
 

@@ -23,7 +23,7 @@
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 310px"
-                        placeholder="Buscar por nombre, fecha y categoria" aria-label="Buscar por nombre, fecha y categoria"
+                        placeholder="Buscar por numero de factura y categoria" aria-label="Buscar por numero de factra y categoria"
                         aria-describedby="basic-addon2" maxlength="50" required
                             value="<?php if(isset($text)) echo $text;?>" />
                         <div class="input-group-append">
@@ -75,7 +75,7 @@
 
             </div>
             <div class="col-md-5" style="text-align: center; margin: 0 auto; margin-bottom: 10px; margin-top: 12px;">
-                {{ $compras->links('pagination::bootstrap-4') }}
+                {!! $compras->appends(["busqueda" => $text]) !!}
             </div>
         </div>
     </div>

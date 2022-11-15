@@ -243,13 +243,16 @@
                         </div>
                         <div class="col-sm-8">
                             <label for="imp">Ingrese el impuesto del producto</label>
-                            <input class="form-control @error('imp') is-invalid @enderror" id="imp"
-                            name="imp" type="number" value="{{$detalle->impuesto}}" maxlength="6"/>
-                            @error('imp')
-                                <small class="invalid-feedback" >
-                                    <strong>{{ $message }}</strong>
-                                </small>
-                            @enderror
+                            <select  class="form-control @error('imp') is-invalid @enderror" name="imp">
+                                <option value="0.0" @if(old('imp') == "0.0") {{ 'selected' }} @endif @if($detalle->impuesto == "0.0") {{ 'selected' }} @endif>Excento</option>
+                                <option value="0.15" @if(old('imp') == "0.15") {{ 'selected' }} @endif @if($detalle->impuesto == "0.15") {{ 'selected' }} @endif>0.15%</option>
+                                <option value="0.18" @if(old('imp') == "0.18") {{ 'selected' }} @endif @if($detalle->impuesto == "0.18") {{ 'selected' }} @endif>0.18%</option>
+                                </select>
+                                @error('imp')
+                                    <small class="invalid-feedback" >
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                @enderror
                         </div>
                         <br>
                         <div style="text-align: center">
