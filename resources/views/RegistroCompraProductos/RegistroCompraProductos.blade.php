@@ -22,7 +22,8 @@
                                 <input  type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
                                 <label for="numfactura">Número de factura</label>
                                 <input class="form-control @error('numfactura') is-invalid @enderror" id="numfactura"
-                                name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}" />
+                                name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}" 
+                                placeholder="Ingrese el codigo de factura"/>
                                 @error('numfactura')
                                     <small class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -47,7 +48,7 @@
                                 <label for="proveedor">Nombre del proveedor</label>
                                 <input class="form-control @error('proveedor') is-invalid @enderror" id="proveedor"
                                 name="proveedor" type="text" maxlength="45"
-                                placeholder="" value="{{ old('proveedor') }}" />
+                                placeholder="Ingrese el proveedor" value="{{ old('proveedor') }}" />
                                 @error('proveedor')
                                     <small class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
@@ -55,21 +56,6 @@
                                 @enderror
                             </div>
                             <div class="col-sm-6">
-                            <label for="impuesto">Seleccione el impuesto</label>
-                                <select  class="form-control @error('impuesto') is-invalid @enderror" name="impuesto">
-                                <option value="">--seleccione un impuesto--</option>
-                                <option value="0.15" @if(old('impuesto') == "0.15") {{ 'selected' }} @endif>0.15%</option>
-                                <option value="0.10" @if(old('impuesto') == "0.18") {{ 'selected' }} @endif>0.18%</option>
-                                </select>
-                                @error('impuesto')
-                                    <small class="invalid-feedback" >
-                                        <strong>{{ $message }}</strong>
-                                    </small>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="categoria">Seleccione una categoría </label>
                             <select  class="form-control @error('categoria') is-invalid @enderror" name="categoria">
                                     <option value="">--seleccione una categoría--</option>
@@ -78,24 +64,25 @@
                                     <option value="siembra" @if(old('categoria') == "siembra") {{ 'selected' }} @endif>Siembra</option>
                                     <option value="animales" @if(old('categoria') == "animales") {{ 'selected' }} @endif>Animales</option>
                                 </select>
-                                @error('categoria')
-                                    <small class="invalid-feedback">
+                                @error('categoria') 
+                                    <small class="invalid-feedback" >
                                         <strong>{{ $message }}</strong>
                                     </small>
                                 @enderror
                             </div>
-                        </div>
                         <div class="form-group row">
                             <div class="col-sm-12 mb-3 mb-sm-0">
                                 <label for="descripción">Descripción de la compra</label>
                                 <textarea class="form-control @error('descripción') is-invalid @enderror" id="descripción"
-                                name="descripción" type="text" style="height:145px" maxlength="150">{{ old('descripción') }}</textarea>
+                                name="descripción" type="text" style="height:145px" placeholder="Ingrese la descripción de la compra" 
+                                maxlength="150">{{ old('descripción') }}</textarea>
                                 @error('descripción')
                                     <small class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
                                     </small>
                                 @enderror
                             </div>
+                        </div>
                         </div>
                         <div class="form-group row" style="margin-top: 15px">
                             <div class="col-sm-5">
@@ -151,8 +138,8 @@
                             </thead>
                             <tbody>
                             @php
-                                $sum = 0;
                                 $subt = 0;
+                                $imp = 0;
                                 $total = 0;
                             @endphp
                             @forelse($compra->detalle_compra as $i => $detalle)
@@ -162,7 +149,7 @@
       <td scope="col">{{$detalle->cantidad}}</td>
       <td scope="col">L {{$detalle->precio}}</td>
       <td scope="col">  {{$detalle->impuesto}}</td>
-      <td scope="col">L {{$detalle->precio * $detalle->cantidad + ($detalle->precio * $detalle->impuesto)}}</td>
+      <td scope="col">L {{($detalle->precio * $detalle->cantidad)+$detalle->precio * $detalle->cantidad * $detalle->impuesto}}</td>
       <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_producto{{$detalle->id}}">
         <i class="fa fa-edit" style="color: white"></i></a>
             <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto{{$detalle->id}}">
@@ -266,9 +253,9 @@
     </div>
                     </tr>
                     @php
-                    $sum += $detalle->precio*$detalle->cantidad;
-        $subt = $sum * 0.15;
-        $total = $sum + $subt;
+                    $subt += ($detalle->precio*$detalle->cantidad);
+                    $imp += $detalle->precio*$detalle->cantidad*$detalle->impuesto;
+                    $total = $subt + $imp;
         @endphp
     @empty
     <tr>
@@ -278,17 +265,12 @@
                         @endforelse
 
                             </tbody>
-                            <tfoot>
-                                <td scope="row"></td>
-                                <td scope="row"></td>
-                                <td></td>
-                                <td scope="row"></td>
-                                <th scope="row">Total factura: L {{ $total }}</th>
-                                <td></td>
-
-                            </tfoot>
                         </table>
+                       <p style="text-align:right;"><strong> subtotal: L {{ $subt }}<br>
+                        Impuesto total: L {{ $imp }}<br>
+                        Total factura: L {{ $total }}</strong></p>
                     </div>
+                    
                 </div>
             </div>
         </div>

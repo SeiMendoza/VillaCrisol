@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->string('numfactura');
+            $table->string('numfactura')->nullable();
             $table->string('proveedor')->nullable();
-            $table->string('impuesto')->nullable();
             $table->string('descripción');
             $table->string('categoria');
             $table->date('fecha');
-            $table->string('total')->nullable();
             $table->timestamps();
         });
     }

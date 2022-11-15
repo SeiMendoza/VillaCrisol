@@ -23,25 +23,24 @@ class RegCompraProductController extends Controller
     }
     public function create(){
         $productos = Producto ::all();
-        $compra = Compra::all();
+        $detalles = Detallecompra::all();
+        $compra = Compra::where('proveedor','=','')->get();
         if($compra->count() == 0){
 
             $compra_nueva = new Compra();
             $compra_nueva->numfactura = '';
             $compra_nueva->fecha = '2022-11-12';
             $compra_nueva->proveedor = '';
-            $compra_nueva->total = '';
-            $compra_nueva->impuesto = '';
             $compra_nueva->categoria = '';
             $compra_nueva->descripción = '';
             $compra_nueva->save();
             return view('RegistroCompraProductos.RegistroCompraProductos')->with('compra', $compra_nueva)
                                                 ->with('productos', $productos)
-                                                ;
+                                                ->with('detalles', $detalles);
         }
         return view('RegistroCompraProductos.RegistroCompraProductos')->with('compra', $compra[0])
                                                 ->with('productos', $productos)
-                                                ;
+                                                ->with('detalles', $detalles);
     // return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
 }
      //return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
@@ -123,17 +122,14 @@ class RegCompraProductController extends Controller
         /*Validación de campos*/
         $request -> validate([
             'numfactura'=>'nullable|numeric|min:11',
-            'impuesto'=>'nullable|numeric',
             'proveedor'=>'nullable|regex:/^[\pLñÑ.\s\-]+$/u',
             'descripción'=>'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u',
             'categoria'=>'required|in:restaurante,piscina,siembra,animales',
             'fecha'=>'required|date',
-            //'total'=>'required|numeric'
             ],[
 
                 'numfactura.numeric'=>'Solo se aceptan números',
                 'numfactura.min'=>'El número de factura deben ser 11 digitos',
-                'impuesto.numeric'=>'Solo se aceptan números',
                 'proveedor.regex'=>'Solo se aceptan letras',
                 'descripción.required'=>'La descripción es obligatoria',
                 'descripción.regex'=>'La descripción tiene un caracter no permitido',
@@ -141,8 +137,6 @@ class RegCompraProductController extends Controller
                 'categoria.regex'=>'La categoría tiene un caracter no permitido',
                 'fecha.required'=>'La fecha es obligatoria',
                 'fecha.date'=>'fecha incorrecta',
-                'total.required'=>'El total es obligatorio',
-                'total.numeric'=>'Solo se aceptan números'
             ]);
 
             /*Variable para reconocer los nuevos registros a la tabla*/
@@ -153,13 +147,7 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->descripción=$request->input('descripción');
             $nuevorcompraproducto->categoria=$request->input('categoria');
             $nuevorcompraproducto->fecha=$request->input('fecha');
-            $nuevorcompraproducto->total=$request->input('total');
-            $nuevorcompraproducto->impuesto=$request->input('impuesto');
             $nuevorcompraproducto->save();
-
-
-
-
 
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
             $creado = $nuevorcompraproducto->save();
