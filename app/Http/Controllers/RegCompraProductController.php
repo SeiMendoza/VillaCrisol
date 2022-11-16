@@ -15,7 +15,7 @@ class RegCompraProductController extends Controller
         $compras = Compra::paginate(10);
         $comp = Compra::select(DB::raw('min(fecha) as inicio, max(fecha) as final'))->first();
         $inicio = $comp->inicio;
-        $fimal = $comp->final;
+        $final = $comp->final;
         return view ('RegistroCompraProductos/CompraProductosIndex')->with('compras', $compras)->with('inicio', $inicio)->with('final', $final);
     }
     public function search(Request $request){
@@ -62,7 +62,7 @@ class RegCompraProductController extends Controller
             'producto'=>'required',
             'cantidad'=>'required|numeric',
             'precio'=>'required|numeric',
-            'impuesto'=>'nullable|numeric|in:0.15,0.18',
+            'impuesto'=>'nullable|in:0.15,0.18,0.0',
         ],[
             'producto.required'=>'El producto es obligatorio',
 

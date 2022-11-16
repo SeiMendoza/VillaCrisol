@@ -127,11 +127,11 @@
                     <div class="table-responsive" id="tblaBody">
                         <table class="table table" id="dataTable">
                             <thead class="card-header py-3" style="background: #1a202c; color: white">
-                                <tr>
+                                <tr style="text-align:center;">
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
-                                    <th>impuesto</th>
+                                    <th>Impuesto</th>
                                     <th>Total</th>
                                     <th style="text-align:center;" colspan="3">Opciones</th>
                                 </tr>
@@ -143,13 +143,12 @@
                                 $total = 0;
                             @endphp
                             @forelse($compra->detalle_compra as $i => $detalle)
-
-    <tr>
-      <td scope="col">{{$detalle->producto->nombre}}</td>
+    <tr style="text-align:center;">
+      <td scope="col" style="width:15%;">{{$detalle->producto->nombre}}</td>
       <td scope="col">{{$detalle->cantidad}}</td>
-      <td scope="col">L {{$detalle->precio}}</td>
+      <td scope="col" style="width:16%;">L. {{$detalle->precio}}</td>
       <td scope="col">  {{$detalle->impuesto}}</td>
-      <td scope="col">L {{($detalle->precio * $detalle->cantidad)+$detalle->precio * $detalle->cantidad * $detalle->impuesto}}</td>
+      <td scope="col" style="width:19%;">L. {{($detalle->precio * $detalle->cantidad)+$detalle->precio * $detalle->cantidad * $detalle->impuesto}}</td>
       <td style="text-align: center"><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#modal_editar_producto{{$detalle->id}}">
         <i class="fa fa-edit" style="color: white"></i></a>
             <a class="btn btn-danger" href="#" data-bs-toggle="modal" data-bs-target="#modal_elimira_producto{{$detalle->id}}">
@@ -266,11 +265,10 @@
 
                             </tbody>
                         </table>
-                       <p style="text-align:right;"><strong> subtotal: L {{ $subt }}<br>
-                        Impuesto total: L {{ $imp }}<br>
-                        Total factura: L {{ $total }}</strong></p>
+                        <p style="text-align:right;"><strong> subtotal: L. {{ $subt }}<br>
+                        Impuesto total: L. {{ $imp }}<br>
+                        Total factura: L. {{ $total }}</strong></p>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -326,6 +324,7 @@
                         </select> <label for="impuesto">Ingrese el impuesto del producto</label>
                             <select  class="form-control @error('impuesto') is-invalid @enderror" name="impuesto">
                                 <option value="">--seleccione un impuesto--</option>
+                                <option value="0.0" @if(old('impuesto') == "0.0") {{ 'selected' }} @endif>Excento</option>
                                 <option value="0.15" @if(old('impuesto') == "0.15") {{ 'selected' }} @endif>15%</option>
                                 <option value="0.18" @if(old('impuesto') == "0.18") {{ 'selected' }} @endif>18%</option>
                             </select>
