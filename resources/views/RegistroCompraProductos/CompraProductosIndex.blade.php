@@ -39,13 +39,13 @@
                             <label style="width: 200px;float: left;text-align: center" for="">Fecha inicio</label>
                             <label style="width: 300px;float: left;text-align: center" for="">Fecha final</label>
                             <input class="form-control" type="date" name="inicio" id="inicio" style="width: 200px;float: left;"
-                            value="{{$comp->inicio}}" onchange="menor()" max="{{$comp->final}}"/>
+                            value="{{$inicio}}" onchange="menor()" max="{{$final}}"/>
                             <input class="form-control" type="date" name="final" id="final" style="width: 200px;float: left;"
-                            value="{{$comp->final}}" onchange="mayor()" min="{{$comp->inicio}}"/>
+                            value="{{$final}}" onchange="mayor()" min="{{$inicio}}"/>
 
                         <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 310px"
                         placeholder="Buscar por numero de factura y categoria" aria-label="Buscar por numero de factra y categoria"
-                        aria-describedby="basic-addon2" maxlength="50" required
+                        aria-describedby="basic-addon2" maxlength="50"
                             value="<?php if(isset($text)) echo $text;?>" />
 
                         <div class="input-group-append">
@@ -101,7 +101,7 @@
             </div>
             <div class="col-md-5" style="text-align: center; margin: 0 auto; margin-bottom: 10px; margin-top: 12px;">
                 @if(isset($text))
-                {!! $compras->appends(["busqueda" => $text,'inicio'=>$comp->inicio,'final'=>$comp->final]) !!}
+                {!! $compras->appends(["busqueda" => $text,'inicio'=>$inicio,'final'=>$final]) !!}
                 @else
                 {{$compras->links()}}
                 @endif

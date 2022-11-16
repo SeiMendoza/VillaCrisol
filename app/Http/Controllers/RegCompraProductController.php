@@ -14,7 +14,9 @@ class RegCompraProductController extends Controller
     public function index(){
         $compras = Compra::paginate(10);
         $comp = Compra::select(DB::raw('min(fecha) as inicio, max(fecha) as final'))->first();
-        return view ('RegistroCompraProductos/CompraProductosIndex')->with('compras', $compras)->with('comp', $comp);
+        $inicio = $comp->inicio;
+        $fimal = $comp->final;
+        return view ('RegistroCompraProductos/CompraProductosIndex')->with('compras', $compras)->with('inicio', $inicio)->with('final', $final);
     }
     public function search(Request $request){
         $text =trim($request->get('busqueda'));
@@ -27,9 +29,8 @@ class RegCompraProductController extends Controller
          })
         ->paginate(10);
 
-        $comp = Compra::select(DB::raw('min(fecha) as inicio, max(fecha) as final'))->whereBetween('fecha', [$inicio, $final])->first();
 
-        return view('RegistroCompraProductos/CompraProductosIndex', compact('compras', 'text','comp'));
+        return view('RegistroCompraProductos/CompraProductosIndex', compact('compras', 'text','inicio','final'));
     }
     public function create(){
         $productos = Producto ::all();
