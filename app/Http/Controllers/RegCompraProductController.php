@@ -60,9 +60,9 @@ class RegCompraProductController extends Controller
 
         $request ->validate([
             'producto'=>'required',
-            'cantidad'=>'required|numeric',
-            'precio'=>'required|numeric',
-            'impuesto'=>'nullable|numeric|in:0.15,0.18',
+            'cantidad'=>'required|numeric|min:1',
+            'precio'=>'required|numeric|min:1',
+            'impuesto'=>'nullable|numeric',
         ],[
             'producto.required'=>'El producto es obligatorio',
 
@@ -78,19 +78,26 @@ class RegCompraProductController extends Controller
             'impuesto.min'=>'Solo se aceptan números positivos',
         ]);
 
-        $productos = Producto::findOrFail($request->input('producto'));
+        $productos = DetalleCompra::all();
+
+        foreach ($productos as $key => $value) {
+            if($value->producto_id == $request->input('producto')){
+            return redirect()->route('regcompra.create');
+
+            }else{
+                $detalles = new DetalleCompra();
+                $detalles->compra_id = $request->input('compra');
+                $detalles->producto_id = $request->input('producto');
+                $detalles->cantidad=$request->input('cantidad');
+                $detalles->impuesto=$request->input('impuesto');
+                $detalles->precio=$request->input('precio');
+                $detalles->save();
+
+                return redirect()->route('regcompra.create');
+            }
+        }
 
 
-
-        $detalles = new DetalleCompra();
-        $detalles->compra_id = $request->input('compra');
-        $detalles->producto_id = $request->input('producto');
-        $detalles->cantidad=$request->input('cantidad');
-        $detalles->impuesto=$request->input('impuesto');
-        $detalles->precio=$request->input('precio');
-        $detalles->save();
-
-        return redirect()->route('regcompra.create');
 
 
 
@@ -175,9 +182,11 @@ class RegCompraProductController extends Controller
             }
 
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
-            $creado = $nuevorcompraproducto->save();
-            if($creado){
+             $nuevorcompraproducto->save();
+            if($nuevorcompraproducto->detalle_compra->count() > 0){
                 return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
+            }else{
+                return redirect()->route('regcompra.create')->with('mensaje', "No hay detalles");
         }
          }
         public function destroy($id) {
