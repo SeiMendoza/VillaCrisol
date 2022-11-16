@@ -13,6 +13,20 @@
 
 <div class="container-fluid px-4">
 
+    <script>
+
+        function mayor(){
+            const elem = document.getElementById('inicio');
+            const valor = document.getElementById('final').value;
+            elem.setAttribute("max",valor);
+        }
+        function menor(){
+            const elem = document.getElementById('final');
+            const valor = document.getElementById('inicio').value;
+            elem.setAttribute("min",valor);
+        }
+    </script>
+
     <div class="card shadow col-md-12">
         <div class="card-header" style="background: #25416b; color: white">
             <div>
@@ -22,13 +36,24 @@
                 <form action="{{ route('regcompra.search') }}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
+                            <label style="width: 200px;float: left;text-align: center" for="">Fecha inicio</label>
+                            <label style="width: 300px;float: left;text-align: center" for="">Fecha final</label>
+                            <input class="form-control" type="date" name="inicio" id="inicio" style="width: 200px;float: left;"
+                            value="{{$comp->inicio}}" onchange="menor()" max="{{$comp->final}}"/>
+                            <input class="form-control" type="date" name="final" id="final" style="width: 200px;float: left;"
+                            value="{{$comp->final}}" onchange="mayor()" min="{{$comp->inicio}}"/>
+
                         <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 310px"
                         placeholder="Buscar por numero de factura y categoria" aria-label="Buscar por numero de factra y categoria"
                         aria-describedby="basic-addon2" maxlength="50" required
                             value="<?php if(isset($text)) echo $text;?>" />
+
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('regcompra.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
+
+                            
+
                         </div>
                     </div>
                 </form>
@@ -75,7 +100,11 @@
 
             </div>
             <div class="col-md-5" style="text-align: center; margin: 0 auto; margin-bottom: 10px; margin-top: 12px;">
-                {!! $compras->appends(["busqueda" => $text]) !!}
+                @if(isset($text))
+                {!! $compras->appends(["busqueda" => $text,'inicio'=>$comp->inicio,'final'=>$comp->final]) !!}
+                @else
+                {{$compras->links()}}
+                @endif
             </div>
         </div>
     </div>

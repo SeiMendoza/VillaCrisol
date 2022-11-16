@@ -6,20 +6,30 @@ use App\Models\DetalleCompra;
 use App\Models\Producto;
 use App\Models\Compra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegCompraProductController extends Controller
 {
 
     public function index(){
         $compras = Compra::paginate(10);
-        return view ('RegistroCompraProductos/CompraProductosIndex')->with('compras', $compras);
+        $comp = Compra::select(DB::raw('min(fecha) as inicio, max(fecha) as final'))->first();
+        return view ('RegistroCompraProductos/CompraProductosIndex')->with('compras', $compras)->with('comp', $comp);
     }
     public function search(Request $request){
         $text =trim($request->get('busqueda'));
-        $compras = Compra::where('numfactura', 'like', '%'.$text.'%')
-        ->orWhere('categoria', 'like', '%'.$text.'%')
-        ->orWhere('fecha', 'like', '%'.$text.'%')->paginate(10);
-        return view('RegistroCompraProductos/CompraProductosIndex', compact('compras', 'text'));
+        $inicio =trim($request->get('inicio'));
+        $final =trim($request->get('final'));
+        $compras = Compra::whereBetween('fecha', [$inicio, $final])
+        ->where(function($q) use ($text){
+            $q->where('numfactura', 'like', '%'.$text.'%')
+            ->orWhere('categoria', 'like', '%'.$text.'%');
+         })
+        ->paginate(10);
+
+        $comp = Compra::select(DB::raw('min(fecha) as inicio, max(fecha) as final'))->whereBetween('fecha', [$inicio, $final])->first();
+
+        return view('RegistroCompraProductos/CompraProductosIndex', compact('compras', 'text','comp'));
     }
     public function create(){
         $productos = Producto ::all();
