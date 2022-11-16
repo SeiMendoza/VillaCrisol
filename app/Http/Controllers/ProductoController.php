@@ -100,16 +100,14 @@ class ProductoController extends Controller
     //Lista de productos
     public function index(){
         $productos= Producto::where('categoria', '=', 'restaurante')->paginate(10);
-        $detalles = DetalleCompra::paginate(10);
-        return view ('productos/inventarios')->with('productos', $productos)
-        ->with('detalles', $detalles);
+        return view ('productos/inventarios')->with('productos', $productos);
     }
 
     //buscar productos
     public function searchRestaurante(Request $request){
         $text =trim($request->get('busqueda'));
-        $detalles = DetalleCompra::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10);
-        return view('productos/inventarios', compact('detalles', 'text'));
+        $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10);
+        return view('productos/inventarios', compact('productos', 'text'));
     }
 
     //función para ver productos

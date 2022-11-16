@@ -9,8 +9,8 @@ class Producto extends Model
 {
     use HasFactory;
 
-    public function detalle_compra()
+    public function detalle_compras()
     {
-        return $this->hasOne(DetalleCompra::class);
+        return $this->hasMany(DetalleCompra::class);
     }
 }

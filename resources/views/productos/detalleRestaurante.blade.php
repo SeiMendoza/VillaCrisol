@@ -36,11 +36,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Cantidad:</th>
-                                    <th>{{$producto->detalle_compra->cantidad}}</th>
+                                    <th>{{$producto->existencia}}</th>
                                 </tr>
                                 <tr>
                                     <th scope="row">Precio:</th>
-                                    <td >{{$producto->detalle_compra->precio}}</td>
+                                    <td >{{$producto->precio}}</td>
 
                                 </tr>
                             </tbody>

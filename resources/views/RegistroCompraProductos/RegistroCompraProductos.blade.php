@@ -22,7 +22,7 @@
                                 <input  type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
                                 <label for="numfactura">Número de factura</label>
                                 <input class="form-control @error('numfactura') is-invalid @enderror" id="numfactura"
-                                name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}" 
+                                name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}"
                                 placeholder="Ingrese el codigo de factura"/>
                                 @error('numfactura')
                                     <small class="invalid-feedback">
@@ -64,7 +64,7 @@
                                     <option value="siembra" @if(old('categoria') == "siembra") {{ 'selected' }} @endif>Siembra</option>
                                     <option value="animales" @if(old('categoria') == "animales") {{ 'selected' }} @endif>Animales</option>
                                 </select>
-                                @error('categoria') 
+                                @error('categoria')
                                     <small class="invalid-feedback" >
                                         <strong>{{ $message }}</strong>
                                     </small>
@@ -74,7 +74,7 @@
                             <div class="col-sm-12 mb-3 mb-sm-0">
                                 <label for="descripción">Descripción de la compra</label>
                                 <textarea class="form-control @error('descripción') is-invalid @enderror" id="descripción"
-                                name="descripción" type="text" style="height:145px" placeholder="Ingrese la descripción de la compra" 
+                                name="descripción" type="text" style="height:145px" placeholder="Ingrese la descripción de la compra"
                                 maxlength="150">{{ old('descripción') }}</textarea>
                                 @error('descripción')
                                     <small class="invalid-feedback">
@@ -269,6 +269,7 @@
                         Impuesto total: L. {{ $imp }}<br>
                         Total factura: L. {{ $total }}</strong></p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -289,10 +290,13 @@
                             <label for="producto">Seleccione el producto</label>
                             <select  class="form-control @error('producto') is-invalid @enderror" name="producto" required>
                                 <option value="">--seleccione un producto--</option>
+
                                 @foreach ($productos as $producto)
-                                    <option value="{{ $producto->id }}" @if(old('producto') == "{{ $producto->id }}") {{ 'selected' }} @endif>
-                                        {{ $producto->nombre }} ({{$producto->categoria}})</option>
+                                <option value="{{ $producto->id }}" @if(old('producto') == "{{ $producto->id }}") {{ 'selected' }} @endif>
+                                    {{ $producto->nombre }} ({{$producto->categoria}})</option>
                                 @endforeach
+
+
                             </select>
                             @error('producto')
                                 <small class="invalid-feedback" role="alert">
@@ -324,7 +328,6 @@
                         </select> <label for="impuesto">Ingrese el impuesto del producto</label>
                             <select  class="form-control @error('impuesto') is-invalid @enderror" name="impuesto">
                                 <option value="">--seleccione un impuesto--</option>
-                                <option value="0.0" @if(old('impuesto') == "0.0") {{ 'selected' }} @endif>Excento</option>
                                 <option value="0.15" @if(old('impuesto') == "0.15") {{ 'selected' }} @endif>15%</option>
                                 <option value="0.18" @if(old('impuesto') == "0.18") {{ 'selected' }} @endif>18%</option>
                             </select>

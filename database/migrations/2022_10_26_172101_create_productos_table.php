@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('categoria');
+            $table->integer('existencia')->default(0);
+            $table->decimal('precio',10,2)->default(0);
             $table->timestamps();
         });
     }

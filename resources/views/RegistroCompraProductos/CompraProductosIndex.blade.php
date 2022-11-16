@@ -52,7 +52,7 @@
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('regcompra.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
 
-                            
+
 
                         </div>
                     </div>

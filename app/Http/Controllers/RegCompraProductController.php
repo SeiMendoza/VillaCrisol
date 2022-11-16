@@ -57,23 +57,29 @@ class RegCompraProductController extends Controller
      //return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
 //}
     public function detalle(Request $request){
-        /*Validación de los campos*/
+
         $request ->validate([
             'producto'=>'required',
             'cantidad'=>'required|numeric',
             'precio'=>'required|numeric',
-            'impuesto'=>'nullable|in:0.15,0.18,0.0',
+            'impuesto'=>'nullable|numeric|in:0.15,0.18',
         ],[
             'producto.required'=>'El producto es obligatorio',
 
             'cantidad.required'=>'La cantidad es obligatoria',
             'cantidad.numeric'=>'Solo se aceptan números',
+            'cantidad.min'=>'Solo se aceptan números positivos',
 
             'precio.required'=>'El producto es obligatorio',
             'precio.numeric'=>'Solo se aceptan números',
+            'precio.min'=>'Solo se aceptan números positivos',
 
             'impuesto.numeric'=>'Solo se aceptan números',
+            'impuesto.min'=>'Solo se aceptan números positivos',
         ]);
+
+        $productos = Producto::findOrFail($request->input('producto'));
+
 
 
         $detalles = new DetalleCompra();
@@ -82,10 +88,11 @@ class RegCompraProductController extends Controller
         $detalles->cantidad=$request->input('cantidad');
         $detalles->impuesto=$request->input('impuesto');
         $detalles->precio=$request->input('precio');
-
         $detalles->save();
 
         return redirect()->route('regcompra.create');
+
+
 
     }
 
@@ -159,6 +166,13 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->categoria=$request->input('categoria');
             $nuevorcompraproducto->fecha=$request->input('fecha');
             $nuevorcompraproducto->save();
+
+            foreach ($nuevorcompraproducto->detalle_compra as $key => $value) {
+                $pro = Producto::findOrFail($value->producto_id);
+                $pro->existencia = $value->cantidad + $pro->existencia;
+                $pro->precio= $value->precio;
+                $pro->save();
+            }
 
             /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
             $creado = $nuevorcompraproducto->save();

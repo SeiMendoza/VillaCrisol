@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\DetalleCompra;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,8 @@ class ProductoFactory extends Factory
             'nombre'=>$this->faker->word,
             'descripcion'=>$this->faker->words(10, true),
             'categoria'=>$this->faker->randomElement(['restaurante','piscina','siembras','animales']),
+            'existencia'=>$this->faker->numberBetween(0, 100),
+            'precio'=>$this->faker->numberBetween(0, 100),
         ];
     }
 }
