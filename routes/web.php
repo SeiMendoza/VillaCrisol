@@ -207,3 +207,10 @@ Route::get('/inventario/{id}/editar', [ProductoController::class,'edit'])
 Route::put('/inventario/{id}/editar', [ProductoController::class,'update'])//envia los datos al servidor
 ->name('inventario.update')->where('id','[0-9]+');
 
+//Inventario piscina
+Route::get('/invpiscina', [ProductoController::class,'piscinaindex'])
+->name('inventario.piscinaindex');
+
+//Buscar productos del inventario
+Route::get('inventario/piscina/busqueda', [ProductoController::class,'searchPiscina'])
+->name('piscina.search');

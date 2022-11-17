@@ -122,5 +122,16 @@ class ProductoController extends Controller
         ->with('detalle', $detalle)
         ->with('compra', $compra);
     }
+//Lista de productos de piscina
+public function piscinaindex(){
+    $productos= Producto::where('categoria', '=', 'piscina')->paginate(10);
+    return view ('piscina/invpiscina')->with('productos', $productos);
+}
 
+//buscar productos
+public function searchPiscina(Request $request){
+    $text =trim($request->get('busqueda'));
+    $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'piscina')->paginate(10);
+    return view('piscina/invpiscina', compact('productos', 'text'));
+}
 }
