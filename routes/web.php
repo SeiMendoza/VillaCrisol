@@ -192,6 +192,8 @@ Route::get('/regcompra/detalle/{id}',[RegCompraProductController::class, 'detail
 Route::get('/inventario', [ProductoController::class,'index'])
 ->name('inventario.index');
 
+Route::get('/invrestaurante/desc-PDF', [ProductoController::class,'restaurantePDF'])
+->name('inventario.restaurantepdf');
 //Buscar productos del inventario
 Route::get('inventario/restaurante/busqueda', [ProductoController::class,'searchRestaurante'])
 ->name('restaurante.search');
@@ -210,7 +212,9 @@ Route::put('/inventario/{id}/editar', [ProductoController::class,'update'])//env
 //Inventario piscina
 Route::get('/invpiscina', [ProductoController::class,'piscinaindex'])
 ->name('inventario.piscinaindex');
-
+// reporte de piscina
+Route::get('/invpiscina/desc-PDF', [ProductoController::class,'piscinaPDF'])
+->name('inventario.piscinapdf');
 //Buscar productos del inventario
 Route::get('inventario/piscina/busqueda', [ProductoController::class,'searchPiscina'])
 ->name('piscina.search');

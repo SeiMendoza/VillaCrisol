@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Dompdf\Options;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\DB;
+use PDF;
+//use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
 use App\Models\Producto;
 use App\Models\RcompraProducto;
+use Dompdf\Adapter\PDFLib;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -102,12 +107,29 @@ class ProductoController extends Controller
         $productos= Producto::where('categoria', '=', 'restaurante')->paginate(10);
         return view ('productos/inventarios')->with('productos', $productos);
     }
+//pdf de piscina
+public function restaurantePDF(Request $request){
+    $text =trim($request->get('busqueda'));
+    $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10); 
+$vista = view('productos.Reporte_restaurante')->with('productos',$productos);
+$options = new Options();
+$options->set('isRemoteEnabled', TRUE);
 
+$dompdf = new Dompdf($options);
+    // Definimos el tamaño y orientación del papel que queremos.
+    $dompdf->setPaper('A4', 'portrait');
+    // Cargamos el contenido HTML.
+    $dompdf->loadHtml(utf8_decode($vista));
+    // Renderizamos el documento PDF.
+    $dompdf->render();
+    // Enviamos el fichero PDF al navegador.
+  $dompdf->stream("Reporte.pdf"); 
+}
     //buscar productos
     public function searchRestaurante(Request $request){
         $text =trim($request->get('busqueda'));
         $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10);
-        return view('productos/inventarios', compact('productos', 'text'));
+        return view('BuscarInventario/BuscarR', compact('productos', 'text'));
     }
 
     //función para ver productos
@@ -127,11 +149,30 @@ public function piscinaindex(){
     $productos= Producto::where('categoria', '=', 'piscina')->paginate(10);
     return view ('piscina/invpiscina')->with('productos', $productos);
 }
+//pdf de piscina
+public function piscinaPDF(Request $request){
+    $text =trim($request->get('busqueda'));
+    $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'piscina')->paginate(10);
+$vista = view('piscina.Reporte_piscina')->with('productos',$productos);
+$options = new Options();
+$options->set('isRemoteEnabled', TRUE);
 
+$dompdf = new Dompdf($options);
+    // Definimos el tamaño y orientación del papel que queremos.
+    $dompdf->setPaper('A4', 'portrait');
+    // Cargamos el contenido HTML.
+    $dompdf->loadHtml(utf8_decode($vista));
+    // Renderizamos el documento PDF.
+    $dompdf->render();
+    // Enviamos el fichero PDF al navegador.
+  $dompdf->stream("Reporte.pdf"); 
+}
 //buscar productos
 public function searchPiscina(Request $request){
     $text =trim($request->get('busqueda'));
     $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'piscina')->paginate(10);
-    return view('piscina/invpiscina', compact('productos', 'text'));
+    return view('BuscarInventario/BuscarP', compact('productos', 'text')); 
+     
+    
 }
 }

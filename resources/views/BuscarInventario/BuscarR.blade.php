@@ -18,17 +18,28 @@
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Inventario de Productos</h2>
             </div><br>
             <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
-                <button class="btn btn-primary">Piscina</button>
-                 <button class="btn btn-primary">Siembra</button> <button class="btn btn-primary">Animales</button>
+                <a href="{{route('inventario.piscinaindex')}}" class="btn btn-primary">Piscina</a>
+                 <a class="btn btn-primary">Siembra</a> <a class="btn btn-primary">Animales</a>
             </div>
         </div> <br>
 
         <!--------Lista de Clientes---------------->
         <div class="card-header">
-        <div class="" style="display:block; float: left;"><h4>Inventario de la Piscina</h4>
+        <div class="" style="display:block; float: left;"><h4>Inventario del Restaurante
+            <form action="{{route('inventario.restaurantepdf')}}" method="get" role="search"
+                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input hidden class="form-control" type="text" id="busqueda" name="busqueda" style="width: 200px"
+                        placeholder="Buscar por nombre" aria-label="Buscar por nombre"
+                        aria-describedby="basic-addon2" maxlength="50"
+                            value="<?php if(isset($text)) echo $text;?>" />
+                        <div class="input-group-append">
+                            <button  class="btn btn-primary" type="submit" id="b" ><i class="fas fa-save"></i> Reporte</button>  
+             </h4>
         </div>
+</form>
             <div style="display: block; float: right;">
-                <form action="{{route('piscina.search')}}" method="get" role="search"
+                <form action="{{route('restaurante.search')}}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 200px"
@@ -37,7 +48,7 @@
                             value="<?php if(isset($text)) echo $text;?>" />
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
-                            <a href="{{route('inventario.piscinaindex')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
+                            <a href="{{route('inventario.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
                         </div>
                          
                     </div>
@@ -49,17 +60,18 @@
                 <div class="table-responsive">
                     <table class="table" id="table" style=" text-align: center">
                         <thead class="card-header" style="background: rgb(52, 111, 37); color:white;">
-                            <tr style="text-align:center;">
-                            <th scope="col">N</th>
+                        <tr style="text-align:center; ">
+                            <th scope="col">Numero</th>
                             <th scope="col">Nombre del Producto</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Detalles</th>
+                             
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($productos as $item => $producto)
-                                @if ($producto->categoria == "piscina")
+                                @if ($producto->categoria == "restaurante")
                                 <tr style="text-align: center;">
                                         <td><strong>{{ $producto->id }}</strong></td>
                                         <td>{{$producto->nombre}}</td>
@@ -82,7 +94,7 @@
             </div>
             <div class="card shadow col-md-12">
                 <div class="card-body row justify-content-center">
-                    <a class="btn btn-primary" href="{{route('inventario.piscinaindex')}}">Volver</a>
+                    <a class="btn btn-primary" href="{{route('inventario.index')}}">Volver</a>
                 </div>
             </div>
         </div>
