@@ -82,13 +82,13 @@
                                         <td style="text-align: right">L.{{ number_format($aux,2)}}</td>
                                         <td>
                                             @if ($producto->impuesto != null)
-                                                {{$producto->impuesto}}
+                                                {{$producto->impuesto * 100}}
                                             @else
                                                 0.00
                                             @endif
                                         %</td>
-                                        <td style="text-align: right">L.{{ number_format($aux*($producto->impuesto/100),2)}}</td>
-                                        <?php $aux= $aux -(($producto->precio*$producto->cantidad)*($producto->impuesto/100)) ?>
+                                        <td style="text-align: right">L.{{ number_format($aux*($producto->impuesto),2)}}</td>
+                                        <?php $aux= $aux -(($producto->precio*$producto->cantidad)*($producto->impuesto)) ?>
                                         <td style="text-align: right">L.{{ number_format($aux,2)}}</td>
                                         <?php $sum+= $aux?>
                                     </tr>

@@ -44,7 +44,7 @@
                             value="{{$final}}" onchange="mayor()" min="{{$inicio}}"/>
 
                         <input class="form-control" type="text" id="busqueda" name="busqueda" style="width: 310px"
-                        placeholder="Buscar por numero de factura y categoria" aria-label="Buscar por numero de factra y categoria"
+                        placeholder="Buscar por numero de factura" aria-label="Buscar por numero de factura"
                         aria-describedby="basic-addon2" maxlength="50"
                             value="<?php if(isset($text)) echo $text;?>" />
 
@@ -52,7 +52,7 @@
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('regcompra.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
 
-
+                            
 
                         </div>
                     </div>
@@ -73,11 +73,12 @@
       <th scope="col">N</th>
       <th scope="col">Numero de factura</th>
       <th scope="col">Fecha</th>
-      <th scope="col">Categoria</th>
-      <th scope="col">Editar</th>
+      <th scope="col">Total Compra</th>
+      <th scope="col">Detalles</th>
     </tr>
   </thead>
   <tbody>
+    <?php $sumt=0?>
   @forelse($compras as $compra)
     <tr>
     <th scope="col">{{$compra->id}}</th>
@@ -85,8 +86,17 @@
     <td scope="col">
         {{\Carbon\Carbon::parse($compra->fecha)->locale("es")->isoFormat("DD MMMM YYYY")}}
     </td>
-      <td scope="col">{{$compra->categoria}}</td>
-
+<td>
+    <?php $sum=0?>
+    @foreach($compra->detalle_compra as $producto)
+        <?php $aux=0?>
+        <?php $aux=$producto->precio*$producto->cantidad?>
+        <?php $aux= $aux -(($producto->precio*$producto->cantidad)*($producto->impuesto)) ?>
+        <?php $sum+= $aux?>
+    @endforeach
+    <?php $sumt += $sum?>
+    L.{{ number_format($sum,2)}}
+</td>
       <td style=" text-align: center"><a class="btn btn-info" href="{{route('regcompra.detail' , ['id'=>$compra->id])}}">Detalles</a></td>
 
     </tr>
@@ -97,6 +107,8 @@
                         @endforelse
                     </tbody>
                 </table>
+
+                <p>Se muestran {{count($compras)}} compras con un total de L.{{ number_format($sumt,2)}}</p>
 
             </div>
             <div class="col-md-5" style="text-align: center; margin: 0 auto; margin-bottom: 10px; margin-top: 12px;">
