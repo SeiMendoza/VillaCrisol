@@ -240,3 +240,15 @@ Route::get('/invanimal/desc-PDF', [AnimalesController::class,'animalpdf'])
 //Buscar productos de animal del inventario
 Route::get('inventario/animal/busqueda', [AnimalesController::class,'searchanimal'])
 ->name('animal.search');
+
+/*
+   |------------------------------------|
+   |   Rutas de Registros de animales  |
+   |------------------------------------|
+*/
+
+Route::get('/create/animal', [AnimalesController::class,'createAnimal'])
+->name('animal.create');
+
+Route::post('/create/animal', [AnimalesController::class, 'storeAnimal'])
+->name('animal.store');

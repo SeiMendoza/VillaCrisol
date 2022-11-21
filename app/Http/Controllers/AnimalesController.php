@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Models\Animal;
 use Dompdf\Adapter\PDFLib;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +33,55 @@ class AnimalesController extends Controller
         ->groupby('producto_id')
         ->paginate(10);
         return view('Animal/inventarioanimal', compact('productos', 'text')); 
+    }
+
+    public function createAnimal(){
+        return view('Animal/registroAnimal');
+    }
+
+    public function storeAnimal(Request $request){
         
-        
+        /*Validación de campos*/
+        $request -> validate([
+            'tipo'=> 'required|min:3|max:50',
+            'proposito' => 'required|min:3|max:50',
+            'descripcion' => 'required|min:3|max:100',
+            'nacimiento' => 'required',
+            'raza' => 'required|min:3|max:100',
+        ],
+        [
+            'tipo.required'=> 'El tipo es obligatorio',
+            'tipo.min'=> 'El tipo requiere una longitud mínima de 3',
+            'tipo.max'=> 'El tipo requiere una longitud máxima de 50',
+
+            'proposito.required'=> 'El proposito es obligatorio',
+            'proposito.min'=> 'El proposito requiere una longitud mínima de 3',
+            'proposito.max'=> 'El proposito requiere una longitud máxima de 50',
+
+            'descripcion.required'=> 'La descripcion es obligatorio',
+            'descripcion.min'=> 'La descripcion requiere una longitud mínima de 3',
+            'descripcion.max'=> 'La descripcion requiere una longitud máxima de 100',
+
+            'nacimiento.required'=> 'La fecha de nacimiento es obligatorio',
+
+            'raza.required'=> 'La raza es obligatorio',
+            'raza.min'=> 'La raza requiere una longitud mínima de 3',
+            'raza.max'=> 'La raza requiere una longitud máxima de 50',
+        ]);
+
+         /*Variable para reconocer los nuevos registros a la tabla*/
+         $animal = new Animal();
+         $animal->tipo=$request->input('tipo');
+         $animal->proposito=$request->input('proposito');
+         $animal->descripcion=$request->input('descripcion');
+         $animal->fecha_nacimiento=$request->input('nacimiento');
+         $animal->raza=$request->input('raza');
+
+
+         /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
+         $creado = $animal->save();
+         if($creado){
+             return redirect()->route('index')->with('mensaje', "El animal se registró correctamente");
+         }
     }
 }
