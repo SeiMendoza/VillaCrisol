@@ -18,7 +18,7 @@
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Inventario de Productos</h2>
             </div><br>
             <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
-                <button class="btn btn-primary">Piscina</button>
+                <a href="{{route('inventario.piscinaindex')}}" class="btn btn-primary">Piscina</a>
                  <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.siembraindex')}}'">Siembra</button> 
                  <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.animalindex')}}'">Animales</button>
             </div>
@@ -26,7 +26,7 @@
 
         <!--------Lista de Clientes---------------->
         <div class="card-header">
-        <div class="" style="display:block; float: left;"><h4>Inventario de la Siembra</h4>
+        <div class="" style="display:block; float: left;"><h4>Inventario de Siembra</h4>
         </div>
             <div style="display: block; float: right;">
                 <form action="{{route('siembra.search')}}" method="get" role="search"

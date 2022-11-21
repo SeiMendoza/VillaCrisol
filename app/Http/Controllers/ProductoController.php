@@ -107,7 +107,7 @@ class ProductoController extends Controller
         $productos= Producto::where('categoria', '=', 'restaurante')->paginate(10);
         return view ('productos/inventarios')->with('productos', $productos);
     }
-//pdf de piscina
+//pdf de restaurante
 public function restaurantePDF(Request $request){
     $text =trim($request->get('busqueda'));
     $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10); 
@@ -123,7 +123,7 @@ $dompdf = new Dompdf($options);
     // Renderizamos el documento PDF.
     $dompdf->render();
     // Enviamos el fichero PDF al navegador.
-  $dompdf->stream("Reporte.pdf"); 
+  $dompdf->stream("Reporte-restaurante_".$text.".pdf"); 
 }
     //buscar productos
     public function searchRestaurante(Request $request){
@@ -165,7 +165,7 @@ $dompdf = new Dompdf($options);
     // Renderizamos el documento PDF.
     $dompdf->render();
     // Enviamos el fichero PDF al navegador.
-  $dompdf->stream("Reporte.pdf"); 
+  $dompdf->stream("Reporte-piscina_".$text.".pdf"); 
 }
 //buscar productos
 public function searchPiscina(Request $request){

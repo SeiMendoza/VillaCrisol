@@ -19,13 +19,14 @@
             </div><br>
             <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
                 <a href="{{route('inventario.piscinaindex')}}" class="btn btn-primary">Piscina</a>
-                 <a class="btn btn-primary">Siembra</a> <a class="btn btn-primary">Animales</a>
+                 <a href="{{route('inventario.siembraindex')}}" class="btn btn-primary">Siembra</a> 
+                 <a href="{{route('inventario.animalindex')}}" class="btn btn-primary">Animales</a>
             </div>
         </div> <br>
 
         <!--------Lista de Clientes---------------->
         <div class="card-header">
-        <div class="" style="display:block; float: left;"><h4>Inventario de la Piscina
+        <div class="" style="display:block; float: left;"><h4>Inventario de piscina
             <form action="{{route('inventario.piscinapdf')}}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">

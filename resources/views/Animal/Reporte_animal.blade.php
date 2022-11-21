@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Reporte de Restaurante</title>
-  <!-- CSS Bootstrap 5.2 -->
-  <link href={{ asset("css/bootstrap.min.css") }} rel="stylesheet" type="text/css" media="screen"/>
+    <title>Reporte de Animales</title>
+    <link href={{ asset("css/bootstrap.min.css") }} rel="stylesheet" type="text/css" media="screen"/>
+
 </head>
 <body >
    <div class="col">
@@ -33,7 +33,7 @@
                         <tbody>
                             @forelse($productos as $item => $producto)
                                 <tr style="text-align: center;">
-                                        <td><strong>{{ $producto->id }}</strong></td>
+                                        <td><strong>{{ $item+1 + ( 10 * ($productos->currentPage()-1)) }}</strong></td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->existencia}}</td>
                                         <td style="text-align:center">L.{{ number_format($producto->precio,2)}}</td>
@@ -44,6 +44,7 @@
                     </tbody>
                 </table>
             </div>
+             
    <hr />    
 </body>
 </html>

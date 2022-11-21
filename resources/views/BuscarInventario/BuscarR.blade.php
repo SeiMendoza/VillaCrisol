@@ -19,11 +19,12 @@
             </div><br>
             <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
                 <a href="{{route('inventario.piscinaindex')}}" class="btn btn-primary">Piscina</a>
-                 <a class="btn btn-primary">Siembra</a> <a class="btn btn-primary">Animales</a>
+                 <a href="{{route('inventario.siembraindex')}}" class="btn btn-primary">Siembra</a> 
+                 <a href="{{route('inventario.animalindex')}}" class="btn btn-primary">Animales</a>
             </div>
         </div> <br>
 
-        <!--------Lista de Clientes---------------->
+        <!--------Lista de productos de restaurante---------------->
         <div class="card-header">
         <div class="" style="display:block; float: left;"><h4>Inventario del Restaurante
             <form action="{{route('inventario.restaurantepdf')}}" method="get" role="search"

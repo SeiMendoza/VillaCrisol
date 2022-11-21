@@ -8,12 +8,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Reporte de Piscina</title>
- <link rel="stylesheet" href="style.css"> 
+  <!-- CSS Bootstrap 5.2 -->
+  <link href={{ asset("css/bootstrap.min.css") }} rel="stylesheet" type="text/css" media="screen"/>
+  
 </head>
 <body >
    <div class="col">
   <div class="text-center text-150">
-      <span class="titulo">Villa-Crisol</span>
+      <span  class="titulo">Villa-Crisol</span>
       </div>
  </div>
       <hr class="row brc-default-l1 mx-n1 mb-4" />

@@ -18,14 +18,15 @@
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Inventario de Productos</h2>
             </div><br>
             <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
-                <button class="btn btn-primary">Piscina</button>
-                 <button class="btn btn-primary">Siembra</button> <button class="btn btn-primary">Animales</button>
+                <a href="{{route('inventario.piscinaindex')}}" class="btn btn-primary">Piscina</a>
+                 <a href="{{route('inventario.siembraindex')}}" class="btn btn-primary">Siembra</a>
+                  <a href="{{route('inventario.animalindex')}}" class="btn btn-primary">Animales</a>
             </div>
         </div> <br>
 
         <!--------Lista de Clientes---------------->
         <div class="card-header">
-        <div class="" style="display:block; float: left;"><h4>Inventario de la Piscina</h4>
+        <div class="" style="display:block; float: left;"><h4>Inventario de piscina</h4>
         </div>
             <div style="display: block; float: right;">
                 <form action="{{route('piscina.search')}}" method="get" role="search"
