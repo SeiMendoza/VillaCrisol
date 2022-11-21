@@ -8,6 +8,8 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegCompraProductController;
+use App\Http\Controllers\SiembraController;
+use App\Http\Controllers\AnimalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,3 +220,23 @@ Route::get('/invpiscina/desc-PDF', [ProductoController::class,'piscinaPDF'])
 //Buscar productos del inventario
 Route::get('inventario/piscina/busqueda', [ProductoController::class,'searchPiscina'])
 ->name('piscina.search');
+
+//Inventario siembre
+Route::get('/invsiembra', [SiembraController::class,'index'])
+->name('inventario.siembraindex');
+// reporte de siembra
+Route::get('/invsiembra/desc-PDF', [SiembraController::class,'siembrapdf'])
+->name('inventario.siembrapdf');
+//Buscar productos de siembre del inventario
+Route::get('inventario/siembra/busqueda', [SiembraController::class,'searchsiembra'])
+->name('siembra.search');
+
+//Inventario animal
+Route::get('/invanimal', [AnimalesController::class,'index'])
+->name('inventario.animalindex');
+// reporte de animal
+Route::get('/invanimal/desc-PDF', [AnimalesController::class,'animalpdf'])
+->name('inventario.animalpdf');
+//Buscar productos de animal del inventario
+Route::get('inventario/animal/busqueda', [AnimalesController::class,'searchanimal'])
+->name('animal.search');
