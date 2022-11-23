@@ -39,7 +39,7 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('inventario.siembraindex')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
-                            <button  class="btn btn-primary" type="submit" id="b" ><i class="fas fa-save"></i> Reporte</button>
+                             
                         </div>
                          
                     </div>

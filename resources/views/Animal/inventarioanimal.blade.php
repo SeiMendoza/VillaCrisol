@@ -18,8 +18,9 @@
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Inventario de Productos</h2>
             </div><br>
             <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
-                <button class="btn btn-primary">Piscina</button>
-                 <button class="btn btn-primary">Siembra</button> <button class="btn btn-primary">Animales</button>
+                <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.piscinaindex')}}'">Piscina</button>
+                 <button class="btn btn-primary"  onclick="window.location.href='{{route('inventario.siembraindex')}}'">Siembra</button> 
+                 <button class="btn btn-primary"  onclick="window.location.href='{{route('inventario.animalindex')}}'">Animales</button>
             </div>
         </div> <br>
 
@@ -38,7 +39,7 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('inventario.animalindex')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
-                            <button  class="btn btn-primary" type="submit" id="b" ><i class="fas fa-save"></i> Reporte</button>
+                             
                         </div>
                          
                     </div>

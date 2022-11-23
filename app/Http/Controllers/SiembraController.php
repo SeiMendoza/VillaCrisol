@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\App;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Dompdf\Adapter\PDFLib;
@@ -29,19 +31,11 @@ class SiembraController extends Controller
         ->where('nombre', 'like', '%'.$text.'%')
         ->groupby('producto_id')
         ->paginate(10);
-        $vista = view('piscina.Reporte_siembra')->with('productos',$productos);
-$options = new Options();
-$options->set('isRemoteEnabled', TRUE);
-
-$dompdf = new Dompdf($options);
-    // Definimos el tamaño y orientación del papel que queremos.
-    $dompdf->setPaper('A4', 'portrait');
-    // Cargamos el contenido HTML.
-    $dompdf->loadHtml(utf8_decode($vista));
-    // Renderizamos el documento PDF.
-    $dompdf->render();
-    // Enviamos el fichero PDF al navegador.
-  $dompdf->stream("Reporte-siembra_".$text.".pdf");   
+        $vista = view('Siembra.Reporte_siembra')->with('productos',$productos);
+        $view = View::make('Siembra.Reporte_siembra',compact('productos'))->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('Reporte-siembra-'.$text.'.pdf'); 
     }
     //buscar productos siembra
     public function searchSiembra(Request $request){

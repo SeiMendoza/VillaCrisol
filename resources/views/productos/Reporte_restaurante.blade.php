@@ -8,22 +8,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Reporte de Restaurante</title>
-  <!-- CSS Bootstrap 5.2 -->
-  <link href={{ asset("css/bootstrap.min.css") }} rel="stylesheet" type="text/css" media="screen"/>
+  <style>
+    h1{
+        text-align: center;
+    }
+    .tabla{
+        text-align: center;
+        width: 100%;
+    }
+    .color{
+        background: green;
+    }
+    .izq{
+        text-align: left;
+    }
+    .color1{
+        background: gainsboro;
+    }
+  </style>
 </head>
-<body >
-   <div class="col">
-  <div class="text-center text-150">
-      <span class="titulo">Villa-Crisol</span>
+<body>
+  <div>
+      <h1>Villa-Crisol</h1>
       </div>
- </div>
-      <hr class="row brc-default-l1 mx-n1 mb-4" />
+      <h3 class="izq">Reporte de busqueda en inevtario de resturante</h3>
+      <hr/>
                     <!-- or use a table instead -->
-            <div class="table-responsive" id="tblaBody">
-                <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
-                    <tbody class="text-95 text-secondary-d3">
-                    <tr class="emc" style="text-align:center;">
-                            <th scope="col">Numero</th>
+            <div>
+                <table class="tabla">
+                    <tbody>
+                    <tr class="color">
+                            <th scope="col">Número</th>
                             <th scope="col">Nombre del Producto</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio</th>
@@ -32,8 +47,8 @@
                         </thead>
                         <tbody>
                             @forelse($productos as $item => $producto)
-                                <tr style="text-align: center;">
-                                        <td><strong>{{ $producto->id }}</strong></td>
+                                <tr class="color1">
+                                        <td>{{ $producto->id }}</td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->existencia}}</td>
                                         <td style="text-align:center">L.{{ number_format($producto->precio,2)}}</td>

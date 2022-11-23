@@ -5,6 +5,8 @@ use Dompdf\Options;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\App;
 //use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
@@ -111,19 +113,10 @@ class ProductoController extends Controller
 public function restaurantePDF(Request $request){
     $text =trim($request->get('busqueda'));
     $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'restaurante')->paginate(10); 
-$vista = view('productos.Reporte_restaurante')->with('productos',$productos);
-$options = new Options();
-$options->set('isRemoteEnabled', TRUE);
-
-$dompdf = new Dompdf($options);
-    // Definimos el tamaño y orientación del papel que queremos.
-    $dompdf->setPaper('A4', 'portrait');
-    // Cargamos el contenido HTML.
-    $dompdf->loadHtml(utf8_decode($vista));
-    // Renderizamos el documento PDF.
-    $dompdf->render();
-    // Enviamos el fichero PDF al navegador.
-  $dompdf->stream("Reporte-restaurante_".$text.".pdf"); 
+    $view = View::make('productos.Reporte_restaurante',compact('productos'))->render();
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadHTML($view);
+    return $pdf->stream('Reporte-restaurante-'.$text.'.pdf'); 
 }
     //buscar productos
     public function searchRestaurante(Request $request){
@@ -154,18 +147,12 @@ public function piscinaPDF(Request $request){
     $text =trim($request->get('busqueda'));
     $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'piscina')->paginate(10);
 $vista = view('piscina.Reporte_piscina')->with('productos',$productos);
-$options = new Options();
-$options->set('isRemoteEnabled', TRUE);
+$view = View::make('piscina.Reporte_piscina',compact('productos'))->render();
+$pdf = App::make('dompdf.wrapper');
+$pdf->loadHTML($view);
+return $pdf->stream('Reporte-piscina-'.$text.'.pdf');
 
-$dompdf = new Dompdf($options);
-    // Definimos el tamaño y orientación del papel que queremos.
-    $dompdf->setPaper('A4', 'portrait');
-    // Cargamos el contenido HTML.
-    $dompdf->loadHtml(utf8_decode($vista));
-    // Renderizamos el documento PDF.
-    $dompdf->render();
-    // Enviamos el fichero PDF al navegador.
-  $dompdf->stream("Reporte-piscina_".$text.".pdf"); 
+ 
 }
 //buscar productos
 public function searchPiscina(Request $request){

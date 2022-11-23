@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Animal;
+use Illuminate\Support\Facades\App as PDF;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use Dompdf\Adapter\PDFLib;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class AnimalesController extends Controller
@@ -30,19 +33,10 @@ class AnimalesController extends Controller
         ->where('nombre', 'like', '%'.$text.'%')
         ->groupby('producto_id')
         ->paginate(10);
-        $vista = view('Animal.Reporte_animal')->with('productos',$productos);
-$options = new Options();
-$options->set('isRemoteEnabled', TRUE);
-
-$dompdf = new Dompdf($options);
-    // Definimos el tamaño y orientación del papel que queremos.
-    $dompdf->setPaper('A4', 'portrait');
-    // Cargamos el contenido HTML.
-    $dompdf->loadHtml(utf8_decode($vista));
-    // Renderizamos el documento PDF.
-    $dompdf->render();
-    // Enviamos el fichero PDF al navegador.
-  $dompdf->stream("Reporte-animal_".$text.".pdf"); 
+        $view = View::make('Animal.Reporte_animal',compact('productos'))->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('Reporte-animal-'.$text.'.pdf');
     }
     //buscar productos animal
     public function searchanimal(Request $request){

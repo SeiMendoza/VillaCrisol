@@ -140,6 +140,13 @@
     </style>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    @if(session('mensaje'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong> {{session('mensaje')}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
+
     <div class="card shadow mb-4">
         <div class="card-header py-2" style="background: #0d6efd">
             <div style="float: left">
@@ -147,77 +154,76 @@
             </div>
 
         </div>
-    <form action="{{ route('regcompra.store') }}" id="" name="form" method="POST">
+    <form action="{{ route('regcompra.store') }}" id="formulario_compras" name="formulario_compras" method="POST">
         @csrf
 
         <div class="modal-body" style="font-family: 'Nunito', sans-serif; font-size: small; padding-top: 10px">
             <div class="page-content container-fluid">
                 <div class="page-header text-blue-d2">
-                
+                     
                 <div class="container px-0">
                     <div class="row g-3">
                         <div class="col-sm-12">
                             <div class="form-group row">
-                            <div class="col-sm-3 mb-3 mb-sm-0">
-                            <label for="numfactura" class="text-secondary-d1"><strong>Número de factura:</strong></label>
-                            <input  type="text" name="compra_id" id="compra_id" value="{{$compra->id}}" hidden>
-                                <input class="form-control @error('numfactura') is-invalid @enderror" id="numfactura"
+                                <!-- Nombre del cliente -->
+                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <label for="numfactura" class="text-secondary-d1"><strong>Número de factura:</strong></label>
+                                    <input class="form-control @error('numfactura') is-invalid @enderror" id="numfactura"
                                 name="numfactura" type="num" maxlength="11" value="{{ old('numfactura') }}"
                                 placeholder="Ingrese el codigo de factura"/>
                                 @error('numfactura')
                                     <small class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </small>
+                                @enderror
+                                </div>
+
+                                <!-- Tipo de cliente -->
+                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <label for="categoria" class="text-secondary-d1"><strong>seleccione la categoría:</strong></label>
+                                    <select class="form-control @error('categoria') is-invalid @enderror"
+                                            id="categoria"
+                                            required autocomplete="categoria" name="categoria" >
+                                        <option value="">--seleccione una categoría--</option>
+                                    <option value="restaurante" @if(old('categoria') == "restaurante") {{ 'selected' }} @endif>Restaurante</option>
+                                    <option value="piscina" @if(old('categoria') == "piscina") {{ 'selected' }} @endif>Piscina</option>
+                                    <option value="siembra" @if(old('categoria') == "siembra") {{ 'selected' }} @endif>Siembra</option>
+                                    <option value="animales" @if(old('categoria') == "animales") {{ 'selected' }} @endif>Animales</option>
+                                    </select>
+                                    @error('categoria')
+                                    <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                     @enderror
                                 </div>
-                                 
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                    <label for="proveedor" class="text-secondary-d1"><strong>Nombre del proveedor:</strong></label>
+                                <!-- Nombre del vendedor -->
+                                <div class="col-sm-2 mb-3 mb-sm-0">
+                                    <label class="text-secondary-d1"><strong>Nombre del vendedor:</strong></label>
                                     <input class="form-control @error('proveedor') is-invalid @enderror" id="proveedor"
                                 name="proveedor" type="text" maxlength="45"
                                 placeholder="Ingrese el proveedor" value="{{ old('proveedor') }}" />
                                 @error('proveedor')
                                     <small class="invalid-feedback">
                                         <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    </small>
+                                @enderror
                                 </div>
-
-                              
                                 <div class="col-sm-2 mb-3 mb-sm-0">
-                                    <label for="fecha" class="text-secondary-d1"><strong>Fecha de registro:</strong></label>
+                                    <label for="fecha" class="text-secondary-d1"><strong>Fecha:</strong></label>
                                     <input class="form-control @error('fecha') is-invalid @enderror" id="fecha"
                                 name="fecha" type="date" min="{{ date("Y-m-d",strtotime(now()."- 1 month"));}}" max="{{ now()->toDateString('Y-m-d') }}"
                                 value="{{old('fecha')}}" />
                                 @error('fecha')
-                                    <small class="invalid-feedback" >
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
-
-                                 
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                    <label for="categoria" class="text-secondary-d1"><strong>Seleccione una categoría:</strong></label>
-                                            <select  class="form-control @error('categoria') is-invalid @enderror" name="categoria">
-                                    <option value="">--seleccione una categoría--</option>
-                                    <option value="restaurante" @if(old('categoria') == "restaurante") {{ 'selected' }} @endif>Restaurante</option>
-                                    <option value="piscina" @if(old('categoria') == "piscina") {{ 'selected' }} @endif>Piscina</option>
-                                    <option value="siembra" @if(old('categoria') == "siembra") {{ 'selected' }} @endif>Siembra</option>
-                                    <option value="animales" @if(old('categoria') == "animales") {{ 'selected' }} @endif>Animales</option>
-                                </select>
-                                @error('categoria')
-                                    <small class="invalid-feedback" >
-                                        <strong>{{ $message }}</strong>
-                                    </small>
-                                @enderror
-                                </div>
-
-                                 
-                                <div class="col-sm-3 mb-2 mb-sm-0">
-                                    <label for="descripcion" class="text-secondary-d1"><strong>Descripción de la compra:</strong></label>
-                                    <textarea class="form-control @error('descripción') is-invalid @enderror" id="descripción"
-                                name="descripción" type="text" style="height:100px" placeholder="Ingrese la descripción de la compra"
+                            </div>
+                                <div class="col-sm-4 mb-2 mb-sm-0">
+                                    <label for="descripcion" class="text-secondary-d1"><strong>Ingrese la descripción:</strong></label>
+                                            <textarea class="form-control @error('descripción') is-invalid @enderror" id="descripción"
+                                name="descripción" type="text" style="height:90px" placeholder="Ingrese la descripción de la compra"
                                 maxlength="150">{{ old('descripción') }}</textarea>
                                 @error('descripción')
                                     <small class="invalid-feedback">
@@ -255,18 +261,26 @@
                                                     <div class="agregar-factura" id=""
                                                          style="display:block;  height: 170px; width: 140px; padding: 3px ">
                                                         <div class="card h-100 btn" data-id="{{$pro->id}}">
-                                                            
-                                                             
+                                                            <!-- Cantidad en existencia -->
+                                                            <div class="badge bg-dark text-white position-absolute"
+                                                                 style="top: 0.5rem; right: 0.5rem">
+                                                                {{$pro->existencia}} unidades
+                                                            </div>
+                                                            <!-- Imagen del producto-->
+                                                            <img class="card-img-top"
+                                                                 src="/images/products/{{$pro->imagen_producto}}"
+                                                                 width="00px"
+                                                                 height="80px" alt="..."/>
                                                             <div class="" style="text-align:center ;">
                                                                 <div class="text-center">
                                                                     <!-- Nombre del producto -->
                                                                     <p class="nombre" id="nombre">
-                                                                        <strong style="font-size: 18px">{{$pro->nombre}}</strong>
+                                                                        <strong style="font-size: 12px">{{$pro->marca." ".$pro->modelo}}</strong>
                                                                     </p>
                                                                     <!-- Precio del producto-->
                                                                     <div class="p">
                                                                         <span id="pre" class="pre text-muted text-decoration-line">
-                                                                            <strong style="font-size: 15px">{{$pro->categoria}}</strong>
+                                                                            <strong style="font-size: 15px"> L.{{$pro->prec_venta_fin}}</strong>
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -290,21 +304,16 @@
                                             <thead class="bg-none bgc-default-tp1">
                                             <tr class="text-white">
                                             <th>Nombre</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
-                                            <th>Impuesto</th>
-                                            <th>Total</th>
-                                            <th style="text-align:center;" colspan="3">Opciones</th>
-                                            </tr>
-                                            </thead>
-
-                                            <tbody id="content-fac" class="content-fac">
-                                            </tbody>
-                                            <input type="text" name="tuplas" hidden>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Impuesto</th>
+                                    <th>Total</th>
+                                    <th style="text-align:center;" colspan="3">Opciones</th>
+                                </tr>
                                         </table>
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
-                                               
+                                                Realizar Pago imediato de factura
                                             </div>
                                             <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
 
@@ -409,12 +418,12 @@
         }
         function buscar() {
             var impu_buscar = document.getElementById("buscar_producto");
-            window.location.href = " ";
+            window.location.href;
         }
 
 
         function guardar_compra() {
-            var formul = document.getElementById("form")
+            var formul = document.getElementById("formulario_compras")
 
             formul.submit();
         }
@@ -564,6 +573,7 @@
             var valor = select.value;
 
              
+            
         }
 
     </script>
