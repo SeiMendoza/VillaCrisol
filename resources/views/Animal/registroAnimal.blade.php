@@ -31,9 +31,12 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control @error('proposito') is-invalid @enderror" id="proposito"
-                        name="proposito" type="text" maxlength="50"
-                        placeholder="" value="{{old('proposito')}}" minlength="3"/>
+                        <select class="form-control @error('proposito') is-invalid @enderror" id="proposito"
+                        name="proposito">
+                        <option value="" >--seleccione una opcion--</option>
+                        <option value="consumo" @if(old('proposito') == "consumo") {{ 'selected' }} @endif>Consumo</option>
+                        <option value="producción" @if(old('proposito') == "producción") {{ 'selected' }} @endif>Producción</option>
+                    </select>
                         <label for="proposito">Propósito</label>
                         @error('proposito')
                             <small class="invalid-feedback">
@@ -59,11 +62,15 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control @error('nacimiento') is-invalid @enderror" id="nacimiento"
-                        name="nacimiento" type="date"
-                        placeholder="" value="{{old('nacimiento')}}"/>
-                        <label for="nacimiento">Fecha de nacimiento</label>
-                        @error('nacimiento')
+                        <select class="form-control @error('sexo') is-invalid @enderror" id="sexo"
+                        name="sexo" value="{{old('sexo')}}">
+                        <option value="" >--seleccione una opcion--</option>
+                        <option value="macho" @if(old('sexo') == "macho") {{ 'selected' }} @endif>Macho</option>
+                        <option value="hembra" @if(old('sexo') == "hembra") {{ 'selected' }} @endif>Hembra</option>
+                        
+                    </select>
+                        <label for="sexo">Sexo</label>
+                        @error('sexo')
                             <small class="invalid-feedback">
                                 <strong>{{ $message }}</strong>
                             </small>

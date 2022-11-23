@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('tipo');
             $table->string('proposito');
             $table->string('descripcion');
-            $table->date('fecha_nacimiento');
+            $table->string('sexo');
             $table->string('raza');
             $table->timestamps();
         });

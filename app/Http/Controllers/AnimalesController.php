@@ -59,9 +59,9 @@ class AnimalesController extends Controller
         /*Validación de campos*/
         $request -> validate([
             'tipo'=> 'required|min:3|max:50',
-            'proposito' => 'required|min:3|max:50',
+            'proposito' => 'required|in:producción,consumo',
             'descripcion' => 'required|min:3|max:100',
-            'nacimiento' => 'required',
+            'sexo' => 'required|in:macho,hembra',
             'raza' => 'required|min:3|max:100',
         ],
         [
@@ -89,7 +89,7 @@ class AnimalesController extends Controller
          $animal->tipo=$request->input('tipo');
          $animal->proposito=$request->input('proposito');
          $animal->descripcion=$request->input('descripcion');
-         $animal->fecha_nacimiento=$request->input('nacimiento');
+         $animal->sexo=$request->input('sexo');
          $animal->raza=$request->input('raza');
 
 
