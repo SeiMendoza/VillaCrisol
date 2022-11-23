@@ -18,12 +18,14 @@
     }
     .color{
         background: green;
+        
     }
     .izq{
         text-align: left;
     }
     .color1{
         background: gainsboro;
+        
     }
   </style>
 </head>
@@ -48,17 +50,20 @@
                         <tbody>
                             @forelse($productos as $item => $producto)
                                 <tr class="color1">
-                                        <td>{{ $producto->id }}</td>
+                                        <td>{{ $item+1 + ( 10 * ($productos->currentPage()-1)) }}</td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->existencia}}</td>
                                         <td style="text-align:center">L.{{ number_format($producto->precio,2)}}</td>
                                         <td style="text-align:center">L.{{$producto->precio*$producto->existencia}}</td>
                                 </tr>
                             @empty
+                             <tr><td colspan = "7" style="text-align: center">No hay productos registrados</td>
+                                    </tr>
                             @endforelse
                     </tbody>
                 </table>
             </div>
-   <hr />    
+   <hr />   
+    
 </body>
 </html>

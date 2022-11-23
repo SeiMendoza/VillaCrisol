@@ -17,8 +17,9 @@
             <div>
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Inventario de Productos</h2>
             </div><br>
-            <div style="text-align: center"> <button class="btn btn-primary">Restaurante</button>
-                <a class="btn btn-primary" href="{{route('inventario.piscinaindex')}}">Piscina</a>
+            <div style="text-align: center"> 
+            <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.index')}}'">Restaurante</button>
+                <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.piscinaindex')}}'">Piscina</button>
                  <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.siembraindex')}}'">Siembra</button> 
                  <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.animalindex')}}'">Animales</button>
             </div>
@@ -49,7 +50,7 @@
                 <div class="table-responsive">
                     <table class="table" id="table" style=" text-align: center">
                         <thead class="card-header" style="background: rgb(52, 111, 37); color:white;">
-                            <tr>
+                            <tr style="text-align: center;">
                             <th scope="col">N</th>
                             <th scope="col">Nombre del Producto</th>
                             <th scope="col">Cantidad</th>
@@ -60,11 +61,11 @@
                         <tbody>
                             @forelse($productos as $item => $producto)
                                 @if ($producto->categoria == "restaurante")
-                                <tr>
-                                        <td><strong>{{ $producto->id }}</strong></td>
+                                <tr style="text-align: center;">
+                                        <td><strong>{{ $item+1 + ( 10 * ($productos->currentPage()-1)) }}</strong></td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->existencia}}</td>
-                                        <td style="text-align: right">L.{{ number_format($producto->precio,2)}}</td>
+                                        <td style="text-align: center">L.{{ number_format($producto->precio,2)}}</td>
                                         <td><a class="btn btn-info" href="{{route('restaurante.show', ['id'=>$producto->id])}}">Detalles</a></td>
                                 @endif
                                 </tr>

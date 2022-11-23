@@ -214,6 +214,9 @@ Route::put('/inventario/{id}/editar', [ProductoController::class,'update'])//env
 //Inventario piscina
 Route::get('/invpiscina', [ProductoController::class,'piscinaindex'])
 ->name('inventario.piscinaindex');
+//Detalle de productos del inventario
+Route::get('inventario/piscina/detalle/{id}', [ProductoController::class,'showPiscina'])
+->name('piscina.show')->where('id','[0-9]+');
 // reporte de piscina
 Route::get('/invpiscina/desc-PDF', [ProductoController::class,'piscinaPDF'])
 ->name('inventario.piscinapdf');

@@ -17,10 +17,11 @@
             <div>
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Inventario de Productos</h2>
             </div><br>
-            <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
-                <a href="{{route('inventario.piscinaindex')}}" class="btn btn-primary">Piscina</a>
-                 <a href="{{route('inventario.siembraindex')}}" class="btn btn-primary">Siembra</a>
-                  <a href="{{route('inventario.animalindex')}}" class="btn btn-primary">Animales</a>
+            <div style="text-align: center"> 
+            <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.index')}}'">Restaurante</button>
+                <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.piscinaindex')}}'">Piscina</button>
+                 <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.siembraindex')}}'">Siembra</button> 
+                 <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.animalindex')}}'">Animales</button>
             </div>
         </div> <br>
 
@@ -62,7 +63,7 @@
                     <table class="table" id="table" style=" text-align: center">
                         <thead class="card-header" style="background: rgb(52, 111, 37); color:white;">
                         <tr style="text-align:center; ">
-                            <th scope="col">Numero</th>
+                            <th scope="col">N</th>
                             <th scope="col">Nombre del Producto</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio</th>

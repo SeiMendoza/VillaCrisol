@@ -142,6 +142,18 @@ public function piscinaindex(){
     $productos= Producto::where('categoria', '=', 'piscina')->paginate(10);
     return view ('piscina/invpiscina')->with('productos', $productos);
 }
+  //función para ver productos
+  public function showPiscina($id){
+    $producto = Producto::findOrfail($id);
+    $producto->detalle_compra;
+    $detalles = DetalleCompra::all();
+    $detalle = DetalleCompra::findOrFail($id);
+    $compra = Compra::findOrFail($id);
+    return view ('piscina/detallePiscina')->with('producto', $producto)
+    ->with('detalles', $detalles)
+    ->with('detalle', $detalle)
+    ->with('compra', $compra);
+}
 //pdf de piscina
 public function piscinaPDF(Request $request){
     $text =trim($request->get('busqueda'));

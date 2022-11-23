@@ -17,10 +17,11 @@
             <div>
                 <h2 style=" text-align: center;" class="m-0 font-weight-bold">Inventario de Productos</h2>
             </div><br>
-            <div style="text-align: center"> <a class="btn btn-primary" href="{{route('inventario.index')}}">Restaurante</a>
+            <div style="text-align: center">  
+            <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.index')}}'">Restaurante</button>
                 <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.piscinaindex')}}'">Piscina</button>
-                 <button class="btn btn-primary"  onclick="window.location.href='{{route('inventario.siembraindex')}}'">Siembra</button> 
-                 <button class="btn btn-primary"  onclick="window.location.href='{{route('inventario.animalindex')}}'">Animales</button>
+                 <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.siembraindex')}}'">Siembra</button> 
+                 <button class="btn btn-primary" onclick="window.location.href='{{route('inventario.animalindex')}}'">Animales</button>
             </div>
         </div> <br>
 

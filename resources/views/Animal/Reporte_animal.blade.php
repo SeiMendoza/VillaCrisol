@@ -55,6 +55,8 @@
                                         <td style="text-align:center">L.{{$producto->precio*$producto->existencia}}</td>
                                 </tr>
                             @empty
+                            <tr><td colspan = "7" style="text-align: center">No hay productos registrados</td>
+                                    </tr>
                             @endforelse
                     </tbody>
                 </table>
