@@ -27,7 +27,10 @@
 
         <!--------Lista de Clientes---------------->
         <div class="card-header">
-        <div class="" style="display:block; float: left;"><h4>Inventario de Siembra</h4>
+        <div class="" style="display:block; float: left;"><h4>Inventario de Siembra
+        <button onclick="window.location.href='{{route('inventario.siembraspdf')}}'" class="btn btn-primary" type="submit" id="b" ><i class="fas fa-save"></i> Reporte</button>  
+           
+        </h4>
         </div>
             <div style="display: block; float: right;">
                 <form action="{{route('siembra.search')}}" method="get" role="search"

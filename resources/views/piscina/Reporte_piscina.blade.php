@@ -33,7 +33,7 @@
   <div>
       <h1>Villa-Crisol</h1>
       </div>
-      <h3 class="izq">Reporte de busqueda en inevtario de piscina</h3>
+      <h3 class="izq">Reporte de busqueda en inventario de piscina</h3>
       <hr/>
                     <!-- or use a table instead -->
             <div>

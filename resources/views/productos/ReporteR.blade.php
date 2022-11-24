@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Reporte de siembra</title>
+    <title>Reporte de restaurante</title>
   <style>
     h1{
         text-align: center;
@@ -31,7 +31,7 @@
   <div>
       <h1>Villa-Crisol</h1>
       </div>
-      <h3 class="izq">Reporte de busqueda en inventario de siembra</h3>
+      <h3 class="izq">Reporte de inventario de restaurante</h3>
       <hr/>
                     <!-- or use a table instead -->
             <div>

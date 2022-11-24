@@ -27,7 +27,10 @@
 
         <!--------Lista de Clientes---------------->
         <div class="card-header">
-            <div class="" style="display:block; float: left;"><h4>Inventario de piscina</h4></div>
+            <div class="" style="display:block; float: left;"><h4>Inventario de piscina
+            <button onclick="window.location.href='{{route('inventario.piscinaspdf')}}'" class="btn btn-primary" type="submit" id="b" ><i class="fas fa-save"></i> Reporte</button>  
+           
+            </h4></div>
             <div style="display: block; float: right;">
                 <form action="{{route('piscina.search')}}" method="get" role="search"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">

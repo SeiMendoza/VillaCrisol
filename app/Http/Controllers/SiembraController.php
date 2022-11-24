@@ -22,6 +22,13 @@ class SiembraController extends Controller
         ->paginate(10);
         return view ('Siembra/inventariosiembra')->with('productos', $productos);
     }
+    public function siembraspdf(){
+        $productos= Producto::where('categoria','=','siembras')->paginate(1000);
+        $view = View::make('Siembra.ReporteS',compact('productos'))->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('Reporte-siembras.pdf');
+    }
     //pdf de siembra
     public function siembrapdf(Request $request){
         $text =trim($request->get('busqueda'));

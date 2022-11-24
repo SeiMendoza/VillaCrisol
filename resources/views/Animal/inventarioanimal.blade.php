@@ -27,7 +27,10 @@
 
         <!--------Lista de Clientes---------------->
         <div class="card-header">
-        <div class="" style="display:block; float: left;"><h4>Inventario de Animales</h4>
+        <div class="" style="display:block; float: left;"><h4>Inventario de Animales
+        <button onclick="window.location.href='{{route('inventario.animalespdf')}}'" class="btn btn-primary" type="submit" id="b" ><i class="fas fa-save"></i> Reporte</button>  
+             
+        </h4>
         </div>
             <div style="display: block; float: right;">
                 <form action="{{route('animal.search')}}" method="get" role="search"
@@ -40,7 +43,6 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('inventario.animalindex')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
-                             
                         </div>
                          
                     </div>

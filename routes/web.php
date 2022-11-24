@@ -193,7 +193,10 @@ Route::get('/regcompra/detalle/{id}',[RegCompraProductController::class, 'detail
 //Inventarios
 Route::get('/inventario', [ProductoController::class,'index'])
 ->name('inventario.index');
-
+// reporte de restaurantes
+Route::get('/invrestaurantes/desc-PDF', [ProductoController::class,'restaurantespdf'])
+->name('inventario.restaurantespdf');
+// restaurante pdf
 Route::get('/invrestaurante/desc-PDF', [ProductoController::class,'restaurantePDF'])
 ->name('inventario.restaurantepdf');
 //Buscar productos del inventario
@@ -217,6 +220,9 @@ Route::get('/invpiscina', [ProductoController::class,'piscinaindex'])
 //Detalle de productos del inventario
 Route::get('inventario/piscina/detalle/{id}', [ProductoController::class,'showPiscina'])
 ->name('piscina.show')->where('id','[0-9]+');
+// reporte de piscinas
+Route::get('/invpiscinas/desc-PDF', [ProductoController::class,'piscinaspdf'])
+->name('inventario.piscinaspdf');
 // reporte de piscina
 Route::get('/invpiscina/desc-PDF', [ProductoController::class,'piscinaPDF'])
 ->name('inventario.piscinapdf');
@@ -227,6 +233,9 @@ Route::get('inventario/piscina/busqueda', [ProductoController::class,'searchPisc
 //Inventario siembre
 Route::get('/invsiembra', [SiembraController::class,'index'])
 ->name('inventario.siembraindex');
+// reporte de siembras
+Route::get('/invsiembras/desc-PDF', [SiembraController::class,'siembraspdf'])
+->name('inventario.siembraspdf');
 // reporte de siembra
 Route::get('/invsiembra/desc-PDF', [SiembraController::class,'siembrapdf'])
 ->name('inventario.siembrapdf');
@@ -240,6 +249,9 @@ Route::get('/invanimal', [AnimalesController::class,'index'])
 // reporte de animal
 Route::get('/invanimal/desc-PDF', [AnimalesController::class,'animalpdf'])
 ->name('inventario.animalpdf');
+// reporte de animales
+Route::get('/invanimales/desc-PDF', [AnimalesController::class,'animalespdf'])
+->name('inventario.animalespdf');
 //Buscar productos de animal del inventario
 Route::get('inventario/animal/busqueda', [AnimalesController::class,'searchanimal'])
 ->name('animal.search');

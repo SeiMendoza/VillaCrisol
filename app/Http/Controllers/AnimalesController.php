@@ -38,6 +38,14 @@ class AnimalesController extends Controller
         $pdf->loadHTML($view);
         return $pdf->stream('Reporte-animal-'.$text.'.pdf');
     }
+    //pdf de animal
+    public function animalespdf(){
+        $productos= Producto::where('categoria','=','animales')->paginate(1000);
+        $view = View::make('Animal.ReporteA',compact('productos'))->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('Reporte-animales.pdf');
+    }
     //buscar productos animal
     public function searchanimal(Request $request){
         $text =trim($request->get('busqueda'));

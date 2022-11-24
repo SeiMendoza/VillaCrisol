@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Reporte de siembra</title>
+    <title>Reporte de Animales</title>
   <style>
     h1{
         text-align: center;
@@ -31,7 +31,7 @@
   <div>
       <h1>Villa-Crisol</h1>
       </div>
-      <h3 class="izq">Reporte de busqueda en inventario de siembra</h3>
+      <h3 class="izq">Reporte de inventario de animales</h3>
       <hr/>
                     <!-- or use a table instead -->
             <div>
@@ -46,14 +46,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($productos as $item => $producto)
+                            @forelse($productos as $item => $producto) 
                                 <tr class="color1">
                                         <td>{{ $item+1 + ( 10 * ($productos->currentPage()-1)) }}</td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->existencia}}</td>
                                         <td style="text-align:center">L.{{ number_format($producto->precio,2)}}</td>
                                         <td style="text-align:center">L.{{$producto->precio*$producto->existencia}}</td>
-                                </tr>
+                                 
+                                    </tr>
                             @empty
                             <tr><td colspan = "7" style="text-align: center">No hay productos registrados</td>
                                     </tr>
