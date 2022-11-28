@@ -12,7 +12,7 @@
     </head>
     <body style="background-color: rgba(60, 255, 0, 0.07)">
         <div class="container-fluid px-4">
-            Piscina
+            Siembra
             <br><br>
             <div class="card shadow col-md-12 items-center">
                 <h1 class="text-center">Detalles de: {{$producto->nombre}}<br></h1>
@@ -44,7 +44,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Impuesto:</th>
-                                    <td>{{$producto->impuesto}}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Total:</th>
@@ -87,7 +87,7 @@
         <br>
         <div class="card shadow col-md-12">
             <div class="card-body" style="text-align: right">
-                <a class="btn btn-primary" href="{{route('inventario.piscinaindex')}}">Volver</a>
+                <a class="btn btn-primary" href="{{route('inventario.siembraindex')}}">Volver</a>
                 <a class="btn btn-warning" href="{{route('inventario.edit', ['id'=>$producto->id])}}">Editar</a>
             </div>
         </div>

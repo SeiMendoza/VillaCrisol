@@ -65,17 +65,19 @@
                         </thead>
                         <tbody>
                             @forelse($productos as $item => $producto)
+                            @if ($producto->categoria == "siembras")
                                 <tr style="text-align: center;">
                                         <td><strong>{{ $item+1 + ( 10 * ($productos->currentPage()-1)) }}</strong></td>
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->existencia}}</td>
                                         <td style="text-align:center">L.{{ number_format($producto->precio,2)}}</td>
-                                        <td><a class="btn btn-info" href="#">Detalles</a></td>
-                                </tr>
-                            @empty
-                                    <tr><td colspan = "7" style="text-align: center">No hay productos registrados</td>
+                                        <td><a class="btn btn-info"  onclick="window.location.href='{{route('siembra.show', ['id'=>$producto->id])}}'" >Detalles</a></td>
                                     </tr>
-                            @endforelse
+                                    @endif
+                                    @empty
+                                    <tr><td colspan = "7" style="text-align: center">No hay productos registrados</td>
+                                </tr>
+                                @endforelse
 
                         </tbody>
                     </table>

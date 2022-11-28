@@ -230,9 +230,12 @@ Route::get('/invpiscina/desc-PDF', [ProductoController::class,'piscinaPDF'])
 Route::get('inventario/piscina/busqueda', [ProductoController::class,'searchPiscina'])
 ->name('piscina.search');
 
-//Inventario siembre
+//Inventario siembra
 Route::get('/invsiembra', [SiembraController::class,'index'])
 ->name('inventario.siembraindex');
+//detalles de siembra
+Route::get('inventario/siembra/detalle/{id}', [SiembraController::class,'showSiembra'])
+->name('siembra.show')->where('id','[0-9]+');
 // reporte de siembras
 Route::get('/invsiembras/desc-PDF', [SiembraController::class,'siembraspdf'])
 ->name('inventario.siembraspdf');
@@ -246,6 +249,9 @@ Route::get('inventario/siembra/busqueda', [SiembraController::class,'searchsiemb
 //Inventario animal
 Route::get('/invanimal', [AnimalesController::class,'index'])
 ->name('inventario.animalindex');
+//detalles producto animal
+Route::get('inventario/animal/detalle/{id}', [AnimalesController::class,'showAnimal'])
+->name('animal.show')->where('id','[0-9]+');
 // reporte de animal
 Route::get('/invanimal/desc-PDF', [AnimalesController::class,'animalpdf'])
 ->name('inventario.animalpdf');
@@ -267,3 +273,9 @@ Route::get('/create/animal', [AnimalesController::class,'createAnimal'])
 
 Route::post('/create/animal', [AnimalesController::class, 'storeAnimal'])
 ->name('animal.store');
+//ruta para editar el animal
+Route::get('/animal/{id}/editar', [AnimalesController::class,'editar'])
+->name('animal.editar')->where('id','[0-9]+');
+// ruta para actualizar animal
+Route::put('/animal/{id}/editar', [AnimalesController::class,'update'])//envia los datos al servidor
+->name('animal.update')->where('id','[0-9]+');

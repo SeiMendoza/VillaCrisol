@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Animal;
+use App\Models\Compra;
+use App\Models\DetalleCompra;
 use Illuminate\Support\Facades\App as PDF;
 use Dompdf\Options;
 use Dompdf\Dompdf;
@@ -23,6 +25,18 @@ class AnimalesController extends Controller
         ->groupby('producto_id')
         ->paginate(10);
         return view ('Animal/inventarioanimal')->with('productos', $productos);
+    }
+    //mostrar detalles de producto de animal
+    public function showAnimal($id){
+        $producto = Producto::findOrfail($id);
+        $producto->detalle_compra;
+        $detalles = DetalleCompra::all();
+        $detalle = DetalleCompra::findOrFail($id);
+        $compra = Compra::findOrFail($id);
+        return view ('Siembra/detalleSiembra')->with('producto', $producto)
+        ->with('detalles', $detalles)
+        ->with('detalle', $detalle)
+        ->with('compra', $compra);
     }
     //pdf de animal
     public function animalpdf(Request $request){
@@ -106,5 +120,54 @@ class AnimalesController extends Controller
          if($creado){
              return redirect()->route('index')->with('mensaje', "El animal se registró correctamente");
          }
+    }
+    // Editar animal
+    public function editar ($id){
+        $animal = Animal::findOrfail($id);
+        return view('Animal.editarAnimal')->with('animal',$animal);
+    }
+    // actualizar animal
+    public function update(Request $request, $id){
+
+        //$animal = Animal::findOrFail($id);
+        $request -> validate([
+            'tipo'=> 'required|min:3|max:50',
+            'proposito' => 'required|in:producción,consumo',
+            'descripcion' => 'required|min:3|max:100',
+            'sexo' => 'required|in:macho,hembra',
+            'raza' => 'required|min:3|max:100',
+        ],
+        [
+            'tipo.required'=> 'El tipo es obligatorio',
+            'tipo.min'=> 'El tipo requiere una longitud mínima de 3',
+            'tipo.max'=> 'El tipo requiere una longitud máxima de 50',
+
+            'proposito.required'=> 'El proposito es obligatorio',
+            'proposito.min'=> 'El proposito requiere una longitud mínima de 3',
+            'proposito.max'=> 'El proposito requiere una longitud máxima de 50',
+
+            'descripcion.required'=> 'La descripcion es obligatorio',
+            'descripcion.min'=> 'La descripcion requiere una longitud mínima de 3',
+            'descripcion.max'=> 'La descripcion requiere una longitud máxima de 100',
+
+            'nacimiento.required'=> 'La fecha de nacimiento es obligatorio',
+
+            'raza.required'=> 'La raza es obligatorio',
+            'raza.min'=> 'La raza requiere una longitud mínima de 3',
+            'raza.max'=> 'La raza requiere una longitud máxima de 50',
+        ]);
+
+         /*Variable para reconocer los nuevos registros a la tabla*/
+         $animal = Animal::findOrFail($id); 
+         $animal->tipo=$request->input('tipo');
+         $animal->proposito=$request->input('proposito');
+         $animal->descripcion=$request->input('descripcion');
+         $animal->sexo=$request->input('sexo');
+         $animal->raza=$request->input('raza');
+        
+         $creado = $animal->save();
+    if($creado){
+        return redirect()->route('empleado.index')->with('mensaje', "El empleado ".$animal->tipo." se actualizo correctamente");
+    }
     }
 }
