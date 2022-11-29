@@ -42,14 +42,7 @@
                                     <th scope="row">Precio:</th>
                                     <td >{{$producto->precio}}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">Impuesto:</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Total:</th>
-                                    <td >{{($producto->precio*$producto->existencia)}}</td>
-                                </tr>
+                                 
                             </tbody>
                         </table>
                     </div>

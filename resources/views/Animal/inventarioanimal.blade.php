@@ -64,7 +64,7 @@
                         </thead>
                         <tbody>
                             @forelse($productos as $item => $producto)
-                            @if ($producto->categoria == "animal")
+                            @if ($producto->categoria == "animales")
                                 <tr style="text-align: center;">
                                         <td><strong>{{ $item+1 + ( 10 * ($productos->currentPage()-1)) }}</strong></td>
                                         <td>{{$producto->nombre}}</td>
@@ -87,7 +87,7 @@
             </div>
             <div class="card shadow col-md-12">
                 <div class="card-body row justify-content-center">
-                    <a class="btn btn-primary" href="{{route('inventario.piscinaindex')}}">Volver</a>
+                    <a class="btn btn-primary" href="{{route('inventario.animalindex')}}">Volver</a>
                 </div>
             </div>
         </div>

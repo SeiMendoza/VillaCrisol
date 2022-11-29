@@ -71,7 +71,7 @@
                                         <td>{{$producto->nombre}}</td>
                                         <td>{{$producto->existencia}}</td>
                                         <td style="text-align:center">L.{{ number_format($producto->precio,2)}}</td>
-                                        <td><a class="btn btn-info"  onclick="window.location.href='{{route('siembra.show', ['id'=>$producto->id])}}'" >Detalles</a></td>
+                                        <td><a class="btn btn-info"   onclick="window.location.href='{{route('siembra.show', ['id'=>$producto->id])}}'" >Detalles</a></td>
                                     </tr>
                                     @endif
                                     @empty
@@ -88,7 +88,7 @@
             </div>
             <div class="card shadow col-md-12">
                 <div class="card-body row justify-content-center">
-                    <a class="btn btn-primary" href="{{route('inventario.piscinaindex')}}">Volver</a>
+                    <a class="btn btn-primary" href="{{route('inventario.siembraindex')}}">Volver</a>
                 </div>
             </div>
         </div>

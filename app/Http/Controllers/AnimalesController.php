@@ -19,11 +19,7 @@ class AnimalesController extends Controller
 {
      //Lista de productos de animal
      public function index(){
-        $productos= Producto::select('producto_id', 'productos.nombre',DB::raw('sum(cantidad) as existencia'), 'productos.precio')
-        ->join('detalle_compras','productos.id','=','detalle_compras.producto_id')
-        ->where('categoria', '=', 'animales')
-        ->groupby('producto_id')
-        ->paginate(10);
+        $productos= Producto::where('categoria', '=', 'animales')->paginate(10);
         return view ('Animal/inventarioanimal')->with('productos', $productos);
     }
     //mostrar detalles de producto de animal
@@ -33,7 +29,7 @@ class AnimalesController extends Controller
         $detalles = DetalleCompra::all();
         $detalle = DetalleCompra::findOrFail($id);
         $compra = Compra::findOrFail($id);
-        return view ('Siembra/detalleSiembra')->with('producto', $producto)
+        return view ('Animal/detalleAnimal')->with('producto', $producto)
         ->with('detalles', $detalles)
         ->with('detalle', $detalle)
         ->with('compra', $compra);
@@ -46,7 +42,7 @@ class AnimalesController extends Controller
         ->where('categoria', '=', 'animales')
         ->where('nombre', 'like', '%'.$text.'%')
         ->groupby('producto_id')
-        ->paginate(10);
+        ->paginate(1000);
         $view = View::make('Animal.Reporte_animal',compact('productos'))->render();
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
@@ -62,13 +58,15 @@ class AnimalesController extends Controller
     }
     //buscar productos animal
     public function searchanimal(Request $request){
-        $text =trim($request->get('busqueda'));
+        /*$text =trim($request->get('busqueda'));
         $productos= Producto::select('producto_id', 'productos.nombre',DB::raw('sum(cantidad) as existencia'), 'productos.precio')
         ->join('detalle_compras','productos.id','=','detalle_compras.producto_id')
         ->where('categoria', '=', 'animales')
         ->where('nombre', 'like', '%'.$text.'%')
         ->groupby('producto_id')
-        ->paginate(10);
+        ->paginate(10);*/
+        $text =trim($request->get('busqueda'));
+        $productos = Producto::where('nombre', 'like', '%'.$text.'%')->where('categoria', '=', 'animales')->paginate(10);
         return view('BuscarInventario/BuscarA', compact('productos', 'text')); 
     }
 
