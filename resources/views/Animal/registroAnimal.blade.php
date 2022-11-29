@@ -36,6 +36,7 @@
                         <option value="" >--seleccione una opcion--</option>
                         <option value="consumo" @if(old('proposito') == "consumo") {{ 'selected' }} @endif>Consumo</option>
                         <option value="producción" @if(old('proposito') == "producción") {{ 'selected' }} @endif>Producción</option>
+                        <option value="doméstico" @if(old('doméstico') == "doméstico") {{ 'selected' }} @endif>Doméstico`</option>
                     </select>
                         <label for="proposito">Propósito</label>
                         @error('proposito')
@@ -69,7 +70,7 @@
                         <option value="hembra" @if(old('sexo') == "hembra") {{ 'selected' }} @endif>Hembra</option>
                         
                     </select>
-                        <label for="sexo">Sexo</label>
+                        <label for="sexo">Seleccione el sexo</label>
                         @error('sexo')
                             <small class="invalid-feedback">
                                 <strong>{{ $message }}</strong>

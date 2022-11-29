@@ -81,23 +81,23 @@ class AnimalesController extends Controller
         /*Validación de campos*/
         $request -> validate([
             'tipo'=> 'required|min:3|max:50',
-            'proposito' => 'required|in:producción,consumo',
+            'proposito' => 'required|in:producción,consumo,doméstico',
             'descripcion' => 'required|min:3|max:100',
             'sexo' => 'required|in:macho,hembra',
             'raza' => 'required|min:3|max:100',
         ],
         [
-            'tipo.required'=> 'El tipo es obligatorio',
-            'tipo.min'=> 'El tipo requiere una longitud mínima de 3',
-            'tipo.max'=> 'El tipo requiere una longitud máxima de 50',
+            'tipo.required'=> 'El tipo de animal es obligatorio',
+            'tipo.min'=> 'El tipo de animal requiere una longitud mínima de 3',
+            'tipo.max'=> 'El tipo de animal requiere una longitud máxima de 50',
 
-            'proposito.required'=> 'El proposito es obligatorio',
-            'proposito.min'=> 'El proposito requiere una longitud mínima de 3',
-            'proposito.max'=> 'El proposito requiere una longitud máxima de 50',
+            'proposito.required'=> 'El propósito es obligatorio',
+            'proposito.min'=> 'El propósito requiere una longitud mínima de 3',
+            'proposito.max'=> 'El propósito requiere una longitud máxima de 50',
 
-            'descripcion.required'=> 'La descripcion es obligatorio',
-            'descripcion.min'=> 'La descripcion requiere una longitud mínima de 3',
-            'descripcion.max'=> 'La descripcion requiere una longitud máxima de 100',
+            'descripcion.required'=> 'La descripción es obligatorio',
+            'descripcion.min'=> 'La descripción requiere una longitud mínima de 3',
+            'descripcion.max'=> 'La descripción requiere una longitud máxima de 100',
 
             'nacimiento.required'=> 'La fecha de nacimiento es obligatorio',
 
