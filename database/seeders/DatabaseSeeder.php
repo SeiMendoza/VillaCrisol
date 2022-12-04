@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
                     ComidaBebidaSeeder::class,
                     ProductoSeeder::class,
                 CompraSeeder::class,
-                    DetalleCompraSeeder::class]);
+                    DetalleCompraSeeder::class,
+                AnimalSeeder::class]);
 
     }
 }

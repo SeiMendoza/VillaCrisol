@@ -52,7 +52,7 @@
                             <button class="btn btn-primary" type="submit" id="b" type="button"><i class="fas fa-search"></i></button>
                             <a href="{{route('regcompra.index')}}" id="" class="btn btn-secondary">Borrar Busqueda</a>
 
-                            
+
 
                         </div>
                     </div>
@@ -91,7 +91,7 @@
     @foreach($compra->detalle_compra as $producto)
         <?php $aux=0?>
         <?php $aux=$producto->precio*$producto->cantidad?>
-        <?php $aux= $aux -(($producto->precio*$producto->cantidad)*($producto->impuesto)) ?>
+        <?php $aux= $aux +(($producto->precio*$producto->cantidad)*($producto->impuesto)) ?>
         <?php $sum+= $aux?>
     @endforeach
     <?php $sumt += $sum?>

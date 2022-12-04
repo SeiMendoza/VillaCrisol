@@ -39,16 +39,8 @@
                                     <td>{{$detalles->descripción}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Categoria:</th>
-                                    <td>{{$detalles->categoria}}</td>
-                                </tr>
-                                <tr>
                                     <th scope="row">Fecha:</th>
                                     <td>{{\Carbon\Carbon::parse($detalles->fecha)->locale("es")->isoFormat("DD MMMM YYYY")}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Total de la compra:</th>
-                                    <td id="resultado"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -64,9 +56,8 @@
                                     <th scope="col">Producto</th>
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Precio</th>
-                                    <th scope="col">Sub Total</th>
+                                    <th scope="col">%</th>
                                     <th scope="col">Impuesto</th>
-                                    <th scope="col">Impuesto total</th>
                                     <th scope="col">Total</th>
                                 </tr>
                             </thead>
@@ -78,17 +69,11 @@
                                         <td>{{$producto->producto->nombre}}</td>
                                         <td>{{$producto->cantidad}}</td>
                                         <td style="text-align: right">L.{{ number_format($producto->precio,2)}}</td>
-                                        <?php $aux=$producto->precio*$producto->cantidad?>
+                                        <?php $aux= 100 * $producto->impuesto?>
+                                        <td>{{$aux}}</td>
+                                        <?php $aux=$producto->precio*$producto->cantidad * $producto->impuesto?>
                                         <td style="text-align: right">L.{{ number_format($aux,2)}}</td>
-                                        <td>
-                                            @if ($producto->impuesto != null)
-                                                {{$producto->impuesto * 100}}
-                                            @else
-                                                0.00
-                                            @endif
-                                        %</td>
-                                        <td style="text-align: right">L.{{ number_format($aux*($producto->impuesto),2)}}</td>
-                                        <?php $aux= $aux -(($producto->precio*$producto->cantidad)*($producto->impuesto)) ?>
+                                        <?php $aux= $aux + (($producto->precio*$producto->cantidad)) ?>
                                         <td style="text-align: right">L.{{ number_format($aux,2)}}</td>
                                         <?php $sum+= $aux?>
                                     </tr>
@@ -100,10 +85,12 @@
                             </tbody>
                         </table>
 
-                        <script>
-                            document.getElementById('resultado').innerHTML = "L.{{ number_format($sum,2)}}";
-                        </script>
-
+                        <div class="card-body" style="text-align: right">
+                            <tr>
+                                <th scope="row">Total de la compra:</th>
+                                <td id="resultado"><?php echo "L. ".number_format($sum,2); ?></td>
+                            </tr>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CompraAnimalController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\HomeController;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegCompraProductController;
 use App\Http\Controllers\SiembraController;
 use App\Http\Controllers\AnimalesController;
+use App\Http\Livewire\Compras\CompraCreate;
+use App\Http\Livewire\Compras\CompraCreate\CompraCreate as CompraCreateCompraCreate;
 
 /*
 |--------------------------------------------------------------------------
@@ -168,7 +171,13 @@ Route::get('/regcompra/busqueda', [RegCompraProductController::class,'search'])
 Route::get('/create/regcompra', [RegCompraProductController::class,'create'])
 ->name('regcompra.create');
 
-Route::post('/create/regcompra', [RegCompraProductController::class, 'store'])
+// Registrar compra
+
+
+Route::get('/create/busqueda', [RegCompraProductController::class, 'buscarpro'])
+->name('regcompra.buscarpro');
+
+Route::post('/create/regcompra/c', [RegCompraProductController::class, 'store'])
 ->name('regcompra.store');
 
 Route::delete('/regcompra/{id}/borrar',[RegCompraProductController::class,'destroy'])
@@ -230,6 +239,23 @@ Route::get('/invpiscina/desc-PDF', [ProductoController::class,'piscinaPDF'])
 Route::get('inventario/piscina/busqueda', [ProductoController::class,'searchPiscina'])
 ->name('piscina.search');
 
+/*
+   |-----------------|
+   | Rutas Productos |
+   |-----------------|
+*/
+
+Route::get('/create/compraAnimal', [CompraAnimalController::class,'create'])
+->name('compraAnimal.create');
+
+
+Route::post('/create/registro', [CompraAnimalController::class, 'store'])
+->name('compraAnimal.store');
+
+Route::get('/create/animal/busqueda', [CompraAnimalController::class, 'buscarpro'])
+->name('compraAnimal.buscarpro');
+
+
 //Inventario siembra
 Route::get('/invsiembra', [SiembraController::class,'index'])
 ->name('inventario.siembraindex');
@@ -273,9 +299,3 @@ Route::get('/create/animal', [AnimalesController::class,'createAnimal'])
 
 Route::post('/create/animal', [AnimalesController::class, 'storeAnimal'])
 ->name('animal.store');
-//ruta para editar el animal
-Route::get('/animal/{id}/editar', [AnimalesController::class,'editar'])
-->name('animal.editar')->where('id','[0-9]+');
-// ruta para actualizar animal
-Route::put('/animal/{id}/editar', [AnimalesController::class,'update'])//envia los datos al servidor
-->name('animal.update')->where('id','[0-9]+');

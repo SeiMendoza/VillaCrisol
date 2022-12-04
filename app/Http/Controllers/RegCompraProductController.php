@@ -33,7 +33,7 @@ class RegCompraProductController extends Controller
         return view('RegistroCompraProductos/CompraProductosIndex', compact('compras', 'text','inicio','final'));
     }
     public function create(){
-        $productos = Producto ::all();
+        $productos = Producto::all();
         $detalles = Detallecompra::all();
         $compra = Compra::where('proveedor','=','')->get();
         if($compra->count() == 0){
@@ -52,116 +52,33 @@ class RegCompraProductController extends Controller
         return view('RegistroCompraProductos.RegistroCompraProductos')->with('compra', $compra[0])
                                                 ->with('productos', $productos)
                                                 ->with('detalles', $detalles);
-    // return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
-}
-     //return view ('RegistroCompraProductos.RegistroCompraProductos',compact('productos','detalles','compra'));
-//}
-    public function detalle(Request $request){
-
-        $request ->validate([
-            'producto'=>'required',
-            'cantidad'=>'required|numeric|min:1',
-            'precio'=>'required|numeric|min:1',
-            'impuesto'=>'nullable|numeric',
-        ],[
-            'producto.required'=>'El producto es obligatorio',
-
-            'cantidad.required'=>'La cantidad es obligatoria',
-            'cantidad.numeric'=>'Solo se aceptan números',
-            'cantidad.min'=>'Solo se aceptan números positivos',
-
-            'precio.required'=>'El producto es obligatorio',
-            'precio.numeric'=>'Solo se aceptan números',
-            'precio.min'=>'Solo se aceptan números positivos',
-
-            'impuesto.numeric'=>'Solo se aceptan números',
-            'impuesto.min'=>'Solo se aceptan números positivos',
-        ]);
-
-        $productos = DetalleCompra::all();
-
-        foreach ($productos as $key => $value) {
-            if($value->producto_id == $request->input('producto')){
-            return redirect()->route('regcompra.create');
-
-            }else{
-                $detalles = new DetalleCompra();
-                $detalles->compra_id = $request->input('compra');
-                $detalles->producto_id = $request->input('producto');
-                $detalles->cantidad=$request->input('cantidad');
-                $detalles->impuesto=$request->input('impuesto');
-                $detalles->precio=$request->input('precio');
-                $detalles->save();
-
-                return redirect()->route('regcompra.create');
-            }
-        }
-
-
-
-
-
     }
 
-    //funcion para editar detalles
-    public function detalleeditar(Request $request,$id){
-        /*Validación de los campos*/
-
-        $request ->validate([
-            'producto'=>'required',
-            'cantidad'=>'required|numeric|min:1',
-            'precio'=>'required|numeric|min:1',
-            'impuesto'=>'nullable|numeric',
-        ],[
-            'producto.required'=>'El producto es obligatorio',
-
-            'cantidad.required'=>'La cantidad es obligatoria',
-            'cantidad.numeric'=>'Solo se aceptan números',
-            'cantidad.min'=>'Solo se aceptan números positivos',
-
-            'precio.required'=>'El producto es obligatorio',
-            'precio.numeric'=>'Solo se aceptan números',
-            'precio.min'=>'Solo se aceptan números positivos',
-
-            'impuesto.numeric'=>'Solo se aceptan números',
-            'impuesto.min'=>'Solo se aceptan números positivos',
-        ]);
-
-        /*Variable para reconocer los nuevos registros a la tabla*/
-        $detalles = DetalleCompra::findOrFail($id);
-        $detalles->producto_id=$request->input('producto');
-        $detalles->cantidad=$request->input('cantidad');
-        $detalles->precio=$request->input('precio');
-        $detalles->impuesto=$request->input('imp');
-
-        $creado = $detalles->save();
-
-        if($creado){
-        return redirect()->route('regcompra.create');
-        }
+    public function buscarpro(Request $request){
+        $busc =trim($request->get('buscar_producto'));
+        $productos = Producto::Where('nombre', 'LIKE', '%'.$busc. '%')->paginate(5);
+        return view('RegistroCompraProductos.RegistroCompraProductos', compact('productos', 'busc'));
     }
 
-     //Funcion para guardar//
-     public function store(Request $request){
+
+    //Funcion para guardar//
+    public function store(Request $request){
 
         /*Validación de campos*/
         $request -> validate([
             'numfactura'=>'nullable|numeric|min:11',
             'proveedor'=>'nullable|regex:/^[\pLñÑ.\s\-]+$/u',
             'descripción'=>'required|regex:/^[\pLñÑ0-9;:(),.\s\-]+$/u',
-            'categoria'=>'required|in:restaurante,piscina,siembra,animales',
             'fecha'=>'required|date',
+            'tuplas'=>'required'
             ],[
 
                 'numfactura.numeric'=>'Solo se aceptan números',
                 'numfactura.min'=>'El número de factura deben ser 11 digitos',
                 'proveedor.regex'=>'Solo se aceptan letras',
-                'descripción.required'=>'La descripción es obligatoria',
-                'descripción.regex'=>'La descripción tiene un caracter no permitido',
-                'categoria.required'=>'La categoría es obligatoria',
-                'categoria.regex'=>'La categoría tiene un caracter no permitido',
                 'fecha.required'=>'La fecha es obligatoria',
                 'fecha.date'=>'fecha incorrecta',
+                'tuplas.required'=>'No hay detalles'
             ]);
 
             /*Variable para reconocer los nuevos registros a la tabla*/
@@ -170,31 +87,24 @@ class RegCompraProductController extends Controller
             $nuevorcompraproducto->numfactura=$request->input('numfactura');
             $nuevorcompraproducto->proveedor=$request->input('proveedor');
             $nuevorcompraproducto->descripción=$request->input('descripción');
-            $nuevorcompraproducto->categoria=$request->input('categoria');
             $nuevorcompraproducto->fecha=$request->input('fecha');
             $nuevorcompraproducto->save();
 
-            foreach ($nuevorcompraproducto->detalle_compra as $key => $value) {
-                $pro = Producto::findOrFail($value->producto_id);
-                $pro->existencia = $value->cantidad + $pro->existencia;
-                $pro->precio= $value->precio;
-                $pro->save();
+            for ($i=0; $i < intval($request->input("tuplas")) ; $i++) {
+                //$array = explode ( ' ', $request->input("detalle-".$i) );
+                $detalle= new DetalleCompra();
+                $detalle->compra_id = $nuevorcompraproducto->id;
+                $detalle->producto_id = $request->input('producto_id');
+                $detalle->cantidad = $request->input('cantidad');
+                $detalle->precio = $request->input('precio');
+                $detalle->impuesto = $request->input('imp');
+                $detalle->save();
             }
 
-            /*Variable para guardar los nuevos registros de la tabla y retornar a la vista index*/
-             $nuevorcompraproducto->save();
-            if($nuevorcompraproducto->detalle_compra->count() > 0){
-                return redirect()->route('regcompra.index')->with('mensaje', "Se registró correctamente la compra");
-            }else{
-                return redirect()->route('regcompra.create')->with('mensaje', "No hay detalles");
-        }
-         }
-        public function destroy($id) {
+            return redirect()->route('regcompra.index')->with('mensaje','compra registrada');
 
-        DetalleCompra::destroy($id);
-
-        return redirect()->route('regcompra.create')->with('mensaje','Detalle de compra borrado completamente');
     }
+
 
     public function detail($id){
         $detalles = Compra::findOrFail($id);

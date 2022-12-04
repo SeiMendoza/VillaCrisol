@@ -1,0 +1,181 @@
+<?php
+
+namespace App\Http\Livewire\Compras;
+
+use App\Models\Compra;
+use App\Models\DetalleCompra;
+use App\Models\Producto;
+use Livewire\Component;
+
+class CompraCreate extends Component
+{
+    public $filtro_producto = "";
+    public $venta;
+    public $editar = false;
+
+    public $data = [
+        "numfactura" => "",
+        "proveedor" => "",
+        "fecha" => "2022-12-1",
+        "descripcion" => "",
+
+    ];
+
+    public $carrito = [];
+
+    protected $rules = [
+        'data.fecha' => 'required',
+        'data.descripcion' => 'required',
+        'carrito' => 'required',
+    ];
+
+    protected $messages = [
+        'data.fecha.required' => 'La fecha es requerida',
+        'data.descripcion.required' => 'La descripción es requerida',
+    ];
+
+    public function render()
+    {
+
+        return view('RegistroCompraProductos.RegistroCompraProductos', [
+            "productos" => Producto::where("nombre", "like", "%{$this->filtro_producto}%")
+            ->get()
+        ]) ->extends('plantillas.register1')
+            ->section('title', 'Registro de animales')
+            ->section('content');
+    }
+
+
+    public function mount($id = null)
+    {
+        if ($id != null) {
+            $this->editar = true;
+            $this->compra = Compra::findOrFail($id);
+
+            $this->data["numfactura"] = $this->venta->numfactura;
+            $this->data["fecha"] = $this->venta->fecha_factura;
+            $this->data["descripcion"] = $this->venta->descripción;
+            $this->data["proveedor"] = $this->venta->proveedor;
+
+            foreach ($this->compra->detalle_compra as $item) {
+                $vals = [
+                    "id" => $item->id,
+                    "producto_id" => $item->producto_id,
+                    "detalle" => "{$item->producto->nombre} ",
+                    "cantidad" => $item->cantidad,
+                    "precio" => $item->precio,
+                    "impuesto" => $item->impuesto,
+                    "total" => $item->cantidad_detalle_venta * $item->precio_venta,
+                ];
+                array_push($this->carrito, $vals);
+            }
+        }
+    }
+
+    // propiedad computada para calcular el total de la venta
+    public function getTotalProperty()
+    {
+        $totales = array_column($this->carrito, 'total');
+        return array_sum($totales);
+    }
+
+    public function actualizar_total($cantidad, $index = 0)
+    {
+        // actualizo la cantidad y el total
+        $this->carrito[$index]["cantidad"] = $cantidad;
+        $this->carrito[$index]["total"] = $cantidad * $this->carrito[$index]["precio"];
+    }
+
+    public function agregar_item_carrito($producto)
+    {
+        $item = [
+            "producto_id" => $producto["id"],
+            "nombre" => "{$producto["nombre"]}",
+            "cantidad" => 1,
+            "precio" => $producto["precio"],
+            "impuesto" => $producto["impuesto"],
+        ];
+
+        // verifico si el producto que se va a agregar ya existe
+        $existe = in_array("{$producto['id']}", array_column($this->carrito, 'producto_id'));
+
+        // si el producto no existe entonces lo agrego de lo contrario muestro un error
+        if (!$existe) {
+            array_push($this->carrito, $item);
+        } else {
+            #busco el index del elemento que contengo el id del producto que ando buscando
+            $index = array_search("{$producto['id']}", array_column($this->carrito, 'producto_id'));
+
+            // aumento la cantidad en 1 y el total
+            $this->carrito[$index]["cantidad"] += 1;
+            $this->carrito[$index]["total"] = $this->carrito[$index]["cantidad"] * $this->carrito[$index]["precio"];
+        }
+    }
+
+    public function guardar($pagar = false)
+    {
+        // valido los datos del formulario
+        $this->validate();
+
+        if (!$this->editar) {
+            $venta = new Compra();
+            $venta->numfactura = $this->data["numfactura"];
+            $venta->proveedor = $this->data["proveedor"];
+            $venta->descripción =  $this->data["descripcion"];
+            $venta->fecha = $this->data["fecha"];
+            $venta->save();
+
+            if ($venta) {
+                $total_detalles = 0;
+                foreach ($this->carrito as $key => $item) {
+                    $detalle_venta = new DetalleCompra();
+                    $detalle_venta->compra_id = $venta->id;
+                    $detalle_venta->producto_id = $item["producto_id"];
+                    $detalle_venta->cantidad = $item["cantidad"];
+                    $detalle_venta->precio = $item["precio"];
+                    $detalle_venta->impuesto = $item["precio"];
+                    $detalle_venta->save();
+                    $total_detalles += $detalle_venta->cantidad * $detalle_venta->precio;
+
+                }
+                foreach ($venta->detalle_venta as $key => $value) {
+                    $prodcuto = Producto::findOrFail($value->producto_id);
+                    $prodcuto->existencia = $prodcuto->existencia + $value->cantidad;
+                    $prodcuto->save();
+                }
+
+                $venta->total = $this->total;
+                $venta->save();
+            }
+
+            return redirect()->route('index')->with('mensaje', '¡compra guardada con éxito!');
+        } else {
+            $this->venta->numfactura = $this->data["numfactura"];
+            $this->venta->fecha = $this->data["fecha"];
+            $this->venta->descripción = $this->data["descripcion"];
+            $this->venta->proveedor = $this->data["proveedor"];
+            $this->venta->save();
+
+            //elimino los items de esta venta para volver agregarlos con los nuevos cambios
+            DetalleCompra::where('compra_id', $this->venta->id)->truncate();
+
+            foreach ($this->carrito as $key => $item) {
+                $detalle_venta = new DetalleCompra();
+                $detalle_venta->compra_id = $this->venta->id;
+                $detalle_venta->producto_id = $item["producto_id"];
+                $detalle_venta->cantidad = $item["cantidad"];
+                $detalle_venta->precio = $item["precio"];
+                $detalle_venta->impuesto = $item["impuesto"];
+                $detalle_venta->save();
+            }
+
+            return redirect()->route('index')->with('mensaje', '¡compra editada con éxito!');
+        }
+    }
+
+    public function eliminar_item_carrito($index)
+    {
+        // elimino el item del arreglo
+        unset($this->carrito[$index]);
+    }
+}

@@ -4,26 +4,27 @@
 
 .table-responsive{
     height: 400px;
-     overflow:scroll;  
+     overflow:scroll;
      float:left;
 }
 .producto{
-    display: grid; 
+    display: grid;
     grid-template-columns: 140px 140px 140px 140px;
 }
+
 .titulo{
-width:25px;
+width: 120px;
 text-overflow:ellipsis;
 overflow:hidden;
 white-space:nowrap;
-    
+
 }
 
 .agregar-factura{
-    display: block;  
+    display: block;
     height: 170px;
      width: 140px;
-      padding: 3px 
+      padding: 3px
 }
 .page-header {
     margin: 0 0 1rem;

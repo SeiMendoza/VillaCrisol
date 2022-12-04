@@ -17,7 +17,11 @@ class AnimalFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'tipo'=>$this->faker->word,
+            'proposito' =>$this->faker->randomElement(['consumo','produccion']),
+            'descripcion' =>$this->faker->words(10, true),
+            'sexo'=>$this->faker->dateTimeBetween('macho', 'hembra'),
+            'raza'=>$this->faker->word,
         ];
     }
 }

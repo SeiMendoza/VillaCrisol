@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('compras', function (Blueprint $table) {
+        Schema::create('animal_compras', function (Blueprint $table) {
             $table->id();
-            $table->string('numfactura')->nullable();
             $table->string('proveedor')->nullable();
-            $table->string('descripción');
-            $table->string('categoria')->nullable();
+            $table->date('nacimiento');
             $table->date('fecha');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compras');
+        Schema::dropIfExists('animal_compras');
     }
 };
