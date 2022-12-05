@@ -102,13 +102,9 @@
 
 <br>
     <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mb-md-0">
+    <div class="col-md-12">
+            <div class="card-body" style="text-align: center">
                     <button class="btn btn-primary mt-10" type="submit">Guardar</button>
-                </div>
-            </div>
-    <div class="col-md-6">
-                <div class="form-floating mb-3 mb-md-0">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Cancelar
