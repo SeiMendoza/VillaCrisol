@@ -255,6 +255,12 @@ Route::post('/create/registro', [CompraAnimalController::class, 'store'])
 Route::get('/create/animal/busqueda', [CompraAnimalController::class, 'buscarpro'])
 ->name('compraAnimal.buscarpro');
 
+Route::get('/animales/compras', [CompraAnimalController::class,'index'])
+->name('regcompraanimal.index');
+
+Route::get('/regcompra/busqueda/animal', [CompraAnimalController::class,'search'])
+->name('regcompraanimal.search');
+
 
 //Inventario siembra
 Route::get('/invsiembra', [SiembraController::class,'index'])

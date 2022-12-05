@@ -10,16 +10,33 @@ use App\Models\compraAnimales;
 use App\Models\DetalleCompra;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompraAnimalController extends Controller
 {
 
-   /* public function __construct()
-    {
-        session_start();
-        parent::__construct();
-    }*/
+    public function index(){
+        $compras = AnimalCompra::paginate(10);
+        $detalle = AnimalDetalleCompra::all();
+        $comp = AnimalCompra::select(DB::raw('min(fecha) as inicio, max(fecha) as final'))->first();
+        $inicio = $comp->inicio;
+        $final = $comp->final;
+        return view ('animales/listaanimales')->with('compras', $compras)->with('inicio', $inicio)->with('final', $final)->with('detalle', $detalle);
+    }
+    public function search(Request $request){
+        $text =trim($request->get('busqueda'));
+        $inicio =trim($request->get('inicio'));
+        $final =trim($request->get('final'));
+        $compras = AnimalCompra::whereBetween('fecha', [$inicio, $final])
+        ->where(function($q) use ($text){
+            $q->where('proveedor', 'like', '%'.$text.'%');
+         })
+        ->paginate(10);
+        $detalle = AnimalDetalleCompra::all();
 
+
+        return view('animales/listaanimales', compact('compras', 'text','inicio','final','detalle'));
+    }
     public function create(){
         $animales = Animal::all();
         $detalles = AnimalDetalleCompra::all();
@@ -97,7 +114,7 @@ class CompraAnimalController extends Controller
             $pro->save();
         }*/
 
-        return redirect()->route('index');
+        return redirect()->route('regcompraanimal.index');
     }
 
 }
