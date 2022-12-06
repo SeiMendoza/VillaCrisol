@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     use HasFactory;
+    public function detalle()
+    {
+        return $this->hasMany('App\Models\AnimalDetalleCompra');
+    }
 }

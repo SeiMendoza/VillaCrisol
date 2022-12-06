@@ -25,8 +25,8 @@ class AnimalDetalleCompra extends Model
         return $this->belongsTo(AnimalCompra::class);
     }
 
-    public function animales()
+    public function datos()
     {
-        return $this->belongsTo(Animal::class);
+        return $this->belongsTo(Animal::class,'animal_id');
     }
 }
