@@ -20,7 +20,7 @@ class AnimalFactory extends Factory
             'tipo'=>$this->faker->word,
             'proposito' =>$this->faker->randomElement(['consumo','produccion']),
             'descripcion' =>$this->faker->words(10, true),
-            'sexo'=>$this->faker->dateTimeBetween('macho', 'hembra'),
+            'sexo'=>$this->faker->randomElement(['macho', 'hembra']),
             'raza'=>$this->faker->word,
         ];
     }

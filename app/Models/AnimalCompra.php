@@ -11,6 +11,6 @@ class AnimalCompra extends Model
 
     public function detalle_compra()
     {
-        return $this->hasMany(AnimalDetalleCompra::class);
+        return $this->hasMany(AnimalDetalleCompra::class,'compra_id');
     }
 }
