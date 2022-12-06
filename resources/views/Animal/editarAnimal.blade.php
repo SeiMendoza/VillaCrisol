@@ -1,5 +1,5 @@
 @extends('plantillas.register')
-@section('title', 'Registrar Animales')
+@section('title', 'Editar Animales')
 
 @if(session('mensaje'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -10,7 +10,7 @@
 
 @section('encabezado', 'Registro de animales')
 @section('content')
-    <h1 class="text-center">Empleado: {{$animal->tipo}}</h1><br>
+    <h1 class="text-center">Animal: {{$animal->tipo}}</h1><br>
     
     <form method='post' action="{{route('animal.update',['id'=>$animal->id])}}">
     @method('put')
@@ -35,9 +35,10 @@
                     <div class="form-floating mb-3 mb-md-0">
                         <select class="form-control @error('proposito') is-invalid @enderror" id="proposito"
                         name="proposito">
-                        <option value="comsumo"{{$animal->proposito =="consumo" ? 'selected' :''}} >Comsumo</option>
-                        <option value="producción"{{$animal->proposito =="producción" ? 'selected' :''}} >Producción</option>
-                         </select>
+                        <option value="consumo" @if(old('proposito') == "consumo" || $animal->proposito == "consumo") {{ 'selected' }} @endif>Consumo</option>
+                        <option value="producción" @if(old('proposito') == "producción"|| $animal->proposito == "producción") {{ 'selected' }} @endif>Producción</option>
+                        <option value="doméstico" @if(old('doméstico') == "doméstico"|| $animal->proposito == "doméstico") {{ 'selected' }} @endif>Doméstico`</option>
+                    </select>
                         <label for="proposito">Propósito</label>
                         @error('proposito')
                             <small class="invalid-feedback">
@@ -118,7 +119,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                        <a href="{{route('inventario.animalindex')}}" class="btn btn-primary">Si</a>
+                                        <a href="{{route('index')}}" class="btn btn-primary">Si</a>
                                     </div>
                                 </div>
                             </div>
