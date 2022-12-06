@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class compraAnimales extends Model
 {
     use HasFactory;
-
+    protected $table = 'animal_compras';
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function detalle_compra()
+    {
+        return $this->hasMany(AnimalDetalleCompra::class);
     }
 }
