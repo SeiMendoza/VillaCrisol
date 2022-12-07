@@ -1,14 +1,6 @@
 @extends('plantillas.register')
 @section('title', 'Editar Animales')
 
-@if(session('mensaje'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong> {{session('mensaje')}}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-@endif
-
-@section('encabezado', 'Registro de animales')
 @section('content')
     <h1 class="text-center">Animal: {{$animal->tipo}}</h1><br>
     
@@ -35,9 +27,9 @@
                     <div class="form-floating mb-3 mb-md-0">
                         <select class="form-control @error('proposito') is-invalid @enderror" id="proposito"
                         name="proposito">
-                        <option value="consumo" @if(old('proposito') == "consumo" || $animal->proposito == "consumo") {{ 'selected' }} @endif>Consumo</option>
-                        <option value="producción" @if(old('proposito') == "producción"|| $animal->proposito == "producción") {{ 'selected' }} @endif>Producción</option>
-                        <option value="doméstico" @if(old('doméstico') == "doméstico"|| $animal->proposito == "doméstico") {{ 'selected' }} @endif>Doméstico`</option>
+                        <option value="consumo"{{$animal->proposito == "consumo"  ? 'selected' :''}}>Consumo</option>
+                        <option value="producción"{{$animal->proposito == "producción" ? 'selected' :''}}>Producción</option>
+                        <option value="doméstico"{{$animal->proposito == "doméstico" ? 'selected' :''}}>Doméstico</option>
                     </select>
                         <label for="proposito">Propósito</label>
                         @error('proposito')
@@ -54,7 +46,7 @@
                         <input class="form-control @error('descripcion') is-invalid @enderror" id="descripcion"
                         name="descripcion" type="text" maxlength="100"
                         placeholder="" value="{{old('descripcion',$animal->descripcion)}}" minlength="3"/>
-                        <label for="descripcion">Descipción</label>
+                        <label for="descripcion">Descripción</label>
                         @error('descripcion')
                             <small class="invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -95,13 +87,9 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <div class="form-floating mb-3 mb-md-0">
+            <div class="col-md-12">
+            <div class="card-body" style="text-align: center">
                         <button class="btn btn-primary mt-10" type="submit">Guardar</button>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3 mb-md-0">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Cancelar

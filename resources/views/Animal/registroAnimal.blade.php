@@ -36,7 +36,7 @@
                         <option value="" >--seleccione una opcion--</option>
                         <option value="consumo" @if(old('proposito') == "consumo") {{ 'selected' }} @endif>Consumo</option>
                         <option value="producción" @if(old('proposito') == "producción") {{ 'selected' }} @endif>Producción</option>
-                        <option value="doméstico" @if(old('doméstico') == "doméstico") {{ 'selected' }} @endif>Doméstico`</option>
+                        <option value="doméstico" @if(old('doméstico') == "doméstico") {{ 'selected' }} @endif>Doméstico</option>
                     </select>
                         <label for="proposito">Propósito</label>
                         @error('proposito')
@@ -53,7 +53,7 @@
                         <input class="form-control @error('descripcion') is-invalid @enderror" id="descripcion"
                         name="descripcion" type="text" maxlength="100"
                         placeholder="" value="{{old('descripcion')}}" minlength="3"/>
-                        <label for="descripcion">Descipción</label>
+                        <label for="descripcion">Descripción</label>
                         @error('descripcion')
                             <small class="invalid-feedback">
                                 <strong>{{ $message }}</strong>

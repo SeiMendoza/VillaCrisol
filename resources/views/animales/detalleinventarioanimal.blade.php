@@ -31,11 +31,11 @@
                                     <td>{{$animal->tipo}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Proposito:</th>
+                                    <th scope="row">Propósito:</th>
                                     <td>{{$animal->proposito}}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Descripcion:</th>
+                                    <th scope="row">Descripción:</th>
                                     <td>{{$animal->descripcion}}</td>
                                 </tr>
                                 <tr>
