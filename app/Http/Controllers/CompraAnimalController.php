@@ -10,7 +10,6 @@ use App\Models\compraAnimales;
 use App\Models\DetalleCompra;
 use App\Models\Producto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CompraAnimalController extends Controller
 {
@@ -34,6 +33,26 @@ class CompraAnimalController extends Controller
         ->paginate(10);
         $detalle = AnimalDetalleCompra::all();
 
+    public function inventario(){
+        $animales= AnimalDetalleCompra::select(
+            DB::raw('animal_id as id, animal_id, SUM(cantidad) AS cantidad, SUM(precioVenta*cantidad)/SUM(cantidad) AS precioVenta')
+        )
+        ->groupby('animal_id')
+        ->paginate(10);
+        return view ('animales/inventarioanimal')->with('animales', $animales);
+    }
+
+    public function inventariobuscar(Request $request){
+        $text =trim($request->get('busqueda'));
+        $animales= AnimalDetalleCompra::select(
+            DB::raw('animal_id as id, animal_id, SUM(cantidad) AS cantidad, SUM(precioVenta*cantidad)/SUM(cantidad) AS precioVenta')
+        )
+        ->groupby('animal_id')
+        ->where('tipo', 'like', '%'.$text.'%')
+        ->orwhere('proposito', 'like', '%'.$text.'%')
+        ->join('animals','animals.id','=','animal_detalle_compras.animal_id')->paginate(10);
+        return view ('animales/inventarioanimal')->with('animales', $animales)->with('text', $text);
+    }
 
         return view('animales/listaanimales', compact('compras', 'text','inicio','final','detalle'));
     }
@@ -114,7 +133,17 @@ class CompraAnimalController extends Controller
             $pro->save();
         }*/
 
-        return redirect()->route('regcompraanimal.index');
+        return redirect()->route('index');
+    }
+
+    public function show($id){
+        $animales = Animal::find($id);
+        return view ('animales/detalleinventarioanimal')->with('animal', $animales);
+    }
+
+    public function detalle($id){
+        $animales = AnimalCompra::find($id);
+        return view ('animales/detalleanimal')->with('animal', $animales);
     }
 
 }

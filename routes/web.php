@@ -244,16 +244,32 @@ Route::get('inventario/piscina/busqueda', [ProductoController::class,'searchPisc
    | Rutas Productos |
    |-----------------|
 */
+Route::get('compraAnimal/inventario', [CompraAnimalController::class,'inventario'])
+->name('compraAnimal.inventario');
+
+Route::get('compraAnimal/inventario/busqueda', [CompraAnimalController::class,'inventariobuscar'])
+->name('compraAnimal.searchinventario');
+
+Route::get('compraAnimal/inventario/{id}', [CompraAnimalController::class,'show'])
+->name('compraAnimal.show')->where('id','[0-9]+');
+
+Route::get('/editar/animal/{id}', [AnimalesController::class,'editAnimal'])
+->name('animal.edit')->where('id','[0-9]+');
+
+Route::put('/editar/animal/{id}', [AnimalesController::class, 'updateAnimal'])
+->name('animal.update')->where('id','[0-9]+');
 
 Route::get('/create/compraAnimal', [CompraAnimalController::class,'create'])
 ->name('compraAnimal.create');
-
 
 Route::post('/create/registro', [CompraAnimalController::class, 'store'])
 ->name('compraAnimal.store');
 
 Route::get('/create/animal/busqueda', [CompraAnimalController::class, 'buscarpro'])
 ->name('compraAnimal.buscarpro');
+
+Route::get('/detalle/compraAnimal/{id}', [CompraAnimalController::class,'detalle'])
+->name('compraAnimal.detalle')->where('id','[0-9]+');
 
 Route::get('/animales/compras', [CompraAnimalController::class,'index'])
 ->name('regcompraanimal.index');
